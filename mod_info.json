@@ -1,0 +1,11 @@
+{
+    "id":"ShoeyAshesOfOhm",
+	"name":"Ashes of Ohm",
+	"author":"Shoey",
+    "utility":"true",
+    "version": { "major":"0", "minor": "1", "patch": "0" },
+	"description":"[Redacted] focused expansion to Ashes of the Domain.",
+    "gameVersion": "0.97a-RC11",
+  	"jars":["jars/AshesOfOhm.jar"],
+  	"modPlugin":"Shoey.AshesOfOhm.MainPlugin"
+}
