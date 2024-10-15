@@ -1,7 +1,7 @@
 {
-  "masterVersionFile": "https://github.com/MildlyFootwear/starsector-AshesOfOhm/blob/master/Shoey_AshesOfOhm.version",
+  "masterVersionFile": "https://raw.githubusercontent.com/MildlyFootwear/starsector-AshesOfOhm/refs/heads/master/Shoey_AshesOfOhm.version",
 
-  "modName": "",
+  "modName": "Ashes of Ohm",
   "modVersion":
     {
       "major": 0,

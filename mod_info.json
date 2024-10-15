@@ -7,5 +7,6 @@
 	"description":"[Redacted] focused expansion to Ashes of the Domain.",
     "gameVersion": "0.97a-RC11",
   	"jars":["jars/AshesOfOhm.jar"],
+	"dependencies": [ {"id": "aotd_vok","name": "AoTD- Vaults of Knowledge "} ],
   	"modPlugin":"Shoey.AshesOfOhm.MainPlugin"
 }
