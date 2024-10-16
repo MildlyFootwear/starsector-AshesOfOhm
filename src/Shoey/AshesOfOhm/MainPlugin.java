@@ -18,6 +18,7 @@ public class MainPlugin extends BaseModPlugin {
     @Override
     public void onGameLoad(boolean b) {
         super.onGameLoad(b);
+        Global.getSector().getPlayerFaction().getMemory().set("$ashesofohm_cantesseractsuper", true);
     }
 
     @Override
