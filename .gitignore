@@ -192,3 +192,7 @@ nbdist/
 .idea/vcs.xml
 
 .idea/csv-editor.xml
+
+### LibreOffice Locks ###
+
+*.csv#
