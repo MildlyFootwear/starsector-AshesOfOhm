@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 public class MainPlugin extends BaseModPlugin {
 
-    private Logger log = Global.getLogger(this.getClass());
+    public static Logger log = Global.getLogger(MainPlugin.class);
 
     @Override
     public void onApplicationLoad() throws Exception {
