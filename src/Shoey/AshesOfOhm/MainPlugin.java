@@ -3,11 +3,14 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +22,8 @@ public class MainPlugin extends BaseModPlugin {
     static MemoryAPI pfMem;
 
     List<String> memKeysNums = new ArrayList<>();
+    public static List<String> omegaWeaponIDs = new ArrayList<>();
+    public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
 
     void insertMemoryNumber(MemoryAPI pfMem, String key)
     {
@@ -58,6 +63,24 @@ public class MainPlugin extends BaseModPlugin {
         }
         log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
         return false;
+    }
+
+    public static int getPlayerMemoryInt(String key)
+    {
+        if (pfMem.contains("$ashesofohm_"+key)) {
+            return (int) pfMem.get("$ashesofohm_" + key);
+        }
+        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
+        return 0;
+    }
+
+    public static String getPlayerMemoryString(String key)
+    {
+        if (pfMem.contains("$ashesofohm_"+key)) {
+            return (String) pfMem.get("$ashesofohm_" + key);
+        }
+        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
+        return "";
     }
 
     public static void setPlayerMemory(String key, Object val)
@@ -133,6 +156,28 @@ public class MainPlugin extends BaseModPlugin {
         }
     }
 
+    public static void updateOmegaWeaponIDs()
+    {
+        omegaWeaponIDs.clear();
+        omegaWeaponComponentMap.clear();
+        for(WeaponSpecAPI w : Global.getSettings().getAllWeaponSpecs())
+        {
+            if (w.hasTag("omega"))
+            {
+                omegaWeaponIDs.add(w.getWeaponId());
+                int componentValue = 1;
+                if (w.getSize() == WeaponAPI.WeaponSize.SMALL) {
+                    componentValue = 1;
+                } else if (w.getSize() == WeaponAPI.WeaponSize.MEDIUM) {
+                    componentValue = 2;
+                } else if (w.getSize() == WeaponAPI.WeaponSize.LARGE) {
+                    componentValue = 3;
+                }
+                log.debug("Omega components: "+componentValue+" for weapon "+w.getWeaponId()+":"+w.getWeaponName());
+                omegaWeaponComponentMap.put(w.getWeaponId(), componentValue);
+            }
+        }
+    }
 
     @Override
     public void onApplicationLoad() throws Exception {
@@ -145,7 +190,7 @@ public class MainPlugin extends BaseModPlugin {
         memKeysNums.add("$ashesofohm_constructedFacetCount");
         memKeysNums.add("$ashesofohm_destroyedShardCount");
         memKeysNums.add("$ashesofohm_constructedShardCount");
-        memKeysNums.add("$ashesofohm_weaponPoints");
+        memKeysNums.add("$ashesofohm_omegaWeaponPoints");
     }
 
     @Override
@@ -160,7 +205,7 @@ public class MainPlugin extends BaseModPlugin {
         }
 
         shuntChecks();
-
+        updateOmegaWeaponIDs();
     }
 
     @Override
