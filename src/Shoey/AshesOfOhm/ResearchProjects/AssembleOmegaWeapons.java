@@ -28,6 +28,7 @@ public class AssembleOmegaWeapons extends ResearchProject {
             return true;
         }
         return false;
+
     }
 
     @Override
@@ -60,6 +61,7 @@ public class AssembleOmegaWeapons extends ResearchProject {
 
     @Override
     public void applyOptionResults(String optionId) {
+        currentValueOfOptions = 0;
         super.applyOptionResults(optionId);
         if (optionId.equals("cancel")) {
             this.currentProgress = this.totalDays;

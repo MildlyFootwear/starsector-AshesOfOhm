@@ -204,6 +204,9 @@ public class MainPlugin extends BaseModPlugin {
             insertMemoryNumber(pfMem, s);
         }
 
+        if (getPlayerMemoryInt("omegaWeaponPoints") > 0)
+            setPlayerMemory("deconstructedOmegaWeapons", true);
+
         shuntChecks();
         updateOmegaWeaponIDs();
     }
