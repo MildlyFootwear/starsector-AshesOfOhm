@@ -6,7 +6,6 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import data.kaysaar.aotd.vok.Ids.AoTDSubmarkets;
 import data.kaysaar.aotd.vok.scripts.research.models.ResearchProject;
-import org.apache.log4j.Logger;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
 

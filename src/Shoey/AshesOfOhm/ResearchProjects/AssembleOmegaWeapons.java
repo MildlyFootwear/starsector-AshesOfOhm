@@ -5,10 +5,10 @@ import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import data.kaysaar.aotd.vok.scripts.research.models.ResearchProject;
-import org.apache.log4j.Logger;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
-import static Shoey.AshesOfOhm.ResearchProjects.ResearchUtils.*;
+import static Shoey.AshesOfOhm.ResearchProjects.ResearchUtils.getProjectWeaponID;
+import static Shoey.AshesOfOhm.ResearchProjects.ResearchUtils.setProjectWeaponID;
 
 public class AssembleOmegaWeapons extends ResearchProject {
 

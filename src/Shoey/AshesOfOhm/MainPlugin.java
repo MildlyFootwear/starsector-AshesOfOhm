@@ -1,8 +1,11 @@
 package Shoey.AshesOfOhm;
-import com.fs.starfarer.api.Global;
+
+import Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods;
 import com.fs.starfarer.api.BaseModPlugin;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
+import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 
 public class MainPlugin extends BaseModPlugin {
@@ -89,7 +94,7 @@ public class MainPlugin extends BaseModPlugin {
         log.debug("Set $ashesofohm_"+key+" to "+val);
     }
 
-    public static boolean hasShunt()
+    public static boolean checkShuntPossess()
     {
         for (MarketAPI m : Misc.getPlayerMarkets(false) )
         {
@@ -101,9 +106,9 @@ public class MainPlugin extends BaseModPlugin {
         return false;
     }
 
-    public static boolean harvestingShunt()
+    public static boolean checkShuntHarvest()
     {
-        if (!hasShunt())
+        if (!checkShuntPossess())
             return false;
 
         for (MarketAPI m : Misc.getPlayerMarkets(false) )
@@ -116,10 +121,10 @@ public class MainPlugin extends BaseModPlugin {
         return false;
     }
 
-    public static boolean harvestingShuntWithResearch()
+    public static boolean checkShuntWithResearch()
     {
 
-        if (!hasShunt())
+        if (!checkShuntPossess())
             return false;
 
         boolean bothOnOne = false;
@@ -135,9 +140,32 @@ public class MainPlugin extends BaseModPlugin {
             if (m.hasIndustry("researchfacility") && m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))
             {
                 hasResearch = true;
+                boolean hasAssist = false;
+                for (PersonAPI p : m.getPeopleCopy())
+                {
+                    if (p.hasTag(assistantID)) {
+                        log.info(m.getName()+" ("+m.getId()+") has assistant.");
+                        hasAssist = true;
+                    }
+                }
+                if (!hasAssist) {
+                    AssistantMethods.createAssistant(m);
+                    log.info("Added assistant to "+m.getName()+" ("+m.getId()+")");
+                }
             }
-            if (haarvestingShunt && hasResearch)
+            if (haarvestingShunt && hasResearch) {
                 bothOnOne = true;
+                log.info(m.getName()+" ("+m.getId()+") has shunt and research.");
+            }
+            if ((!hasResearch)) {
+                for (PersonAPI p : m.getPeopleCopy())
+                {
+                    if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
+                        m.getCommDirectory().removePerson(p);
+                        m.removePerson(p);
+                    }
+                }
+            }
         }
         return bothOnOne;
 
@@ -145,10 +173,10 @@ public class MainPlugin extends BaseModPlugin {
 
     public static void shuntChecks()
     {
-        setPlayerMemory("hasCoronalShunt", hasShunt());
-        setPlayerMemory("harvestingShunt", harvestingShunt());
-        setPlayerMemory("harvestingShuntWithResearch", harvestingShuntWithResearch());
-        if ((int) getPlayerMemory("destroyedTesseractCount") > (int) getPlayerMemory("constructedTesseractCount") && getPlayerMemoryBool("harvestingShuntWithResearch"))
+        setPlayerMemory("hasCoronalShunt", checkShuntPossess());
+        setPlayerMemory("harvestingShunt", checkShuntHarvest());
+        setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
+        if (getPlayerMemoryInt("destroyedTesseractCount") > getPlayerMemoryInt("constructedTesseractCount") && getPlayerMemoryBool("harvestingShuntWithResearch"))
         {
             setPlayerMemory("canConstructReplicaTesseract", true);
         } else {
@@ -191,6 +219,7 @@ public class MainPlugin extends BaseModPlugin {
         memKeysNums.add("$ashesofohm_destroyedShardCount");
         memKeysNums.add("$ashesofohm_constructedShardCount");
         memKeysNums.add("$ashesofohm_omegaWeaponPoints");
+
     }
 
     @Override

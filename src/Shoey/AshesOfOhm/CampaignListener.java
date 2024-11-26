@@ -1,9 +1,7 @@
 package Shoey.AshesOfOhm;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
-import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.AbilityPlugin;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.EngagementResultAPI;
@@ -19,19 +17,19 @@ public class CampaignListener implements CampaignEventListener {
     {
         if (Objects.equals(hullID, "tesseract"))
         {
-            setPlayerMemory("destroyedTesseractCount", (int) getPlayerMemory("destroyedTesseractCount")+1);
+            setPlayerMemory("destroyedTesseractCount", getPlayerMemoryInt("destroyedTesseractCount")+1);
             MainPlugin.log.info("Incrementing available Tesseract Replicas");
         } else if (Objects.equals(hullID, "facet"))
         {
-            setPlayerMemory("destroyedFacetCount", (int) getPlayerMemory("destroyedFacetCount")+1);
+            setPlayerMemory("destroyedFacetCount", getPlayerMemoryInt("destroyedFacetCount")+1);
             MainPlugin.log.info("Incrementing available Facet Replicas");
         } else if (Objects.equals(hullID, "shard_right"))
         {
-            setPlayerMemory("destroyedShardCount", (int) getPlayerMemory("destroyedShardCount")+1);
+            setPlayerMemory("destroyedShardCount", getPlayerMemoryInt("destroyedShardCount")+1);
             MainPlugin.log.info("Incrementing available Shard Replicas");
         } else if (Objects.equals(hullID, "shard_left"))
         {
-            setPlayerMemory("destroyedShardCount", (int) getPlayerMemory("destroyedShardCount")+1);
+            setPlayerMemory("destroyedShardCount", getPlayerMemoryInt("destroyedShardCount")+1);
             MainPlugin.log.info("Incrementing available Shard Replicas");
         }
     }

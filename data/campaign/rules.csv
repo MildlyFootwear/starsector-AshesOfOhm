@@ -1,0 +1,5 @@
+id,trigger,conditions,script,text,options,notes
+ashesofohm_assistantGreet,PickGreeting,"$tag:ashesofohm_omegaProcessorAssistant
+$tag:ashesofohm_omegaProcessorAssistant
+$tag:ashesofohm_omegaProcessorAssistant","ShowPersonVisual
+FireAll PopulateOptions",Yay!,,
