@@ -11,6 +11,7 @@ public class DomainTechReplica extends BaseHullMod {
 
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getSuppliesToRecover().modifyMult(id, 2f);
+        stats.getSuppliesPerMonth().modifyMult(id, 0.75f);
         stats.getBreakProb().modifyMult(id, 0f);
         stats.getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat(id, 1000f);
     }
