@@ -10,10 +10,11 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 public class DomainTechReplica extends BaseHullMod {
 
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getSuppliesToRecover().modifyPercent(id, 100f);
-        stats.getSuppliesPerMonth().modifyPercent(id, -50f);
-        stats.getBreakProb().modifyPercent(id, -100f);
+        stats.getSuppliesToRecover().modifyMult(id, 4f);
+        stats.getSuppliesPerMonth().modifyMult(id, 1.50f);
+        stats.getBreakProb().modifyMult(id, 0f);
         stats.getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat(id, 1000f);
+        stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).modifyMult(id, 2f);
     }
 
     public String getDescriptionParam(int index, HullSize hullSize) {

@@ -54,9 +54,9 @@ public class MainPlugin extends BaseModPlugin {
 
     public static Object getPlayerMemory(String key)
     {
-        if (pfMem.contains("$ashesofohm_"+key))
-            return pfMem.get("$ashesofohm_"+key);
-
+        if (pfMem.contains("$ashesofohm_"+key)) {
+            return pfMem.get("$ashesofohm_" + key);
+        }
         log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
         return null;
     }

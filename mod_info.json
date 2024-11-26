@@ -1,9 +1,9 @@
 {
     "id":"ShoeyAshesOfOhm",
-	"name":"AotD- Ashes of Ohm",
+	"name":"AoTD - Ashes of Ohm",
 	"author":"Shoey",
     "version": { "major":"0", "minor": "1", "patch": "0" },
-	"description":"[Redacted] focused expansion to Ashes of the Domain.",
+	"description":"[Redacted] focused expansion for Ashes of the Domain.",
     "gameVersion": "0.97a-RC11",
   	"jars":["jars/AshesOfOhm.jar"],
 	"dependencies": [ {"id": "aotd_vok","name": "AoTD- Vaults of Knowledge "} ],
