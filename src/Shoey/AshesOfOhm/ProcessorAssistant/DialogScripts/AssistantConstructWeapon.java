@@ -20,19 +20,19 @@ public class AssistantConstructWeapon extends BaseCommandPlugin {
         String option = params.get(0).getString(memoryMap).replace("ashesofohm_","");
         if (omegaWeaponComponentMap.containsKey(option))
         {
+            MarketAPI m = dialog.getInteractionTarget().getMarket();
             int weeks = (omegaWeaponComponentMap.get(option)*2);
             dialog.getTextPanel().addPara("\"Confirmed, order placed for "+ Global.getSettings().getWeaponSpec(option).getWeaponName()+". Estimated time to completion is "+weeks+" weeks.\"");
             ConstructWeapon script = new ConstructWeapon();
             script.wID = option;
-            script.daysUntilDone = weeks * 7;
+            script.daysUntilDone = weeks * (7+m.getMemory().getInt("$ashesofohm_marketRateOffset"));
             script.entityToken = dialog.getInteractionTarget();
             Global.getSector().addScript(script);
-            MarketAPI m = dialog.getInteractionTarget().getMarket();
             m.getMemory().set("$ashesofohm_marketBusy", true);
             m.getMemory().set("$ashesofohm_marketBusyWith", "Disassembly");
-            m.getMemory().expire("$ashesofohm_marketBusy", weeks*7);
+            m.getMemory().expire("$ashesofohm_marketBusy", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
             m.getMemory().set("$ashesofohm_marketBusyStart", Global.getSector().getClock().getTimestamp());
-            m.getMemory().set("$ashesofohm_marketBusyDuration", weeks*7);
+            m.getMemory().set("$ashesofohm_marketBusyDuration", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
         } else if (option.contains("Cancel")) {
             dialog.getTextPanel().addPara("\"Confirmed, order canceled. Returning to root directory.\"");
         } else {

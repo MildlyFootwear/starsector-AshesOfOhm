@@ -39,12 +39,13 @@ public class AssistantDisassembleWeapons extends BaseCommandPlugin {
         if (totalWeaponComponents > 0) {
             m.getMemory().set("$ashesofohm_marketBusy", true);
             m.getMemory().set("$ashesofohm_marketBusyWith", "Disassembly");
-            m.getMemory().expire("$ashesofohm_marketBusy", totalWeaponComponents*7);
+            m.getMemory().expire("$ashesofohm_marketBusy", totalWeaponComponents*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
             m.getMemory().set("$ashesofohm_marketBusyStart", Global.getSector().getClock().getTimestamp());
-            m.getMemory().set("$ashesofohm_marketBusyDuration", totalWeaponComponents*7);
+            m.getMemory().set("$ashesofohm_marketBusyDuration", totalWeaponComponents*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
             AddComponents script = new AddComponents();
             script.entityToken = m.getPrimaryEntity();
             script.componentsLeft = totalWeaponComponents;
+            script.offset = m.getMemory().getInt("$ashesofohm_marketRateOffset");
             Global.getSector().addScript(script);
         }
         return false;

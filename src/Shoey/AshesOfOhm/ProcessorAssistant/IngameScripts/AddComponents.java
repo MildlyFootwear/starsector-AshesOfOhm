@@ -6,7 +6,7 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import static Shoey.AshesOfOhm.MainPlugin.*;
 public class AddComponents implements EveryFrameScript {
 
-    public int dayCounter = 0, componentsLeft = 0, previousDay = 0;
+    public int dayCounter = 0, componentsLeft = 0, previousDay = 0, offset = 0;
     boolean done = false;
     public SectorEntityToken entityToken;
 
@@ -28,7 +28,7 @@ public class AddComponents implements EveryFrameScript {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (dayCounter > componentsLeft * 7)
+                if (dayCounter > componentsLeft * (7+offset))
                 {
                     dayCounter = 0;
                     setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")+1);

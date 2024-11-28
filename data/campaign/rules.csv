@@ -12,7 +12,7 @@ ashesofohm_assistantGreet,PickGreeting,"$tag:ashesofohm_omegaProcessorAssistant
 $tag:ashesofohm_omegaProcessorAssistant","ShowPersonVisual
 FireAll PopulateOptions",You begin interfacing with the AI.,,
 ,,,,,,
-ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,,"""Query, what may I assist you with?""
+ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,AssistantGreetingUpdate,"""Query, what may I assist you with?""
 OR
 ""Query, what may I assist you with today?""
 
