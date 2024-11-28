@@ -25,7 +25,7 @@ public class MainPlugin extends BaseModPlugin {
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
-    public static boolean Debugging = false;
+    public static boolean Debugging = false, GiveTesseract = false;
 
     public static void updateLunaSettings()
     {
@@ -36,11 +36,16 @@ public class MainPlugin extends BaseModPlugin {
         } else {
             log.setLevel(Level.INFO);
         }
-        if (Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract")))
+
+        GiveTesseract = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract"));
+        if (Global.getCurrentState() == GameState.CAMPAIGN)
         {
-            if (Global.getCurrentState() == GameState.CAMPAIGN)
+            if (GiveTesseract != getPlayerMemoryBool("hasDebugTesseract", true))
             {
-                Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
+                if (!getPlayerMemoryBool("hasDebugTesseract", true)) {
+                    Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
+                }
+                setPlayerMemory("hasDebugTesseract", GiveTesseract);
             }
         }
     }
@@ -160,7 +165,7 @@ public class MainPlugin extends BaseModPlugin {
     @Override
     public void onGameLoad(boolean b) {
         super.onGameLoad(b);
-
+        updateLunaSettings();
 
         Global.getSector().addTransientListener(new CampaignListener());
         pfMem = Global.getSector().getPlayerFaction().getMemory();

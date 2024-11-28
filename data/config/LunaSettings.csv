@@ -47,7 +47,7 @@ fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValu
 ,,,,,,,,
 ,,,,,,,,
 Debugging,Debug,Boolean,FALSE,,Debug logging.,,,Debug
-GiveTesseract,Give Salvaged Tesseract,Boolean,FALSE,,Adds a fitted Tesseract to player fleet every time settings are updated if enabled.,,,Debug
+GiveTesseract,Give Salvaged Tesseract,Boolean,FALSE,,Adds a fitted Tesseract to player fleet if enabled while in-game.,,,Debug
 ,,,,,,,,Debug
 ,,,,,,,,Debug
 ,,,,,,,,Debug
