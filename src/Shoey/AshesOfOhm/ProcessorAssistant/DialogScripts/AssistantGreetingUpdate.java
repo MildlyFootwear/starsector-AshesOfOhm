@@ -18,7 +18,7 @@ public class AssistantGreetingUpdate extends BaseCommandPlugin {
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
         MarketAPI m = dialog.getInteractionTarget().getMarket();
-        m.getMemory().set("$ashesofohm_marketRateOffset", 3-Math.min(m.getSize(), 6));
+        m.getMemory().set("$ashesofohm_marketRateOffset", 3-Math.min(m.getSize(), 7));
 
         return false;
     }
