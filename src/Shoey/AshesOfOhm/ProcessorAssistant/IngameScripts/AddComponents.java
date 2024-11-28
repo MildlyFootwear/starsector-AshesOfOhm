@@ -28,7 +28,7 @@ public class AddComponents implements EveryFrameScript {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (dayCounter > componentsLeft * (7+offset))
+                if (dayCounter > (7+offset))
                 {
                     dayCounter = 0;
                     setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")+1);
