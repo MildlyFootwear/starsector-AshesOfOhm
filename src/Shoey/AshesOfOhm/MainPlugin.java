@@ -1,23 +1,19 @@
 package Shoey.AshesOfOhm;
 
-import Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods;
 import com.fs.starfarer.api.BaseModPlugin;
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
-import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
-import com.fs.starfarer.api.util.Misc;
+import lunalib.lunaSettings.LunaSettings;
+import lunalib.lunaUtil.LunaCommons;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-
-import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 
 public class MainPlugin extends BaseModPlugin {
@@ -29,6 +25,25 @@ public class MainPlugin extends BaseModPlugin {
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
+    public static boolean Debugging = false;
+
+    public static void updateLunaSettings()
+    {
+        Debugging = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "Debugging"));
+        if (Debugging)
+        {
+            log.setLevel(Level.DEBUG);
+        } else {
+            log.setLevel(Level.INFO);
+        }
+        if (Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract")))
+        {
+            if (Global.getCurrentState() == GameState.CAMPAIGN)
+            {
+                Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
+            }
+        }
+    }
 
     void insertMemoryNumber(MemoryAPI pfMem, String key)
     {
@@ -101,96 +116,6 @@ public class MainPlugin extends BaseModPlugin {
         log.debug("Set $ashesofohm_"+key+" to "+val);
     }
 
-    public static boolean checkShuntPossess()
-    {
-        for (MarketAPI m : Misc.getPlayerMarkets(false) )
-        {
-            if (m.hasIndustry("coronal_network"))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean checkShuntHarvest()
-    {
-        if (!checkShuntPossess())
-            return false;
-
-        for (MarketAPI m : Misc.getPlayerMarkets(false) )
-        {
-            if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean checkShuntWithResearch()
-    {
-
-        if (!checkShuntPossess())
-            return false;
-
-        boolean bothOnOne = false;
-
-        for (MarketAPI m : Misc.getPlayerMarkets(false) )
-        {
-            boolean hasResearch = false;
-            boolean haarvestingShunt = false;
-            if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
-            {
-                haarvestingShunt = true;
-            }
-            if (m.hasIndustry("researchfacility") && m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))
-            {
-                hasResearch = true;
-                boolean hasAssist = false;
-                for (PersonAPI p : m.getPeopleCopy())
-                {
-                    if (p.hasTag(assistantID)) {
-                        log.info(m.getName()+" ("+m.getId()+") has assistant.");
-                        hasAssist = true;
-                    }
-                }
-                if (!hasAssist) {
-                    AssistantMethods.createAssistant(m);
-                    log.info("Added assistant to "+m.getName()+" ("+m.getId()+")");
-                }
-            }
-            if (haarvestingShunt && hasResearch) {
-                bothOnOne = true;
-                log.info(m.getName()+" ("+m.getId()+") has shunt and research.");
-            }
-            if ((!hasResearch)) {
-                for (PersonAPI p : m.getPeopleCopy())
-                {
-                    if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
-                        m.getCommDirectory().removePerson(p);
-                        m.removePerson(p);
-                    }
-                }
-            }
-        }
-        return bothOnOne;
-
-    }
-
-    public static void playerStatusChecks()
-    {
-        setPlayerMemory("hasCoronalShunt", checkShuntPossess());
-        setPlayerMemory("harvestingShunt", checkShuntHarvest());
-        setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
-        if (getPlayerMemoryInt("destroyedTesseractCount") > getPlayerMemoryInt("constructedTesseractCount") && getPlayerMemoryBool("harvestingShuntWithResearch"))
-        {
-            setPlayerMemory("canConstructReplicaTesseract", true);
-        } else {
-            setPlayerMemory("canConstructReplicaTesseract", false);
-        }
-    }
-
     public static void updateOmegaWeaponIDs()
     {
         omegaWeaponIDs.clear();
@@ -217,6 +142,8 @@ public class MainPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() throws Exception {
         super.onApplicationLoad();
+        updateLunaSettings();
+
         log.setLevel(Level.DEBUG);
 
         memKeysNums.add("$ashesofohm_destroyedTesseractCount");
@@ -226,12 +153,15 @@ public class MainPlugin extends BaseModPlugin {
         memKeysNums.add("$ashesofohm_destroyedShardCount");
         memKeysNums.add("$ashesofohm_constructedShardCount");
         memKeysNums.add("$ashesofohm_omegaWeaponPoints");
+        LunaSettings.addSettingsListener(new LunaListener());
 
     }
 
     @Override
     public void onGameLoad(boolean b) {
         super.onGameLoad(b);
+
+
         Global.getSector().addTransientListener(new CampaignListener());
         pfMem = Global.getSector().getPlayerFaction().getMemory();
 
@@ -243,7 +173,7 @@ public class MainPlugin extends BaseModPlugin {
         if (getPlayerMemoryInt("omegaWeaponPoints") > 0)
             setPlayerMemory("deconstructedOmegaWeapons", true);
 
-        playerStatusChecks();
+        CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();
     }
 

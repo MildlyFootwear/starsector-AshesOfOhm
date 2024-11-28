@@ -116,7 +116,7 @@ public class CampaignListener implements CampaignEventListener {
 
     @Override
     public void reportShownInteractionDialog(InteractionDialogAPI dialog) {
-        playerStatusChecks();
+        CheckMethods.playerStatusChecks();
     }
 
     @Override
@@ -157,7 +157,7 @@ public class CampaignListener implements CampaignEventListener {
     @Override
     public void reportEconomyMonthEnd() {
 
-        playerStatusChecks();
+        CheckMethods.playerStatusChecks();
 
     }
 }
