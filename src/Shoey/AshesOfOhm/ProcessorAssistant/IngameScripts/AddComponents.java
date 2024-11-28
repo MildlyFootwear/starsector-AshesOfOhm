@@ -17,13 +17,13 @@ public class AddComponents implements EveryFrameScript {
 
     @Override
     public boolean runWhilePaused() {
-        return false;
+        return BypassTimer;
     }
 
     @Override
     public void advance(float amount) {
         int curDay = Global.getSector().getClock().getDay();
-        if (curDay != previousDay)
+        if (curDay != previousDay || BypassTimer)
         {
             if (previousDay != 0)
             {

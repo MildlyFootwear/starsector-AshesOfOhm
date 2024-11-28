@@ -21,7 +21,7 @@ OR
 ""Query, what is your request?""
 OR
 ""Query, what is needed, $playerSirOrMadam?""","ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons.
-ashesofohm_assistantAssembleOptionWeapon:Assemble weapons.",
+ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons.",
 ashesofohm_assistantRootDirectoryBusyCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
 SetEnabled ashesofohm_assistantAssembleOptionWeapon false
@@ -48,16 +48,20 @@ FireAll PopulateOptions","""Confirmed, disassembly will proceed.""
 ""Due to the nature of these components, they will be securely held in our facilities until you request they be utilized through this interface or another like it.""",,
 ashesofohm_assistantDisassemblyCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeaponCancel",FireAll PopulateOptions,"""Request for disassembly has been canceled. Items will be securely held in our facility's storage until further orders have been received.""",,
-,,,,,,
-ashesofohm_assistantAssembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantAssembleOptionWeapon","AssistantPollComponents
-FireAll ashesofohm_assistantAssemblyCheckComponents
-SetShortcut ashesofohm_assistantAssembleOptionWeaponCancel ""ESCAPE""
-$primedToBuild = false","""Confirmed.""
+ashesofohm_assistantAssemblyWithText,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantAssembleOptionWeaponWithText
+","AssistantPollComponents
+$option = ashesofohm_assistantAssembleOptionWeapon
+FireBest DialogOptionSelected","""Confirmed.""
 
 ""Note, only equipment we have disassembled or otherwise learned the inner workings of can be produced.""
 
-A menu pops up on your display, providing an assortment of options for placing an equipment order.","ashesofohm_assistantAssembleOptionWeaponSmall:Small slot weapons.
+A menu pops up on your display, providing an assortment of options for placing an equipment order.",,
+ashesofohm_assistantAssembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantAssembleOptionWeapon","
+FireAll ashesofohm_assistantAssemblyCheckComponents
+SetShortcut ashesofohm_assistantAssembleOptionWeaponCancel ""ESCAPE""
+$primedToBuild = false",,"ashesofohm_assistantAssembleOptionWeaponSmall:Small slot weapons.
 ashesofohm_assistantAssembleOptionWeaponMedium:Medium slot weapons.
 ashesofohm_assistantAssembleOptionWeaponLarge:Large slot weapons.
 ashesofohm_assistantAssembleOptionWeaponCancel:Cancel.",

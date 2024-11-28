@@ -21,18 +21,18 @@ public class ConstructWeapon implements EveryFrameScript {
 
     @Override
     public boolean runWhilePaused() {
-        return false;
+        return BypassTimer;
     }
 
     @Override
     public void advance(float amount) {
         int curDay = Global.getSector().getClock().getDay();
-        if (curDay != previousDay)
+        if (curDay != previousDay || BypassTimer)
         {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (dayCounter > daysUntilDone)
+                if (dayCounter > daysUntilDone || BypassTimer)
                 {
                     entityToken.getMarket().getSubmarket(AoTDSubmarkets.RESEARCH_FACILITY_MARKET).getCargo().addWeapons(wID, 1);
                     Global.getSector().getCampaignUI().addMessage(Global.getSettings().getWeaponSpec(wID).getWeaponName() + " has been constructed and is waiting in "+entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility.");

@@ -25,7 +25,7 @@ public class MainPlugin extends BaseModPlugin {
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
-    public static boolean Debugging = false, GiveTesseract = false;
+    public static boolean Debugging = false, GiveTesseract = false, BypassTimer = false;
 
     public static void updateLunaSettings()
     {
@@ -48,6 +48,7 @@ public class MainPlugin extends BaseModPlugin {
                 setPlayerMemory("hasDebugTesseract", GiveTesseract);
             }
         }
+        BypassTimer = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassTimer"));
     }
 
     void insertMemoryNumber(MemoryAPI pfMem, String key)
