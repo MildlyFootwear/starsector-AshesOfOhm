@@ -20,24 +20,28 @@ The screen slowly pulsates, anticipating your response.
 OR
 ""Query, what is your request?""
 OR
-""Query, what is needed, $PlayerSirOrMadam?""","ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons.
+""Query, what is needed, $playerSirOrMadam?""","ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons.
 ashesofohm_assistantAssembleOptionWeapon:Assemble weapons.",
-,,,,,,
+ashesofohm_assistantRootDirectoryBusyCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
+$market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
+SetEnabled ashesofohm_assistantAssembleOptionWeapon false
+AssistantBusyDurationPrint","""Our facilities are currently occupied so some options will be unavailable.""",,
 ashesofohm_assistantDisassembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon","AssistantPollComponentsFacility
-SetShortcut ashesofohm_assistantDisassembleOptionCancel ""ESCAPE""
+SetShortcut ashesofohm_assistantDisassembleOptionWeaponCancel ""ESCAPE""
 FireBest ashesofohm_assistantDisassemblyCheckTrigger","""Certainly! Checking facility logs for relevant items.""","ashesofohm_assistantDisassembleOptionWeaponConfirm:Proceed.
 
 ashesofohm_assistantDisassembleOptionWeaponCancel:Cancel.",
 ashesofohm_assistantDisassemblyCheck,ashesofohm_assistantDisassemblyCheckTrigger,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon
-$market.ashesofohm_omegaWeaponPointsForDialog == 0","SetEnabled ashesofohm_assistantDisassembleOptionConfirm false
+$market.ashesofohm_omegaWeaponPointsForDialog == 0","SetEnabled ashesofohm_assistantDisassembleOptionWeaponConfirm false
 Highlight ""Move relevant equipment to the Research Facility storage bay and try again.""","""Error, no items have been logged in the facility's storage. Check with local officials to be sure the items are present in the proper cargo bays.""
 
 Move relevant equipment to the Research Facility storage bay and try again.",,
 ,,,,,,
 ashesofohm_assistantDisassemblyConfirm,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantDisassembleOptionWeaponConfirm",FireAll PopulateOptions,"""Confirmed, disassembly will proceed.""
+$option == ashesofohm_assistantDisassembleOptionWeaponConfirm","AssistantDisassembleWeapons
+FireAll PopulateOptions","""Confirmed, disassembly will proceed.""
 
 ""Note, disassembly can be expected to take several months depending on quantity of items in our facility's storage.""
 
@@ -48,7 +52,8 @@ $option == ashesofohm_assistantDisassembleOptionWeaponCancel",FireAll PopulateOp
 ashesofohm_assistantAssembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeapon","AssistantPollComponents
 FireAll ashesofohm_assistantAssemblyCheckComponents
-SetShortcut ashesofohm_assistantAssembleOptionWeaponCancel ""ESCAPE""","""Confirmed.""
+SetShortcut ashesofohm_assistantAssembleOptionWeaponCancel ""ESCAPE""
+$primedToBuild = false","""Confirmed.""
 
 ""Note, only equipment we have disassembled or otherwise learned the inner workings of can be produced.""
 
@@ -56,14 +61,14 @@ A menu pops up on your display, providing an assortment of options for placing a
 ashesofohm_assistantAssembleOptionWeaponMedium:Medium slot weapons.
 ashesofohm_assistantAssembleOptionWeaponLarge:Large slot weapons.
 ashesofohm_assistantAssembleOptionWeaponCancel:Cancel.",
-ashesofohm_assistantAssemblyCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantAssembleOptionWeaponCancel",FireAll PopulateOptions,"""Request for assembly has been canceled. Components will be securely held in our facility's storage until further orders have been received.""",,
 ashesofohm_assistantAssemblyCheckWeaponSmall,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_Components <= 0",SetEnabled ashesofohm_assistantAssembleOptionWeaponSmall false,,,
 ashesofohm_assistantAssemblyCheckWeaponMedium,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_Components <= 1",SetEnabled ashesofohm_assistantAssembleOptionWeaponMedium false,,,
 ashesofohm_assistantAssemblyCheckWeaponLarge,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_Components <= 2",SetEnabled ashesofohm_assistantAssembleOptionWeaponLarge false,,,
+ashesofohm_assistantAssemblyCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantAssembleOptionWeaponCancel",FireAll PopulateOptions,Request for assembly has been canceled. Components will be securely held in our facility's storage until further orders have been received.,,
 ashesofohm_assistantAssemblyWeaponSmall,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponSmall","AssistantPopulateWeapons Small
 $primedToBuild = true
@@ -80,3 +85,8 @@ ashesofohm_assistantAssemblyWeaponExecute,DialogOptionSelected,"$tag:ashesofohm_
 $primedToBuild == true","$primedToBuild = false
 AssistantConstructWeapon $option
 FireAll PopulateOptions",,,
+ashesofohm_assistantAssemblyWeaponCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToBuild == true
+$option == ashesofohm_assistantAssembleOrderOptionWeaponCancel","$option = ashesofohm_assistantAssembleOptionWeapon
+$primedToBuild = false
+FireBest DialogOptionSelected",,,
