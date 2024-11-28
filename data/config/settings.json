@@ -1,5 +1,8 @@
 {
     "plugins":
     {
-    },	
+    },
+    "ruleCommandPackages":[
+        "Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts",
+    ]
 }

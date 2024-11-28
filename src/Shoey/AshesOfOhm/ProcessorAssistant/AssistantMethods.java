@@ -21,6 +21,7 @@ public class AssistantMethods {
         person.getName().setFirst("Processor Assistant");
         person.getName().setLast("");
         person.setPortraitSprite("graphics/portraits/portrait_ai2.png");
+        person.setVoice(assistantID);
         person.addTag(assistantID);
 
         person.setVoice(assistantID);

@@ -63,10 +63,17 @@ public class MainPlugin extends BaseModPlugin {
 
     public static boolean getPlayerMemoryBool(String key)
     {
+        return getPlayerMemoryBool(key, false);
+    }
+
+    public static boolean getPlayerMemoryBool(String key, boolean suppressError)
+    {
         if (pfMem.contains("$ashesofohm_"+key)) {
             return (boolean) pfMem.get("$ashesofohm_" + key);
         }
-        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
+        if (!suppressError) {
+            log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
+        }
         return false;
     }
 
@@ -193,7 +200,7 @@ public class MainPlugin extends BaseModPlugin {
             if (w.hasTag("omega"))
             {
                 omegaWeaponIDs.add(w.getWeaponId());
-                int componentValue = 1;
+                int componentValue = 0;
                 if (w.getSize() == WeaponAPI.WeaponSize.SMALL) {
                     componentValue = 1;
                 } else if (w.getSize() == WeaponAPI.WeaponSize.MEDIUM) {
