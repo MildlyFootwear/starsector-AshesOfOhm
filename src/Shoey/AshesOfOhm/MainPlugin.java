@@ -178,7 +178,7 @@ public class MainPlugin extends BaseModPlugin {
 
     }
 
-    public static void shuntChecks()
+    public static void playerStatusChecks()
     {
         setPlayerMemory("hasCoronalShunt", checkShuntPossess());
         setPlayerMemory("harvestingShunt", checkShuntHarvest());
@@ -243,7 +243,7 @@ public class MainPlugin extends BaseModPlugin {
         if (getPlayerMemoryInt("omegaWeaponPoints") > 0)
             setPlayerMemory("deconstructedOmegaWeapons", true);
 
-        shuntChecks();
+        playerStatusChecks();
         updateOmegaWeaponIDs();
     }
 
