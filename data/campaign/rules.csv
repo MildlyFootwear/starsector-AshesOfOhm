@@ -24,7 +24,7 @@ OR
 ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons.",
 ashesofohm_assistantRootDirectoryBusyCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
-SetEnabled ashesofohm_assistantAssembleOptionWeapon false
+SetEnabled ashesofohm_assistantAssembleOptionWeaponWithText false
 AssistantBusyDurationPrint","""Our facilities are currently occupied so some options will be unavailable.""",,
 ashesofohm_assistantDisassembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon","AssistantPollComponentsFacility
