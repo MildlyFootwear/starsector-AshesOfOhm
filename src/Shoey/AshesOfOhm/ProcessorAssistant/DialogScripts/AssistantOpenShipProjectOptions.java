@@ -23,8 +23,8 @@ public class AssistantOpenShipProjectOptions extends BaseCommandPlugin {
         for (String s : omegaShipComponentMap.keySet()) {
             if (getPlayerMemoryBool("haveSalvaged" + s)) {
                 dialog.getOptionPanel().addOption(s, "ashesofohm_beginConstruction"+s);
-                tt += "\n"+s+": "+omegaShipComponentMap.get(s);
-                if (getPlayerMemoryInt("omegaWeaponPoints") < omegaShipComponentMap.get(s)) {
+                tt += "\n"+s+": "+(omegaShipComponentMap.get(s) * 2);
+                if (getPlayerMemoryInt("omegaWeaponPoints") < omegaShipComponentMap.get(s) * 2) {
                     dialog.getOptionPanel().setEnabled("ashesofohm_beginConstruction"+s, false);
                 }
                 if (getPlayerMemoryBool("canConstructSalvaged"+s)) {

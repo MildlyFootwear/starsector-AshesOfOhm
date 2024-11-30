@@ -22,7 +22,7 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
             textMode = true;
         }
         if (textMode) {
-            dialog.getTextPanel().addPara("A list of ships that you have defeated and can salvage shows up on your display.");
+            dialog.getTextPanel().addPara("A list of ships that you have defeated and can salvage shows up on your display as well as projected salvage results.");
         }
         boolean canLearn = false;
         TooltipMakerAPI tooltip = null;
@@ -40,6 +40,7 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
                     s += "*";
                     canLearn = true;
                 }
+                s += ": "+omegaShipComponentMap.get("Tesseract");
                 tooltip.addPara(s, 0);
             } else {
                 dialog.getOptionPanel().addOption("Tesseract", "ashesofohm_salvageTesseract");
@@ -54,6 +55,7 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
                     s += "*";
                     canLearn = true;
                 }
+                s += ": "+omegaShipComponentMap.get("Facet");
                 tooltip.addPara(s, 0);
             } else {
                 dialog.getOptionPanel().addOption("Facet", "ashesofohm_salvageFacet");
@@ -68,6 +70,7 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
                     s += "*";
                     canLearn = true;
                 }
+                s += ": "+omegaShipComponentMap.get("Shard");
                 tooltip.addPara(s, 0);
             } else {
                 dialog.getOptionPanel().addOption("Shard", "ashesofohm_salvageShard");

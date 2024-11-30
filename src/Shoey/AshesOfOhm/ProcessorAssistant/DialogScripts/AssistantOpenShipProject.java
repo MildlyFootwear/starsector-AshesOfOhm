@@ -13,8 +13,7 @@ import org.apache.log4j.Logger;
 import java.util.List;
 import java.util.Map;
 
-import static Shoey.AshesOfOhm.MainPlugin.omegaShipComponentMap;
-import static Shoey.AshesOfOhm.MainPlugin.omegaWeaponComponentMap;
+import static Shoey.AshesOfOhm.MainPlugin.*;
 
 public class AssistantOpenShipProject extends BaseCommandPlugin {
     @Override
@@ -23,18 +22,19 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
         if (omegaShipComponentMap.containsKey(option))
         {
             MarketAPI m = dialog.getInteractionTarget().getMarket();
-            int weeks = (omegaShipComponentMap.get(option)/3);
+            int comp = (omegaShipComponentMap.get(option));
             dialog.getTextPanel().addPara("\"Confirmed, beginning preparation for "+option+".\"");
             ConstructShip script = new ConstructShip();
             script.kID = option;
-            script.daysUntilDone = weeks * (7+m.getMemory().getInt("$ashesofohm_marketRateOffset"));
+            script.daysUntilDone = comp * (7+m.getMemory().getInt("$ashesofohm_marketRateOffset") / 3);
             script.entityToken = dialog.getInteractionTarget();
             Global.getSector().addScript(script);
+            setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")-comp*2);
             m.getMemory().set("$ashesofohm_marketBusyShip", true);
             m.getMemory().set("$ashesofohm_marketBusyShipWith", option+" preparation.");
-            m.getMemory().expire("$ashesofohm_marketBusyShip", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
+            m.getMemory().expire("$ashesofohm_marketBusyShip", script.daysUntilDone);
             m.getMemory().set("$ashesofohm_marketBusyShipStart", Global.getSector().getClock().getTimestamp());
-            m.getMemory().set("$ashesofohm_marketBusyShipDuration", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
+            m.getMemory().set("$ashesofohm_marketBusyShipDuration", script.daysUntilDone);
         } else if (option.contains("Cancel")) {
             dialog.getTextPanel().addPara("\"Confirmed, order canceled. Returning to root directory.\"");
         } else {
