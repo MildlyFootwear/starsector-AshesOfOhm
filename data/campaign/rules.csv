@@ -10,9 +10,11 @@ $haveMet = true","You begin interfacing with the AI.
 The screen briefly flickers.",,
 ashesofohm_assistantGreet,PickGreeting,"$tag:ashesofohm_omegaProcessorAssistant
 $tag:ashesofohm_omegaProcessorAssistant","ShowPersonVisual
-FireAll PopulateOptions",You begin interfacing with the AI.,,
+FireBest PickRootDialog",You begin interfacing with the AI.,,
 ,,,,,,
-ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,AssistantGreetingUpdate,"""Query, what may I assist you with?""
+ashesofohm_assistantSessionGreeting,PickRootDialog,"$tag:ashesofohm_omegaProcessorAssistant
+!$sessionGreeted","$sessionGreeted = true 0
+FireAll PopulateOptions","""Query, what may I assist you with?"", the interface recites.
 OR
 ""Query, what may I assist you with today?""
 
@@ -20,10 +22,16 @@ The screen slowly pulsates, anticipating your response.
 OR
 ""Query, what is your request?""
 OR
-""Query, what is needed, $playerSirOrMadam?""","ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons.
-ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons.
-ashesofohm_assistantSalvageOptionShip:Salvage ships.
-ashesofohm_assistantPrepareOptionShip:Prepare ship construction.",
+""Query, what is needed, $playerSirOrMadam?""",,
+ashesofohm_assistantGreeting,PickRootDialog,$tag:ashesofohm_omegaProcessorAssistant,FireAll PopulateOptions,"""Query, what else may I help you with?""
+OR
+""Query, what else is needed?""
+OR
+""Query, any other concerns $playerSirOrMadam?""",,
+ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,AssistantGreetingUpdate,,"ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons
+ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons
+ashesofohm_assistantSalvageOptionShip:Salvage ships
+ashesofohm_assistantPrepareOptionShip:Prepare ship construction",
 ashesofohm_assistantRootDirectoryBusyEquipmentCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
 SetEnabled ashesofohm_assistantAssembleOptionWeaponWithText false
@@ -35,9 +43,9 @@ AssistantBusyDurationPrint Ship",,,
 ashesofohm_assistantDisassembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon","AssistantPollComponentsFacility
 SetShortcut ashesofohm_assistantDisassembleOptionWeaponCancel ""ESCAPE""
-FireBest ashesofohm_assistantDisassemblyCheckTrigger","""Certainly! Checking facility logs for relevant items.""","ashesofohm_assistantDisassembleOptionWeaponConfirm:Proceed.
+FireBest ashesofohm_assistantDisassemblyCheckTrigger","""Certainly! Checking facility logs for relevant items.""","ashesofohm_assistantDisassembleOptionWeaponConfirm:Proceed
 
-ashesofohm_assistantDisassembleOptionWeaponCancel:Cancel.",
+ashesofohm_assistantDisassembleOptionWeaponCancel:Cancel",
 ashesofohm_assistantDisassemblyCheck,ashesofohm_assistantDisassemblyCheckTrigger,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon
 $market.ashesofohm_omegaWeaponPointsForDialog == 0","SetEnabled ashesofohm_assistantDisassembleOptionWeaponConfirm false
@@ -67,10 +75,10 @@ ashesofohm_assistantAssembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcesso
 $option == ashesofohm_assistantAssembleOptionWeapon","
 FireAll ashesofohm_assistantAssemblyCheckComponents
 SetShortcut ashesofohm_assistantAssembleOptionWeaponCancel ""ESCAPE""
-$primedToBuild = false",,"ashesofohm_assistantAssembleOptionWeaponSmall:Small slot weapons.
-ashesofohm_assistantAssembleOptionWeaponMedium:Medium slot weapons.
-ashesofohm_assistantAssembleOptionWeaponLarge:Large slot weapons.
-ashesofohm_assistantAssembleOptionWeaponCancel:Cancel.",
+$primedToBuild = false",,"ashesofohm_assistantAssembleOptionWeaponSmall:Small slot weapons
+ashesofohm_assistantAssembleOptionWeaponMedium:Medium slot weapons
+ashesofohm_assistantAssembleOptionWeaponLarge:Large slot weapons
+ashesofohm_assistantAssembleOptionWeaponCancel:Cancel",
 ashesofohm_assistantAssemblyCheckWeaponSmall,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_Components <= 0",SetEnabled ashesofohm_assistantAssembleOptionWeaponSmall false,,,
 ashesofohm_assistantAssemblyCheckWeaponMedium,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
@@ -82,15 +90,15 @@ $option == ashesofohm_assistantAssembleOptionWeaponCancel",FireAll PopulateOptio
 ashesofohm_assistantAssemblyWeaponSmall,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponSmall","AssistantPopulateWeapons Small
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel.,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
 ashesofohm_assistantAssemblyWeaponMedium,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponMedium","AssistantPopulateWeapons Medium
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel.,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
 ashesofohm_assistantAssemblyWeaponLarge,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponLarge","AssistantPopulateWeapons Large
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel.,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
 ashesofohm_assistantAssemblyWeaponExecute,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToBuild == true","$primedToBuild = false
 AssistantConstructWeapon $option
@@ -105,7 +113,7 @@ $option == ashesofohm_assistantSalvageOptionShip","AssistantPopulateWrecks Text
 FireAll ashesofohm_WrecksOptions","""Certainly! Here are the wrecks we have available to salvage.""",,
 ashesofohm_assistantSalvageShipOptions,ashesofohm_WrecksOptions,,"AssistantPopulateWrecks Options
 $primedToSalvageShip = true
-SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,ashesofohm_assistantSalvageOptionShipCancel:Cancel.,
+SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,ashesofohm_assistantSalvageOptionShipCancel:Cancel,
 ashesofohm_assistantSalvageShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true","$primedToSalvageShip = false
 AssistantSalvageWreck $option
@@ -116,9 +124,9 @@ $option == ashesofohm_assistantSalvageOptionShipCancel","$primedToSalvageShip = 
 FireAll PopulateOptions","""Confirmed, salvage order canceled. Returning to root directory.""",,
 ashesofohm_assistantPrepareShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantPrepareOptionShip",FireAll ashesofohm_ShipOptions,"""Certainly! Here are the ships we can prepare to produce.""",,
-ashesofohm_assistantPrepareShipOptions,ashesofohm_ShipOptions,,"AssistantOpenShipProjectOptions
+ashesofohm_assistantPrepareShipOptions,ashesofohm_ShipOptions,,"AssistantPopulateShips
 $primedToPrepareShip = true
-SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,ashesofohm_assistantPrepareOptionShipCancel:Cancel.,
+SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,ashesofohm_assistantPrepareOptionShipCancel:Cancel,
 ashesofohm_assistantPrepareShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true","$primedToPrepareShip = false
 AssistantOpenShipProject $option

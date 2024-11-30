@@ -26,10 +26,10 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
             dialog.getTextPanel().addPara("\"Confirmed, beginning preparation for "+option+".\"");
             ConstructShip script = new ConstructShip();
             script.kID = option;
-            script.daysUntilDone = comp * (7+m.getMemory().getInt("$ashesofohm_marketRateOffset") / 3);
+            script.daysUntilDone = comp * (7+(m.getMemory().getInt("$ashesofohm_marketRateOffset") / 3));
             script.entityToken = dialog.getInteractionTarget();
             Global.getSector().addScript(script);
-            setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")-comp*2);
+            setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")-(comp*2));
             m.getMemory().set("$ashesofohm_marketBusyShip", true);
             m.getMemory().set("$ashesofohm_marketBusyShipWith", option+" preparation.");
             m.getMemory().expire("$ashesofohm_marketBusyShip", script.daysUntilDone);
