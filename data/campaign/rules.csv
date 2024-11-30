@@ -30,6 +30,7 @@ SetEnabled ashesofohm_assistantAssembleOptionWeaponWithText false
 AssistantBusyDurationPrint Equipment",,,
 ashesofohm_assistantRootDirectoryBusyShipCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusyShip == true","SetEnabled ashesofohm_assistantSalvageOptionShip false
+SetEnabled ashesofohm_assistantPrepareOptionShip false
 AssistantBusyDurationPrint Ship",,,
 ashesofohm_assistantDisassembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon","AssistantPollComponentsFacility
