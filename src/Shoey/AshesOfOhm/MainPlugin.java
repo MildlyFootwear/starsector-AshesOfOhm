@@ -4,6 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
+import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import lunalib.lunaSettings.LunaSettings;
@@ -25,6 +26,7 @@ public class MainPlugin extends BaseModPlugin {
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
+    public static HashMap<String, Integer> omegaShipComponentMap = new HashMap<>();
     public static boolean Debugging = false, GiveTesseract = false, BypassTimer = false;
 
     public static void updateLunaSettings()
@@ -144,23 +146,32 @@ public class MainPlugin extends BaseModPlugin {
             }
         }
     }
+    public static void updateOmegaShips()
+    {
+        omegaShipComponentMap.clear();
+        omegaShipComponentMap.put("Tesseract", 12);
+        omegaShipComponentMap.put("Facet", 6);
+        omegaShipComponentMap.put("Shard", 3);
+
+    }
 
     @Override
     public void onApplicationLoad() throws Exception {
         super.onApplicationLoad();
         updateLunaSettings();
 
-        log.setLevel(Level.DEBUG);
-
+        updateOmegaShips();
         memKeysNums.add("$ashesofohm_destroyedTesseractCount");
         memKeysNums.add("$ashesofohm_constructedTesseractCount");
+        memKeysNums.add("$ashesofohm_salvagedTesseractCount");
         memKeysNums.add("$ashesofohm_destroyedFacetCount");
         memKeysNums.add("$ashesofohm_constructedFacetCount");
+        memKeysNums.add("$ashesofohm_salvagedFacetCount");
         memKeysNums.add("$ashesofohm_destroyedShardCount");
         memKeysNums.add("$ashesofohm_constructedShardCount");
+        memKeysNums.add("$ashesofohm_salvagedShardCount");
         memKeysNums.add("$ashesofohm_omegaWeaponPoints");
         LunaSettings.addSettingsListener(new LunaListener());
-
     }
 
     @Override

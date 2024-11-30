@@ -6,8 +6,10 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import static Shoey.AshesOfOhm.MainPlugin.*;
 public class AddComponents implements EveryFrameScript {
 
-    public int dayCounter = 0, componentsLeft = 0, previousDay = 0, offset = 0;
+    public int dayCounter = 0, componentsLeft = 0, previousDay = 0, offset = 0, daysPerTick = 0;
     boolean done = false;
+    public boolean forShip = false;
+    public String shipName = "";
     public SectorEntityToken entityToken;
 
     @Override
@@ -28,7 +30,13 @@ public class AddComponents implements EveryFrameScript {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (dayCounter > (7+offset))
+                if (forShip && !getPlayerMemoryBool("haveSalvaged"+shipName))
+                {
+                    daysPerTick = (7+offset) * 2;
+                } else {
+                    daysPerTick = (7+offset);
+                }
+                if (dayCounter > daysPerTick)
                 {
                     dayCounter = 0;
                     setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")+1);
@@ -36,8 +44,14 @@ public class AddComponents implements EveryFrameScript {
                 }
                 if (componentsLeft == 0)
                 {
-                    Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished disassembling the requested items.");
-                    entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
+                    if (!forShip) {
+                        Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished disassembling the requested items.");
+                        entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
+                    } else {
+                        setPlayerMemory("haveSalvaged"+shipName, true);
+                        Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished salvaging a "+shipName+".");
+                        entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
+                    }
                     done = true;
                 }
             }

@@ -21,11 +21,16 @@ OR
 ""Query, what is your request?""
 OR
 ""Query, what is needed, $playerSirOrMadam?""","ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons.
-ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons.",
-ashesofohm_assistantRootDirectoryBusyCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
+ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons.
+ashesofohm_assistantSalvageOptionShip:Salvage ships.
+ashesofohm_assistantPrepareOptionShip:Prepare ship construction.",
+ashesofohm_assistantRootDirectoryBusyEquipmentCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
 SetEnabled ashesofohm_assistantAssembleOptionWeaponWithText false
-AssistantBusyDurationPrint","""Our facilities are currently occupied so some options will be unavailable.""",,
+AssistantBusyDurationPrint Equipment",,,
+ashesofohm_assistantRootDirectoryBusyShipCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
+$market.ashesofohm_marketBusyShip == true","SetEnabled ashesofohm_assistantSalvageOptionShip false
+AssistantBusyDurationPrint Ship",,,
 ashesofohm_assistantDisassembly,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantDisassembleOptionWeapon","AssistantPollComponentsFacility
 SetShortcut ashesofohm_assistantDisassembleOptionWeaponCancel ""ESCAPE""
@@ -72,7 +77,7 @@ $market.ashesofohm_Components <= 1",SetEnabled ashesofohm_assistantAssembleOptio
 ashesofohm_assistantAssemblyCheckWeaponLarge,ashesofohm_assistantAssemblyCheckComponents,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_Components <= 2",SetEnabled ashesofohm_assistantAssembleOptionWeaponLarge false,,,
 ashesofohm_assistantAssemblyCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantAssembleOptionWeaponCancel",FireAll PopulateOptions,Request for assembly has been canceled. Components will be securely held in our facility's storage until further orders have been received.,,
+$option == ashesofohm_assistantAssembleOptionWeaponCancel",FireAll PopulateOptions,"""Request for assembly has been canceled. Components will be securely held in our facility's storage until further orders have been received.""",,
 ashesofohm_assistantAssemblyWeaponSmall,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponSmall","AssistantPopulateWeapons Small
 $primedToBuild = true
@@ -94,3 +99,30 @@ $primedToBuild == true
 $option == ashesofohm_assistantAssembleOrderOptionWeaponCancel","$option = ashesofohm_assistantAssembleOptionWeapon
 $primedToBuild = false
 FireBest DialogOptionSelected",,,
+ashesofohm_assistantSalvageShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantSalvageOptionShip","AssistantPopulateWrecks Text
+FireAll ashesofohm_WrecksOptions","""Certainly! Here are the wrecks we have available to salvage.""",,
+ashesofohm_assistantSalvageShipOptions,ashesofohm_WrecksOptions,,"AssistantPopulateWrecks Options
+$primedToSalvageShip = true
+SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,ashesofohm_assistantSalvageOptionShipCancel:Cancel.,
+ashesofohm_assistantSalvageShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToSalvageShip == true","$primedToSalvageShip = false
+AssistantSalvageWreck $option
+FireAll PopulateOptions",,,
+ashesofohm_assistantSalvageShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToSalvageShip == true
+$option == ashesofohm_assistantSalvageOptionShipCancel","$primedToSalvageShip = false
+FireAll PopulateOptions","""Confirmed, salvage order canceled. Returning to root directory.""",,
+ashesofohm_assistantPrepareShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantPrepareOptionShip",FireAll ashesofohm_ShipOptions,"""Certainly! Here are the ships we can prepare to produce.""",,
+ashesofohm_assistantPrepareShipOptions,ashesofohm_ShipOptions,,"AssistantOpenShipProjectOptions
+$primedToPrepareShip = true
+SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,ashesofohm_assistantPrepareOptionShipCancel:Cancel.,
+ashesofohm_assistantPrepareShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToPrepareShip == true","$primedToPrepareShip = false
+AssistantOpenShipProject $option
+FireAll PopulateOptions",,,
+ashesofohm_assistantPrepareShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToPrepareShip == true
+$option == ashesofohm_assistantPrepareOptionShipCancel","$primedToPrepareShip = false
+FireAll PopulateOptions","""Confirmed, ship preparation order canceled. Returning to root directory.""",,

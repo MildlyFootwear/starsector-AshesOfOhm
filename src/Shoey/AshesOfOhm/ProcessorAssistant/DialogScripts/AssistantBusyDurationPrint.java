@@ -14,16 +14,31 @@ public class AssistantBusyDurationPrint extends BaseCommandPlugin {
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
         MarketAPI m = dialog.getInteractionTarget().getMarket();
-        float busyDays = (m.getMemory().getLong("$ashesofohm_marketBusyDuration")-Global.getSector().getClock().getElapsedDaysSince(m.getMemory().getLong("$ashesofohm_marketBusyStart")));
-        if (busyDays > 1) {
-            dialog.getTextPanel().addPara("\"The facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"");
-        }
-        else if (busyDays > 0) {
-            dialog.getTextPanel().addPara("\"The facilities will be ready by tomorrow.\"");
-        }
-        else {
-            dialog.getTextPanel().addPara("\"The facilities are ready.\"");
-            m.getMemory().set("ashesofohm_marketBusy", false);
+        if (params.get(0).string.contains("Equip")) {
+            float busyDays = (m.getMemory().getLong("$ashesofohm_marketBusyDuration")-Global.getSector().getClock().getElapsedDaysSince(m.getMemory().getLong("$ashesofohm_marketBusyStart")));
+            if (busyDays > 1) {
+                dialog.getTextPanel().addPara("\"Our equipment facilities are currently occupied so some options will be unavailable. The equipment facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"");
+            }
+            else if (busyDays > 0) {
+                dialog.getTextPanel().addPara("\"Our equipment facilities are currently occupied so some options will be unavailable. The equipment facilities will be ready by tomorrow.\"");
+            }
+            else {
+                dialog.getTextPanel().addPara("\"The equipment facilities are ready.\"");
+                m.getMemory().set("ashesofohm_marketBusy", false);
+            }
+        } else if (params.get(0).string.contains("Ship"))
+        {
+            float busyDays = (m.getMemory().getLong("$ashesofohm_marketBusyShipDuration")-Global.getSector().getClock().getElapsedDaysSince(m.getMemory().getLong("$ashesofohm_marketBusyShipStart")));
+            if (busyDays > 1) {
+                dialog.getTextPanel().addPara("\"Our ship facilities are currently occupied so some options will be unavailable. The ship facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"");
+            }
+            else if (busyDays > 0) {
+                dialog.getTextPanel().addPara("\"Our ship facilities are currently occupied so some options will be unavailable. The ship facilities will be ready by tomorrow.\"");
+            }
+            else {
+                dialog.getTextPanel().addPara("\"The ship facilities are ready.\"");
+                m.getMemory().set("ashesofohm_marketBusyShip", false);
+            }
         }
         return false;
     }
