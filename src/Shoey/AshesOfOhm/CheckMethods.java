@@ -10,23 +10,9 @@ import java.util.Objects;
 import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 public class CheckMethods {
-    public static boolean checkShuntPossess()
-    {
-        for (MarketAPI m : Misc.getPlayerMarkets(false) )
-        {
-            if (m.hasIndustry("coronal_network"))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static boolean checkShuntHarvest()
     {
-        if (!checkShuntPossess())
-            return false;
-
         for (MarketAPI m : Misc.getPlayerMarkets(false) )
         {
             if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
@@ -39,9 +25,6 @@ public class CheckMethods {
 
     public static boolean checkShuntWithResearch()
     {
-
-        if (!checkShuntPossess())
-            return false;
 
         boolean bothOnOne = false;
 
@@ -89,7 +72,6 @@ public class CheckMethods {
 
     public static void playerStatusChecks()
     {
-        MainPlugin.setPlayerMemory("hasCoronalShunt", checkShuntPossess());
         MainPlugin.setPlayerMemory("harvestingShunt", checkShuntHarvest());
         MainPlugin.setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
         if (MainPlugin.getPlayerMemoryInt("destroyedTesseractCount") > MainPlugin.getPlayerMemoryInt("constructedTesseractCount") && MainPlugin.getPlayerMemoryBool("harvestingShuntWithResearch"))
