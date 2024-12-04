@@ -2,7 +2,7 @@
     "id":"ShoeyAshesOfOhm",
 	"name":"AoTD - Ashes of Ohm",
 	"author":"Shoey",
-    "version": { "major":"0", "minor": "2", "patch": "2" },
+    "version": { "major":"0", "minor": "2", "patch": "3" },
 	"description":"[Redacted] focused expansion for Ashes of the Domain.",
     "gameVersion": "0.97a-RC11",
   	"jars":["jars/AshesOfOhm.jar"],
