@@ -11,11 +11,52 @@ import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 public class CheckMethods {
 
+    public static boolean marketHarvestShunt(MarketAPI m)
+    {
+        if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
+        {
+            m.getMemory().set("$ashesofohm_MarketHarvestingShunt", true);
+            return true;
+        }
+        m.getMemory().set("$ashesofohm_MarketHarvestingShunt", false);
+        return false;
+    }
+
+    public static boolean marketOmegaResearch(MarketAPI m)
+    {
+        boolean hasResearch = false;
+        if (m.hasIndustry("researchfacility") && m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))
+        {
+            hasResearch = true;
+            boolean hasAssist = false;
+            for (PersonAPI p : m.getPeopleCopy())
+            {
+                if (p.hasTag(assistantID)) {
+                    hasAssist = true;
+                }
+            }
+            if (!hasAssist) {
+                AssistantMethods.createAssistant(m);
+            }
+        }
+        if (!hasResearch) {
+            for (PersonAPI p : m.getPeopleCopy())
+            {
+                if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
+                    m.getCommDirectory().removePerson(p);
+                    m.removePerson(p);
+                }
+            }
+        }
+        m.getMemory().set("$ashesofohm_MarketOmegaResearch", hasResearch);
+        return hasResearch;
+    }
+
     public static boolean checkShuntHarvest()
     {
         for (MarketAPI m : Misc.getPlayerMarkets(false) )
         {
-            if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
+            if (marketHarvestShunt(m))
             {
                 return true;
             }
@@ -32,38 +73,16 @@ public class CheckMethods {
         {
             boolean hasResearch = false;
             boolean haarvestingShunt = false;
-            if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
+            if (marketHarvestShunt(m))
             {
                 haarvestingShunt = true;
             }
-            if (m.hasIndustry("researchfacility") && m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))
-            {
+            if (marketOmegaResearch(m)) {
                 hasResearch = true;
-                boolean hasAssist = false;
-                for (PersonAPI p : m.getPeopleCopy())
-                {
-                    if (p.hasTag(assistantID)) {
-                        MainPlugin.log.info(m.getName()+" ("+m.getId()+") has assistant.");
-                        hasAssist = true;
-                    }
-                }
-                if (!hasAssist) {
-                    AssistantMethods.createAssistant(m);
-                    MainPlugin.log.info("Added assistant to "+m.getName()+" ("+m.getId()+")");
-                }
             }
             if (haarvestingShunt && hasResearch) {
                 bothOnOne = true;
                 MainPlugin.log.info(m.getName()+" ("+m.getId()+") has shunt and research.");
-            }
-            if ((!hasResearch)) {
-                for (PersonAPI p : m.getPeopleCopy())
-                {
-                    if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
-                        m.getCommDirectory().removePerson(p);
-                        m.removePerson(p);
-                    }
-                }
             }
         }
         return bothOnOne;
@@ -74,11 +93,5 @@ public class CheckMethods {
     {
         MainPlugin.setPlayerMemory("harvestingShunt", checkShuntHarvest());
         MainPlugin.setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
-        if (MainPlugin.getPlayerMemoryInt("destroyedTesseractCount") > MainPlugin.getPlayerMemoryInt("constructedTesseractCount") && MainPlugin.getPlayerMemoryBool("harvestingShuntWithResearch"))
-        {
-            MainPlugin.setPlayerMemory("canConstructReplicaTesseract", true);
-        } else {
-            MainPlugin.setPlayerMemory("canConstructReplicaTesseract", false);
-        }
     }
 }

@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.AbilityPlugin;
@@ -12,6 +13,9 @@ import java.util.Objects;
 import static Shoey.AshesOfOhm.MainPlugin.*;
 
 public class CampaignListener implements CampaignEventListener {
+
+    public static MarketAPI currentMarket = null;
+    public static boolean isAtPlayerMarket = false;
 
     void parseHullID(String hullID)
     {
@@ -36,12 +40,16 @@ public class CampaignListener implements CampaignEventListener {
 
     @Override
     public void reportPlayerOpenedMarket(MarketAPI market) {
-
+        currentMarket = market;
+        if (market.getFaction() == Global.getSector().getPlayerFaction()) {
+            isAtPlayerMarket = true;
+        }
     }
 
     @Override
     public void reportPlayerClosedMarket(MarketAPI market) {
-
+        currentMarket = null;
+        isAtPlayerMarket = false;
     }
 
     @Override
@@ -116,7 +124,9 @@ public class CampaignListener implements CampaignEventListener {
 
     @Override
     public void reportShownInteractionDialog(InteractionDialogAPI dialog) {
+
         CheckMethods.playerStatusChecks();
+
     }
 
     @Override

@@ -178,7 +178,7 @@ public class MainPlugin extends BaseModPlugin {
     public void onGameLoad(boolean b) {
         super.onGameLoad(b);
         updateLunaSettings();
-
+        Global.getSector().addTransientScript(new CampaignEFS());
         Global.getSector().addTransientListener(new CampaignListener());
         pfMem = Global.getSector().getPlayerFaction().getMemory();
 
