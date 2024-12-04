@@ -32,7 +32,7 @@ public class AddComponents implements EveryFrameScript {
                 dayCounter++;
                 if (forShip && !getPlayerMemoryBool("haveSalvaged"+shipName))
                 {
-                    daysPerTick = (7+offset) * 2;
+                    daysPerTick = (7+offset) * 4;
                 } else {
                     daysPerTick = (7+offset);
                 }
