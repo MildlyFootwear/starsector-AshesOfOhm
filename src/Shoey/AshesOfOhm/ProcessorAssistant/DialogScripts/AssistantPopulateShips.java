@@ -15,7 +15,7 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
         String tt = "We have "+getPlayerMemoryInt("omegaWeaponPoints")+" components available.\n\nComponent cost:";
-        for (String s : omegaShipComponentMap.keySet()) {
+        for (String s : omegaShips) {
             if (getPlayerMemoryBool("haveSalvaged" + s)) {
                 dialog.getOptionPanel().addOption(s, "ashesofohm_beginConstruction"+s);
                 tt += "\n"+s+": "+(omegaShipComponentMap.get(s) * 2);

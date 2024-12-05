@@ -25,6 +25,7 @@ public class MainPlugin extends BaseModPlugin {
 
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
+    public static List<String> omegaShips = new ArrayList<>();
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
     public static HashMap<String, Integer> omegaShipComponentMap = new HashMap<>();
     public static boolean Debugging = false, GiveTesseract = false, BypassTimer = false;
@@ -149,6 +150,10 @@ public class MainPlugin extends BaseModPlugin {
     public static void updateOmegaShips()
     {
         omegaShipComponentMap.clear();
+        omegaShips.clear();
+        omegaShips.add("Tesseract");
+        omegaShips.add("Facet");
+        omegaShips.add("Shard");
         omegaShipComponentMap.put("Tesseract", 12);
         omegaShipComponentMap.put("Facet", 6);
         omegaShipComponentMap.put("Shard", 3);
