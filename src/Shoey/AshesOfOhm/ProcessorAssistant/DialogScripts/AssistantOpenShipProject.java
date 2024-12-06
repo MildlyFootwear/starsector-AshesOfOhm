@@ -1,7 +1,7 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import Shoey.AshesOfOhm.ProcessorAssistant.IngameScripts.ConstructShip;
-import Shoey.AshesOfOhm.ProcessorAssistant.IngameScripts.ConstructWeapon;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
@@ -29,7 +29,7 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
             script.daysUntilDone = comp * (7+(m.getMemory().getInt("$ashesofohm_marketRateOffset"))) / 3;
             script.entityToken = dialog.getInteractionTarget();
             Global.getSector().addScript(script);
-            setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")-(comp*2));
+            MemoryShortcuts.setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") - (comp * 2));
             m.getMemory().set("$ashesofohm_marketBusyShip", true);
             m.getMemory().set("$ashesofohm_marketBusyShipWith", option+" preparation.");
             m.getMemory().expire("$ashesofohm_marketBusyShip", script.daysUntilDone);

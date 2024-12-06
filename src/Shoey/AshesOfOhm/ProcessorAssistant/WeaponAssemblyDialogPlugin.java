@@ -1,6 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant;
 
-import Shoey.AshesOfOhm.MainPlugin;
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.InteractionDialogPlugin;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
@@ -36,7 +36,7 @@ public class WeaponAssemblyDialogPlugin implements InteractionDialogPlugin {
             }
         }
         TooltipMakerAPI tooltipMakerAPI = dialog.getTextPanel().beginTooltip();
-        int playerComponents = MainPlugin.getPlayerMemoryInt("omegaWeaponPoints");
+        int playerComponents = MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints");
         tooltipMakerAPI.addPara("You have " + playerComponents + " components available.", 0);
         tooltipMakerAPI.addPara("Component cost:\n" +
                 "    Small weapons: 1\n" +

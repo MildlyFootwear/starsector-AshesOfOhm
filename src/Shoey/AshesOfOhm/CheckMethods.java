@@ -91,7 +91,7 @@ public class CheckMethods {
 
     public static void playerStatusChecks()
     {
-        MainPlugin.setPlayerMemory("harvestingShunt", checkShuntHarvest());
-        MainPlugin.setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
+        MemoryShortcuts.setPlayerMemory("harvestingShunt", checkShuntHarvest());
+        MemoryShortcuts.setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
     }
 }

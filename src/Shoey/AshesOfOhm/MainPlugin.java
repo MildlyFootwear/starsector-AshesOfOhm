@@ -4,11 +4,9 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
-import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import lunalib.lunaSettings.LunaSettings;
-import lunalib.lunaUtil.LunaCommons;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -21,7 +19,7 @@ public class MainPlugin extends BaseModPlugin {
     
     public static Logger log = Global.getLogger(MainPlugin.class);
 
-    static MemoryAPI pfMem;
+    public static MemoryAPI pfMem;
 
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
@@ -43,86 +41,15 @@ public class MainPlugin extends BaseModPlugin {
         GiveTesseract = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract"));
         if (Global.getCurrentState() == GameState.CAMPAIGN)
         {
-            if (GiveTesseract != getPlayerMemoryBool("hasDebugTesseract", true))
+            if (GiveTesseract != MemoryShortcuts.getPlayerMemoryBool("hasDebugTesseract", true))
             {
-                if (!getPlayerMemoryBool("hasDebugTesseract", true)) {
+                if (!MemoryShortcuts.getPlayerMemoryBool("hasDebugTesseract", true)) {
                     Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
                 }
-                setPlayerMemory("hasDebugTesseract", GiveTesseract);
+                MemoryShortcuts.setPlayerMemory("hasDebugTesseract", GiveTesseract);
             }
         }
         BypassTimer = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassTimer"));
-    }
-
-    void insertMemoryNumber(MemoryAPI pfMem, String key)
-    {
-        if (!pfMem.getKeys().contains(key))
-        {
-            pfMem.set(key, 0);
-            log.info("Set "+key+" to 0.");
-        } else {
-            log.info(key+" is "+pfMem.get(key));
-        }
-    }
-
-    void insertMemoryBool(MemoryAPI pfMem, String key)
-    {
-        if (!pfMem.getKeys().contains(key))
-        {
-            pfMem.set(key, false);
-            log.info("Set "+key+" to false.");
-        } else {
-            log.info(key+" is "+pfMem.get(key));
-        }
-    }
-
-    public static Object getPlayerMemory(String key)
-    {
-        if (pfMem.contains("$ashesofohm_"+key)) {
-            return pfMem.get("$ashesofohm_" + key);
-        }
-        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
-        return null;
-    }
-
-    public static boolean getPlayerMemoryBool(String key)
-    {
-        return getPlayerMemoryBool(key, false);
-    }
-
-    public static boolean getPlayerMemoryBool(String key, boolean suppressError)
-    {
-        if (pfMem.contains("$ashesofohm_"+key)) {
-            return (boolean) pfMem.get("$ashesofohm_" + key);
-        }
-        if (!suppressError) {
-            log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
-        }
-        return false;
-    }
-
-    public static int getPlayerMemoryInt(String key)
-    {
-        if (pfMem.contains("$ashesofohm_"+key)) {
-            return (int) pfMem.get("$ashesofohm_" + key);
-        }
-        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
-        return 0;
-    }
-
-    public static String getPlayerMemoryString(String key)
-    {
-        if (pfMem.contains("$ashesofohm_"+key)) {
-            return (String) pfMem.get("$ashesofohm_" + key);
-        }
-        log.error("Player faction memory does not contain key "+"$ashesofohm_"+key);
-        return "";
-    }
-
-    public static void setPlayerMemory(String key, Object val)
-    {
-        pfMem.set("$ashesofohm_"+key, val);
-        log.debug("Set $ashesofohm_"+key+" to "+val);
     }
 
     public static void updateOmegaWeaponIDs()
@@ -189,11 +116,11 @@ public class MainPlugin extends BaseModPlugin {
 
         for (String s : memKeysNums)
         {
-            insertMemoryNumber(pfMem, s);
+            MemoryShortcuts.insertMemoryNumber(s);
         }
 
-        if (getPlayerMemoryInt("omegaWeaponPoints") > 0)
-            setPlayerMemory("deconstructedOmegaWeapons", true);
+        if (MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") > 0)
+            MemoryShortcuts.setPlayerMemory("deconstructedOmegaWeapons", true);
 
         CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();

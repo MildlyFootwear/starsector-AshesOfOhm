@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.IngameScripts;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
@@ -30,7 +31,7 @@ public class AddComponents implements EveryFrameScript {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (forShip && !getPlayerMemoryBool("haveSalvaged"+shipName))
+                if (forShip && !MemoryShortcuts.getPlayerMemoryBool("haveSalvaged" + shipName))
                 {
                     daysPerTick = (7+offset) * 4;
                 } else {
@@ -39,7 +40,7 @@ public class AddComponents implements EveryFrameScript {
                 if (dayCounter > daysPerTick)
                 {
                     dayCounter = 0;
-                    setPlayerMemory("omegaWeaponPoints", getPlayerMemoryInt("omegaWeaponPoints")+1);
+                    MemoryShortcuts.setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") + 1);
                     componentsLeft--;
                 }
                 if (componentsLeft == 0)
@@ -48,7 +49,7 @@ public class AddComponents implements EveryFrameScript {
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished disassembling the requested items.");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
                     } else {
-                        setPlayerMemory("haveSalvaged"+shipName, true);
+                        MemoryShortcuts.setPlayerMemory("haveSalvaged" + shipName, true);
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished salvaging a "+shipName+".");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
                     }

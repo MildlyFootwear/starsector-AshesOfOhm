@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import Shoey.AshesOfOhm.ProcessorAssistant.IngameScripts.AddComponents;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoAPI;
@@ -7,7 +8,6 @@ import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
-import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import data.kaysaar.aotd.vok.Ids.AoTDSubmarkets;
 
@@ -30,7 +30,7 @@ public class AssistantDisassembleWeapons extends BaseCommandPlugin {
                 int componentCnt = omegaWeaponComponentMap.get(id);
                 if (num * componentCnt > 0) {
                     totalWeaponComponents += num * componentCnt;
-                    setPlayerMemory("haveDisassembled"+id, true);
+                    MemoryShortcuts.setPlayerMemory("haveDisassembled" + id, true);
                     cargoAPI.removeWeapons(id, num);
                     log.debug("Disassembling "+num+" of "+id);
                 }

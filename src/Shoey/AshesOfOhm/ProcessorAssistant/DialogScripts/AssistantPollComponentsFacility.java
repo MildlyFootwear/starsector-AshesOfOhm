@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
@@ -31,7 +32,12 @@ public class AssistantPollComponentsFacility extends BaseCommandPlugin {
                 log.debug("Found "+num+" of "+id);
                 if (num * componentCnt > 0) {
                     totalWeaponComponents += num * componentCnt;
-                    s += "    "+Global.getSettings().getWeaponSpec(id).getWeaponName()+" x "+num+"\n";
+                    s += "    "+Global.getSettings().getWeaponSpec(id).getWeaponName()+" (x"+num+")";
+                    if (!MemoryShortcuts.getPlayerMemoryBool("haveDisassembled" + id, true))
+                    {
+                        s += "*";
+                    }
+                    s += "\n";
                 }
             }
         }
@@ -40,6 +46,8 @@ public class AssistantPollComponentsFacility extends BaseCommandPlugin {
             tooltipMakerAPI.addPara("Found the following weapons in the facility:", 0);
             tooltipMakerAPI.addPara(s, 0);
             tooltipMakerAPI.addPara("You will receive "+totalWeaponComponents+" components in exchange for all listed items.", Misc.getHighlightColor(), 0);
+            if (s.contains("*"))
+                tooltipMakerAPI.addPara("You will learn how to produce new items based off of those that have been marked.", Misc.getHighlightColor(), 0);
             dialog.getTextPanel().addTooltip();
         }
         m.getMemory().set("$ashesofohm_omegaWeaponPointsForDialog", totalWeaponComponents);

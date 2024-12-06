@@ -1,6 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
-import Shoey.AshesOfOhm.MainPlugin;
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class AssistantPollComponents extends BaseCommandPlugin {
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
-        int playerComponents = MainPlugin.getPlayerMemoryInt("omegaWeaponPoints");
+        int playerComponents = MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints");
         dialog.getInteractionTarget().getMarket().getMemory().set("$ashesofohm_Components", playerComponents);
         TooltipMakerAPI tooltipMakerAPI = dialog.getTextPanel().beginTooltip();
         tooltipMakerAPI.addPara("You have " + playerComponents + " components available.\n", 0);
