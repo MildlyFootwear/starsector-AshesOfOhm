@@ -14,6 +14,12 @@ import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 import static Shoey.AshesOfOhm.MainPlugin.omegaWeaponComponentMap;
 
 public class AssistantPopulateWeapons extends BaseCommandPlugin {
+
+    @Override
+    public boolean doesCommandAddOptions() {
+        return true;
+    }
+
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
@@ -22,7 +28,7 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
 
         for (String k : omegaWeaponComponentMap.keySet())
         {
-            if (!MemoryShortcuts.getPlayerMemoryBool("haveDisassembled" + k, true))
+            if (!getPlayerMemoryBool("haveDisassembled" + k, true))
                 continue;
 
             if (omegaWeaponComponentMap.get(k) == 1 && params.get(0).string.contains("Small")) {

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 
 public class AssistantPollComponentsFacility extends BaseCommandPlugin {
     @Override
@@ -33,7 +34,7 @@ public class AssistantPollComponentsFacility extends BaseCommandPlugin {
                 if (num * componentCnt > 0) {
                     totalWeaponComponents += num * componentCnt;
                     s += "    "+Global.getSettings().getWeaponSpec(id).getWeaponName()+" (x"+num+")";
-                    if (!MemoryShortcuts.getPlayerMemoryBool("haveDisassembled" + id, true))
+                    if (!getPlayerMemoryBool("haveDisassembled" + id, true))
                     {
                         s += "*";
                     }

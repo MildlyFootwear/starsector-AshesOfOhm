@@ -7,6 +7,8 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import data.kaysaar.aotd.vok.campaign.econ.globalproduction.scripts.AoTDSpecialProjBaseListener;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class GiveShip extends AoTDSpecialProjBaseListener {
 
@@ -17,9 +19,9 @@ public class GiveShip extends AoTDSpecialProjBaseListener {
         if (shipName.contains("Shard")) {
             shipName = shipName.replace("_left", "").replace("_right", "");
         }
-        MemoryShortcuts.setPlayerMemory("canConstructSalvaged" + shipName, false);
+        setPlayerMemory("canConstructSalvaged" + shipName, false);
         log.info("Player has completed construction project for: "+shipName+":"+specOfShip.getHullId());
-        MemoryShortcuts.setPlayerMemory("constructed" + shipName + "Count", MemoryShortcuts.getPlayerMemoryInt("constructed" + shipName + "Count") + 1);
+        setPlayerMemory("constructed" + shipName + "Count", getPlayerMemoryInt("constructed" + shipName + "Count") + 1);
         return super.receiveReward(specOfShip, cargo);
     }
 }

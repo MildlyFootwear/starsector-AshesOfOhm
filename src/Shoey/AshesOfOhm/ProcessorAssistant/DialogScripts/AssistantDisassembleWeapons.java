@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class AssistantDisassembleWeapons extends BaseCommandPlugin {
     @Override
@@ -30,7 +31,7 @@ public class AssistantDisassembleWeapons extends BaseCommandPlugin {
                 int componentCnt = omegaWeaponComponentMap.get(id);
                 if (num * componentCnt > 0) {
                     totalWeaponComponents += num * componentCnt;
-                    MemoryShortcuts.setPlayerMemory("haveDisassembled" + id, true);
+                    setPlayerMemory("haveDisassembled" + id, true);
                     cargoAPI.removeWeapons(id, num);
                     log.debug("Disassembling "+num+" of "+id);
                 }

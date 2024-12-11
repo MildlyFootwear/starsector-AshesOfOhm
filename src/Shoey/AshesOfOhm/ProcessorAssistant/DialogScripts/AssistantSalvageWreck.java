@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.*;
 
 
 public class AssistantSalvageWreck extends BaseCommandPlugin {
+
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
@@ -29,12 +31,12 @@ public class AssistantSalvageWreck extends BaseCommandPlugin {
             script.forShip = true;
             script.shipName = shipName;
             script.offset = m.getMemory().getInt("$ashesofohm_marketRateOffset");
-            MemoryShortcuts.setPlayerMemory("salvaged" + shipName + "Count", MemoryShortcuts.getPlayerMemoryInt("salvaged" + shipName + "Count") + 1);
+            setPlayerMemory("salvaged" + shipName + "Count", getPlayerMemoryInt("salvaged" + shipName + "Count") + 1);
             Global.getSector().addScript(script);
             dialog.getTextPanel().addPara("Confirmed. Salvaging of a "+shipName+" has been initiated, expect ship facilities to be occupied for the near future.");
 
             long busyDur = script.componentsLeft * (7L + script.offset);
-            if (!MemoryShortcuts.getPlayerMemoryBool("haveSalvaged" + shipName))
+            if (!getPlayerMemoryBool("haveSalvaged" + shipName))
             {
                 busyDur *= 4;
             }

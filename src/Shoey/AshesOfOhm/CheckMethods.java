@@ -7,6 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.util.Objects;
 
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 public class CheckMethods {
@@ -91,7 +92,7 @@ public class CheckMethods {
 
     public static void playerStatusChecks()
     {
-        MemoryShortcuts.setPlayerMemory("harvestingShunt", checkShuntHarvest());
-        MemoryShortcuts.setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
+        setPlayerMemory("harvestingShunt", checkShuntHarvest());
+        setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
     }
 }

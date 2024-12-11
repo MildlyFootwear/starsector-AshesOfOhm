@@ -10,6 +10,8 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 
 import java.util.Objects;
 
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
+
 public class CampaignListener implements CampaignEventListener {
 
     public static MarketAPI currentMarket = null;
@@ -19,19 +21,19 @@ public class CampaignListener implements CampaignEventListener {
     {
         if (Objects.equals(hullID, "tesseract"))
         {
-            MemoryShortcuts.setPlayerMemory("destroyedTesseractCount", MemoryShortcuts.getPlayerMemoryInt("destroyedTesseractCount") + 1);
+            setPlayerMemory("destroyedTesseractCount", MemoryShortcuts.getPlayerMemoryInt("destroyedTesseractCount") + 1);
             MainPlugin.log.info("Incrementing available Tesseract Replicas");
         } else if (Objects.equals(hullID, "facet"))
         {
-            MemoryShortcuts.setPlayerMemory("destroyedFacetCount", MemoryShortcuts.getPlayerMemoryInt("destroyedFacetCount") + 1);
+            setPlayerMemory("destroyedFacetCount", MemoryShortcuts.getPlayerMemoryInt("destroyedFacetCount") + 1);
             MainPlugin.log.info("Incrementing available Facet Replicas");
         } else if (Objects.equals(hullID, "shard_right"))
         {
-            MemoryShortcuts.setPlayerMemory("destroyedShardCount", MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") + 1);
+            setPlayerMemory("destroyedShardCount", MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") + 1);
             MainPlugin.log.info("Incrementing available Shard Replicas");
         } else if (Objects.equals(hullID, "shard_left"))
         {
-            MemoryShortcuts.setPlayerMemory("destroyedShardCount", MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") + 1);
+            setPlayerMemory("destroyedShardCount", MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") + 1);
             MainPlugin.log.info("Incrementing available Shard Replicas");
         }
     }

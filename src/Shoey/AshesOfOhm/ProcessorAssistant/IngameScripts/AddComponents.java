@@ -5,6 +5,9 @@ import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
+
 public class AddComponents implements EveryFrameScript {
 
     public int dayCounter = 0, componentsLeft = 0, previousDay = 0, offset = 0, daysPerTick = 0;
@@ -31,7 +34,7 @@ public class AddComponents implements EveryFrameScript {
             if (previousDay != 0)
             {
                 dayCounter++;
-                if (forShip && !MemoryShortcuts.getPlayerMemoryBool("haveSalvaged" + shipName))
+                if (forShip && !getPlayerMemoryBool("haveSalvaged" + shipName))
                 {
                     daysPerTick = (7+offset) * 4;
                 } else {
@@ -40,7 +43,7 @@ public class AddComponents implements EveryFrameScript {
                 if (dayCounter > daysPerTick)
                 {
                     dayCounter = 0;
-                    MemoryShortcuts.setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") + 1);
+                    setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") + 1);
                     componentsLeft--;
                 }
                 if (componentsLeft == 0)
@@ -49,7 +52,7 @@ public class AddComponents implements EveryFrameScript {
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished disassembling the requested items.");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
                     } else {
-                        MemoryShortcuts.setPlayerMemory("haveSalvaged" + shipName, true);
+                        setPlayerMemory("haveSalvaged" + shipName, true);
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished salvaging a "+shipName+".");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
                     }

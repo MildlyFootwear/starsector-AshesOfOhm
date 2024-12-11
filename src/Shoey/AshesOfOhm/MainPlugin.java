@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
+
 
 public class MainPlugin extends BaseModPlugin {
     
@@ -41,12 +44,12 @@ public class MainPlugin extends BaseModPlugin {
         GiveTesseract = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract"));
         if (Global.getCurrentState() == GameState.CAMPAIGN)
         {
-            if (GiveTesseract != MemoryShortcuts.getPlayerMemoryBool("hasDebugTesseract", true))
+            if (GiveTesseract != getPlayerMemoryBool("hasDebugTesseract", true))
             {
-                if (!MemoryShortcuts.getPlayerMemoryBool("hasDebugTesseract", true)) {
+                if (!getPlayerMemoryBool("hasDebugTesseract", true)) {
                     Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
                 }
-                MemoryShortcuts.setPlayerMemory("hasDebugTesseract", GiveTesseract);
+                setPlayerMemory("hasDebugTesseract", GiveTesseract);
             }
         }
         BypassTimer = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassTimer"));
@@ -120,7 +123,7 @@ public class MainPlugin extends BaseModPlugin {
         }
 
         if (MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") > 0)
-            MemoryShortcuts.setPlayerMemory("deconstructedOmegaWeapons", true);
+            setPlayerMemory("deconstructedOmegaWeapons", true);
 
         CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();

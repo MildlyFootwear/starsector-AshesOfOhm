@@ -6,6 +6,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 
 import static Shoey.AshesOfOhm.MainPlugin.BypassTimer;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class ConstructShip implements EveryFrameScript {
 
@@ -35,7 +36,7 @@ public class ConstructShip implements EveryFrameScript {
                 if (dayCounter > daysUntilDone || BypassTimer)
                 {
                     Global.getSector().getCampaignUI().addMessage(entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility has prepared the components required for "+kID+". We may now begin the construction project.");
-                    MemoryShortcuts.setPlayerMemory("canConstructSalvaged" + kID, true);
+                    setPlayerMemory("canConstructSalvaged" + kID, true);
                     entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
                     done = true;
                 }

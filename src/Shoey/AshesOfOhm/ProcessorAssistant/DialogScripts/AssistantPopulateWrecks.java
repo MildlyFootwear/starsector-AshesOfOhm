@@ -11,8 +11,15 @@ import java.util.List;
 import java.util.Map;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;
 
 public class AssistantPopulateWrecks extends BaseCommandPlugin {
+
+    @Override
+    public boolean doesCommandAddOptions() {
+        return true;
+    }
+
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
@@ -32,11 +39,11 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
             tooltip.addPara("Wrecks available:", 0);
         }
 
-        if (MemoryShortcuts.getPlayerMemoryInt("destroyedTesseractCount") > MemoryShortcuts.getPlayerMemoryInt("salvagedTesseractCount"))
+        if (getPlayerMemoryInt("destroyedTesseractCount") > getPlayerMemoryInt("salvagedTesseractCount"))
         {
             if (textMode) {
-                String s = "    Tesseract (x" + (MemoryShortcuts.getPlayerMemoryInt("destroyedTesseractCount") - MemoryShortcuts.getPlayerMemoryInt("salvagedTesseractCount")) + ")";
-                if (MemoryShortcuts.getPlayerMemoryInt("salvagedTesseractCount") == 0) {
+                String s = "    Tesseract (x" + (getPlayerMemoryInt("destroyedTesseractCount") - getPlayerMemoryInt("salvagedTesseractCount")) + ")";
+                if (getPlayerMemoryInt("salvagedTesseractCount") == 0) {
                     s += "*";
                     canLearn = true;
                 }
@@ -47,11 +54,11 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
             }
         }
 
-        if (MemoryShortcuts.getPlayerMemoryInt("destroyedFacetCount") > MemoryShortcuts.getPlayerMemoryInt("salvagedFacetCount"))
+        if (getPlayerMemoryInt("destroyedFacetCount") > getPlayerMemoryInt("salvagedFacetCount"))
         {
             if (textMode) {
-                String s = "    Facet (x"+(MemoryShortcuts.getPlayerMemoryInt("destroyedFacetCount") - MemoryShortcuts.getPlayerMemoryInt("salvagedFacetCount"))+")";
-                if (MemoryShortcuts.getPlayerMemoryInt("salvagedFacetCount") == 0) {
+                String s = "    Facet (x"+(getPlayerMemoryInt("destroyedFacetCount") - getPlayerMemoryInt("salvagedFacetCount"))+")";
+                if (getPlayerMemoryInt("salvagedFacetCount") == 0) {
                     s += "*";
                     canLearn = true;
                 }
@@ -62,11 +69,11 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
             }
         }
 
-        if (MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") > MemoryShortcuts.getPlayerMemoryInt("salvagedShardCount"))
+        if (getPlayerMemoryInt("destroyedShardCount") > getPlayerMemoryInt("salvagedShardCount"))
         {
             if (textMode) {
-                String s = "    Shard (x"+(MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") - MemoryShortcuts.getPlayerMemoryInt("salvagedShardCount"))+")";
-                if (MemoryShortcuts.getPlayerMemoryInt("salvagedShardCount") == 0) {
+                String s = "    Shard (x"+(getPlayerMemoryInt("destroyedShardCount") - getPlayerMemoryInt("salvagedShardCount"))+")";
+                if (getPlayerMemoryInt("salvagedShardCount") == 0) {
                     s += "*";
                     canLearn = true;
                 }
