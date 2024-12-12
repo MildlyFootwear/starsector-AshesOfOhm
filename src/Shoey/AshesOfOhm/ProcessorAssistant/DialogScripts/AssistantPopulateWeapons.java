@@ -1,6 +1,5 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
-import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
@@ -10,8 +9,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.util.List;
 import java.util.Map;
 
-import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 import static Shoey.AshesOfOhm.MainPlugin.omegaWeaponComponentMap;
+import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 
 public class AssistantPopulateWeapons extends BaseCommandPlugin {
 

@@ -1,6 +1,5 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
-import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;

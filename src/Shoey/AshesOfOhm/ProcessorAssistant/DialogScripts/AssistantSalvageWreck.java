@@ -1,6 +1,5 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
-import Shoey.AshesOfOhm.MemoryShortcuts;
 import Shoey.AshesOfOhm.ProcessorAssistant.IngameScripts.AddComponents;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
@@ -12,7 +11,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.util.List;
 import java.util.Map;
 
-import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MainPlugin.omegaShipComponentMap;
 import static Shoey.AshesOfOhm.MemoryShortcuts.*;
 
 

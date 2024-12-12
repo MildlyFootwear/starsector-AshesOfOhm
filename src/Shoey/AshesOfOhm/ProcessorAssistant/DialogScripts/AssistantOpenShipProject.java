@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import java.util.List;
 import java.util.Map;
 
-import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MainPlugin.omegaShipComponentMap;
 
 public class AssistantOpenShipProject extends BaseCommandPlugin {
     @Override

@@ -1,6 +1,5 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
-import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
@@ -10,7 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.util.List;
 import java.util.Map;
 
-import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MainPlugin.omegaShipComponentMap;
 import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;
 
 public class AssistantPopulateWrecks extends BaseCommandPlugin {

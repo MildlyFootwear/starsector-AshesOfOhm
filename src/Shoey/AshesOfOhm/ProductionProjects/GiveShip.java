@@ -1,12 +1,11 @@
 package Shoey.AshesOfOhm.ProductionProjects;
 
-import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import data.kaysaar.aotd.vok.campaign.econ.globalproduction.scripts.AoTDSpecialProjBaseListener;
 
-import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MainPlugin.log;
 import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 

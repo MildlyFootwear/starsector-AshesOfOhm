@@ -5,7 +5,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import data.kaysaar.aotd.vok.Ids.AoTDSubmarkets;
 
-import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MainPlugin.BypassTimer;
 
 public class ConstructWeapon implements EveryFrameScript {
 

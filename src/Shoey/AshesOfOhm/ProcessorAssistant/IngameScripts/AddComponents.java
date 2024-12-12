@@ -4,7 +4,8 @@ import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
-import static Shoey.AshesOfOhm.MainPlugin.*;
+
+import static Shoey.AshesOfOhm.MainPlugin.BypassTimer;
 import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
