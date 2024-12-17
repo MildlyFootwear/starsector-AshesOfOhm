@@ -29,7 +29,7 @@ public class AssistantSalvageWreck extends BaseCommandPlugin {
             script.entityToken = m.getPrimaryEntity();
             script.forShip = true;
             script.shipName = shipName;
-            script.offset = m.getMemory().getInt("$ashesofohm_marketRateOffset");
+            script.offset = m.getMemory().getInt("$ashesofohm_productionRateOffset");
             setPlayerMemory("salvaged" + shipName + "Count", getPlayerMemoryInt("salvaged" + shipName + "Count") + 1);
             Global.getSector().addScript(script);
             dialog.getTextPanel().addPara("Confirmed. Salvaging of a "+shipName+" has been initiated, expect ship facilities to be occupied for the near future.");

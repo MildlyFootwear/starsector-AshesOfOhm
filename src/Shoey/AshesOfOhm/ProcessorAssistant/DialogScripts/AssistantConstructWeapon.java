@@ -25,14 +25,14 @@ public class AssistantConstructWeapon extends BaseCommandPlugin {
             dialog.getTextPanel().addPara("\"Confirmed, order placed for "+ Global.getSettings().getWeaponSpec(option).getWeaponName()+".\"");
             ConstructWeapon script = new ConstructWeapon();
             script.wID = option;
-            script.daysUntilDone = weeks * (7+m.getMemory().getInt("$ashesofohm_marketRateOffset"));
+            script.daysUntilDone = weeks * (7+m.getMemory().getInt("$ashesofohm_productionRateOffset"));
             script.entityToken = dialog.getInteractionTarget();
             Global.getSector().addScript(script);
             m.getMemory().set("$ashesofohm_marketBusy", true);
             m.getMemory().set("$ashesofohm_marketBusyWith", "Disassembly");
-            m.getMemory().expire("$ashesofohm_marketBusy", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
+            m.getMemory().expire("$ashesofohm_marketBusy", script.daysUntilDone);
             m.getMemory().set("$ashesofohm_marketBusyStart", Global.getSector().getClock().getTimestamp());
-            m.getMemory().set("$ashesofohm_marketBusyDuration", weeks*(7+m.getMemory().getInt("$ashesofohm_marketRateOffset")));
+            m.getMemory().set("$ashesofohm_marketBusyDuration", script.daysUntilDone);
         } else if (option.contains("Cancel")) {
             dialog.getTextPanel().addPara("\"Confirmed, order canceled. Returning to root directory.\"");
         } else {
