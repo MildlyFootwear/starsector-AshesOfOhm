@@ -16,7 +16,7 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
 
     @Override
     public boolean doesCommandAddOptions() {
-        return true;
+        return false;
     }
 
     @Override
