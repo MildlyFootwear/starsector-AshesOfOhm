@@ -15,11 +15,6 @@ import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;
 public class AssistantPopulateWrecks extends BaseCommandPlugin {
 
     @Override
-    public boolean doesCommandAddOptions() {
-        return false;
-    }
-
-    @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
         boolean textMode = false;
