@@ -7,6 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.util.Objects;
 
+import static Shoey.AshesOfOhm.MainPlugin.BypassProcessor;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
@@ -26,9 +27,12 @@ public class CheckMethods {
     public static boolean marketOmegaResearch(MarketAPI m)
     {
         boolean hasResearch = false;
-        if (m.hasIndustry("researchfacility") && m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))
+        if (m.hasIndustry("researchfacility") && (BypassProcessor || (m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))))
         {
             hasResearch = true;
+        }
+        if (hasResearch)
+        {
             boolean hasAssist = false;
             for (PersonAPI p : m.getPeopleCopy())
             {
@@ -39,8 +43,7 @@ public class CheckMethods {
             if (!hasAssist) {
                 AssistantMethods.createAssistant(m);
             }
-        }
-        if (!hasResearch) {
+        } else {
             for (PersonAPI p : m.getPeopleCopy())
             {
                 if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
