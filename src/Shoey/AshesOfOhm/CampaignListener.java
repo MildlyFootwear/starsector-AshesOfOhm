@@ -41,7 +41,7 @@ public class CampaignListener implements CampaignEventListener {
     @Override
     public void reportPlayerOpenedMarket(MarketAPI market) {
         currentMarket = market;
-        if (market.getFaction() == Global.getSector().getPlayerFaction()) {
+        if (market.isPlayerOwned()) {
             isAtPlayerMarket = true;
         }
     }

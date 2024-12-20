@@ -14,7 +14,7 @@ public class AssistantMethods {
     {
         PersonAPI person = Global.getFactory().createPerson();
         person.setId(assistantID);
-        person.setFaction(Factions.PLAYER);
+        person.setFaction(m.getFactionId());
         person.setGender(FullName.Gender.ANY);
         person.setPostId(Ranks.POST_SCIENTIST);
         person.setImportance(PersonImportance.VERY_HIGH);
