@@ -3,7 +3,7 @@ package Shoey.AshesOfOhm.ProductionProjects;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import data.kaysaar.aotd.vok.campaign.econ.globalproduction.scripts.AoTDSpecialProjBaseListener;
+import data.kaysaar.aotd.vok.campaign.econ.globalproduction.listeners.AoTDSpecialProjBaseListener;
 
 import static Shoey.AshesOfOhm.MainPlugin.log;
 import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryInt;

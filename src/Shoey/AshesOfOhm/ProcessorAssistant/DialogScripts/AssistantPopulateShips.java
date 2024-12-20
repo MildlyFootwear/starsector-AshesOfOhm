@@ -23,6 +23,7 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
 
+        String t = "\"Confirmed, here is a list of the ships we can prepare to produce.\"";
         String tt = "We have "+ getPlayerMemoryInt("omegaWeaponPoints") +" components available.\n\nComponent cost:";
         for (String s : omegaShips) {
             if (getPlayerMemoryBool("haveSalvaged" + s)) {
@@ -39,11 +40,13 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
         }
         if (!tt.equals("We have "+ getPlayerMemoryInt("omegaWeaponPoints") +" components available.\n\nComponent cost:"))
         {
+            dialog.getTextPanel().addPara(t);
             dialog.getTextPanel().beginTooltip().addPara(tt, 0);
             dialog.getTextPanel().addTooltip();
         } else {
-            dialog.getTextPanel().addPara("\"Unfortunately, we do not know of any ships to begin working on.\n");
+            dialog.getTextPanel().addPara("\"Unfortunately, we do not know of any ships to begin working on.\"");
         }
+        dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantPrepareOptionShipCancel");
         return false;
     }
 }

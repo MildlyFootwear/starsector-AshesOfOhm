@@ -1,7 +1,9 @@
 <component name="libraryTable">
   <library name="Vok">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AoTD- Vaults of Knowledge-2.4.11/jars/Vok.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../AoTD- Vaults of Knowledge-3.0.1/jars/Vok.jar!/" />
+      <root url="file://$PROJECT_DIR$/../AoTD- Vaults of Knowledge-3.0.1" />
+      <root url="jar://$PROJECT_DIR$/../Ashlib-1.0.3/jars/ashlib.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

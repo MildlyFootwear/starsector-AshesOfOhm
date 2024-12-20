@@ -39,6 +39,8 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
             }
         }
 
+        dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantAssembleOrderOptionWeaponCancel");
+
         return false;
     }
 }

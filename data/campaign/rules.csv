@@ -99,15 +99,15 @@ OR
 ashesofohm_assistantAssemblyWeaponSmall,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponSmall","AssistantPopulateWeapons Small
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,,
 ashesofohm_assistantAssemblyWeaponMedium,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponMedium","AssistantPopulateWeapons Medium
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,,
 ashesofohm_assistantAssemblyWeaponLarge,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantAssembleOptionWeaponLarge","AssistantPopulateWeapons Large
 $primedToBuild = true
-SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel,
+SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""",,,
 ashesofohm_assistantAssemblyWeaponExecute,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToBuild == true","$primedToBuild = false
 AssistantConstructWeapon $option
@@ -122,12 +122,10 @@ FireBest DialogOptionSelected",,,
 ,,,,,,
 ashesofohm_assistantSalvageShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantSalvageOptionShip","AssistantPopulateWrecks Text
-FireAll ashesofohm_WrecksOptions","""Confirmed, here are the wrecks we have available to salvage.""
-OR
-“Affirmative, here are the wrecks we can salvage.”",,
+FireAll ashesofohm_WrecksOptions",,,
 ashesofohm_assistantSalvageShipOptions,ashesofohm_WrecksOptions,,"AssistantPopulateWrecks Options
 $primedToSalvageShip = true
-SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,ashesofohm_assistantSalvageOptionShipCancel:Cancel,
+SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,,
 ashesofohm_assistantSalvageShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true","$primedToSalvageShip = false
 AssistantSalvageWreck $option
@@ -135,16 +133,12 @@ FireAll PopulateOptions",,,
 ashesofohm_assistantSalvageShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true
 $option == ashesofohm_assistantSalvageOptionShipCancel","$primedToSalvageShip = false
-FireAll PopulateOptions","""Confirmed, salvage order canceled. Returning to root directory.""
-OR
-“Affirmative, salvage order canceled. Displaying root directory.”",,
+FireAll PopulateOptions","""Confirmed, salvage order canceled. Returning to root directory.""",,
 ashesofohm_assistantPrepareShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantPrepareOptionShip",FireAll ashesofohm_ShipOptions,"""Confirmed, here is a list of the ships we can prepare to produce.""
-OR
-“Affirmative, here is a list of the ships we can prepare.”",,
+$option == ashesofohm_assistantPrepareOptionShip",FireAll ashesofohm_ShipOptions,,,
 ashesofohm_assistantPrepareShipOptions,ashesofohm_ShipOptions,,"AssistantPopulateShips
 $primedToPrepareShip = true
-SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,ashesofohm_assistantPrepareOptionShipCancel:Cancel,
+SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,,
 ashesofohm_assistantPrepareShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true","$primedToPrepareShip = false
 AssistantOpenShipProject $option
@@ -152,20 +146,13 @@ FireAll PopulateOptions",,,
 ashesofohm_assistantPrepareShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true
 $option == ashesofohm_assistantPrepareOptionShipCancel","$primedToPrepareShip = false
-FireAll PopulateOptions","""Confirmed, ship preparation order canceled. Returning to root directory.""
-OR
-""Affirmative, ship preparation order canceled. Displaying root directory.""",,
+FireAll PopulateOptions","""Confirmed, ship preparation order canceled. Returning to root directory.""",,
 ,,,,,,
 # Ship Modify options,,,,,,
 ,,,,,,
 ashesofohm_assistantModifyShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantModifyOptionShip",FireAll ashesofohm_ModifyShipsOptions,"“Affirmative, relaying modification status.”
-OR
-“Confirmed, relaying modification status.”
-
-",,
-ashesofohm_assistantModifyShipOptions,ashesofohm_ModifyShipsOptions,,"SetShortcut ashesofohm_assistantModifyOptionShipCancel ""ESCAPE""",,ashesofohm_assistantModifyOptionShipCancel:Cancel,
+$option == ashesofohm_assistantModifyOptionShip",FireAll ashesofohm_ModifyShipsOptions,,,
+ashesofohm_assistantModifyShipOptions,ashesofohm_ModifyShipsOptions,,"SetShortcut ashesofohm_assistantModifyOptionShipCancel ""ESCAPE""
+Highlight This is currently in development and will be available in a future version.",This is currently in development and will be available in a future version.,ashesofohm_assistantModifyOptionShipCancel:Cancel,
 ashesofohm_assistantModifyShipCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantModifyOptionShipCancel",FireAll PopulateOptions,"""Confirmed, returning to root directory.""
-OR
-“Affirmative, displaying root directory.”",,
+$option == ashesofohm_assistantModifyOptionShipCancel",FireAll PopulateOptions,,,

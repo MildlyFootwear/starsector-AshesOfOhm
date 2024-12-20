@@ -7,10 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="starfarer.api" level="project" />
+    <orderEntry type="library" exported="" name="starfarer.api" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="MagicLib" level="application" />
     <orderEntry type="library" name="LunaLib" level="application" />
-    <orderEntry type="library" name="Vok" level="project" />
+    <orderEntry type="library" exported="" name="Vok" level="project" />
   </component>
 </module>
