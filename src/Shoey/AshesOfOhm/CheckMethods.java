@@ -1,6 +1,7 @@
 package Shoey.AshesOfOhm;
 
 import Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -47,14 +48,14 @@ public class CheckMethods {
                 }
             }
             if (!hasAssist) {
-//                log.debug(m.getName() + " is receiving the assistant.");
                 AssistantMethods.createAssistant(m);
             }
         } else {
             for (PersonAPI p : m.getPeopleCopy())
             {
-                if (p.hasTag("ashesofohm_omegaProcessorAssistant")) {
-//                    log.debug(m.getName() + " is losing the assistant.");
+                if (p.hasTag(assistantID)) {
+                    log.debug(m.getName() + " is losing its assistant.");
+                    Global.getSector().getCampaignUI().addMessage("Due to changes in the facilities on "+m.getName()+", the Research Assistant will no longer be available.");
                     m.getCommDirectory().removePerson(p);
                     m.removePerson(p);
                 }

@@ -17,7 +17,7 @@ public class AssistantBusyDurationPrint extends BaseCommandPlugin {
         if (params.get(0).string.contains("Equip")) {
             float busyDays = (m.getMemory().getLong("$ashesofohm_marketBusyDuration")-Global.getSector().getClock().getElapsedDaysSince(m.getMemory().getLong("$ashesofohm_marketBusyStart")));
             if (busyDays > 1) {
-                dialog.getTextPanel().addPara("\"Our equipment facilities are currently occupied so some options will be unavailable. The equipment facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"");
+                dialog.getTextPanel().addPara(("\"Our equipment facilities are currently occupied so some options will be unavailable. The equipment facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"").replace(".0",""));
             }
             else if (busyDays > 0) {
                 dialog.getTextPanel().addPara("\"Our equipment facilities are currently occupied so some options will be unavailable. The equipment facilities will be ready by tomorrow.\"");
@@ -30,7 +30,7 @@ public class AssistantBusyDurationPrint extends BaseCommandPlugin {
         {
             float busyDays = (m.getMemory().getLong("$ashesofohm_marketBusyShipDuration")-Global.getSector().getClock().getElapsedDaysSince(m.getMemory().getLong("$ashesofohm_marketBusyShipStart")));
             if (busyDays > 1) {
-                dialog.getTextPanel().addPara("\"Our ship facilities are currently occupied so some options will be unavailable. The ship facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"");
+                dialog.getTextPanel().addPara(("\"Our ship facilities are currently occupied so some options will be unavailable. The ship facilities will be busy for " + (((float) Math.round(busyDays*4))/4) + " more days.\"").replace(".0",""));
             }
             else if (busyDays > 0) {
                 dialog.getTextPanel().addPara("\"Our ship facilities are currently occupied so some options will be unavailable. The ship facilities will be ready by tomorrow.\"");

@@ -9,7 +9,7 @@ import static Shoey.AshesOfOhm.MainPlugin.BypassTimer;
 
 public class ConstructWeapon implements EveryFrameScript {
 
-    public int dayCounter = 0, previousDay = 0, daysUntilDone = 0;
+    public int dayCounter = 0, previousDay = 0, daysUntilDone = 0, quantity = 1;
     boolean done;
     public SectorEntityToken entityToken;
     public String wID;
@@ -36,8 +36,13 @@ public class ConstructWeapon implements EveryFrameScript {
                 {
                     entityToken.getMarket().getSubmarket(AoTDSubmarkets.RESEARCH_FACILITY_MARKET).getCargo().addWeapons(wID, 1);
                     Global.getSector().getCampaignUI().addMessage(Global.getSettings().getWeaponSpec(wID).getWeaponName() + " has been constructed and is waiting in "+entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility.");
-                    entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
-                    done = true;
+                    quantity--;
+                    if (quantity < 1) {
+                        entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
+                        done = true;
+                    } else {
+                        dayCounter = 0;
+                    }
                 }
             }
             previousDay = curDay;
