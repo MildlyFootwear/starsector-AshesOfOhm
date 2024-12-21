@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant.DialogScripts;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.campaign.InteractionDialogAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
@@ -34,6 +35,7 @@ public class AssistantGreetingUpdate extends BaseCommandPlugin {
             productionTickOffset -= 1;
         }
 
+        m.getMemory().set("$ashesofohm_Components", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints"));
         m.getMemory().set("$ashesofohm_productionRateOffset", productionTickOffset);
         m.getMemory().set("$ashesofohm_marketRateOffset", 3-Math.min(m.getSize(), 6));
 
