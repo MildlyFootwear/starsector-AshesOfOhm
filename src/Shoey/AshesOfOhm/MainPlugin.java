@@ -95,36 +95,35 @@ public class MainPlugin extends BaseModPlugin {
     public void onApplicationLoad() throws Exception {
         super.onApplicationLoad();
         updateLunaSettings();
+        LunaSettings.addSettingsListener(new LunaListener());
 
         updateOmegaShips();
-        memKeysNums.add("$ashesofohm_destroyedTesseractCount");
-        memKeysNums.add("$ashesofohm_constructedTesseractCount");
-        memKeysNums.add("$ashesofohm_salvagedTesseractCount");
-        memKeysNums.add("$ashesofohm_destroyedFacetCount");
-        memKeysNums.add("$ashesofohm_constructedFacetCount");
-        memKeysNums.add("$ashesofohm_salvagedFacetCount");
-        memKeysNums.add("$ashesofohm_destroyedShardCount");
-        memKeysNums.add("$ashesofohm_constructedShardCount");
-        memKeysNums.add("$ashesofohm_salvagedShardCount");
+        for (String key : omegaShips)
+        {
+            memKeysNums.add("$ashesofohm_destroyed"+key+"Count");
+            memKeysNums.add("$ashesofohm_constructed"+key+"Count");
+            memKeysNums.add("$ashesofohm_salvaged"+key+"Count");
+        }
         memKeysNums.add("$ashesofohm_omegaWeaponPoints");
-        LunaSettings.addSettingsListener(new LunaListener());
     }
 
     @Override
     public void onGameLoad(boolean b) {
         super.onGameLoad(b);
         updateLunaSettings();
+        pfMem = Global.getSector().getPlayerFaction().getMemory();
+
         Global.getSector().addTransientScript(new CampaignEFS());
         Global.getSector().addTransientListener(new CampaignListener());
-        pfMem = Global.getSector().getPlayerFaction().getMemory();
 
         for (String s : memKeysNums)
         {
             MemoryShortcuts.insertMemoryNumber(s);
         }
 
-        if (MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") > 0)
+        if (MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") > 0) {
             setPlayerMemory("deconstructedOmegaWeapons", true);
+        }
 
         CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();
