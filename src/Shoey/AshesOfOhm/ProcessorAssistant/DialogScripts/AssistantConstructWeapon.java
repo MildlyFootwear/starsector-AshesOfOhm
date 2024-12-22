@@ -31,7 +31,7 @@ public class AssistantConstructWeapon extends BaseCommandPlugin {
             script.entityToken = dialog.getInteractionTarget();
             dialog.getTextPanel().addPara("\"Confirmed, order placed for "+script.quantity + " " + Global.getSettings().getWeaponSpec(option).getWeaponName()+". Estimated completion time is "+(script.daysUntilDone * script.quantity)+" days.\"");
             Global.getSector().addScript(script);
-            MemoryShortcuts.setPlayerMemory("omegaWeaponComponents", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponComponents") - (weeks / 2 * script.quantity));
+            MemoryShortcuts.setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") - (weeks / 2 * script.quantity));
             m.getMemory().set("$ashesofohm_marketBusy", true);
             m.getMemory().set("$ashesofohm_marketBusyWith", "Disassembly");
             m.getMemory().expire("$ashesofohm_marketBusy", script.daysUntilDone*script.quantity);

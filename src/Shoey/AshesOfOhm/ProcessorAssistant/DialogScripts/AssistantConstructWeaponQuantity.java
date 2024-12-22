@@ -23,7 +23,7 @@ public class AssistantConstructWeaponQuantity extends BaseCommandPlugin {
             quantToBe = Integer.parseInt(params.get(1).string);
         } else if (params.get(0).string.equals("Max"))
         {
-            quantToBe = MemoryShortcuts.getPlayerMemoryInt("omegaWeaponComponents") / omegaWeaponComponentMap.get(mem.getString("$selectedWeapon").replace("ashesofohm_",""));
+            quantToBe = MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") / omegaWeaponComponentMap.get(mem.getString("$selectedWeapon").replace("ashesofohm_",""));
         } else if (params.get(0).string.equals("Add"))
         {
             quantToBe = quantity + Integer.parseInt(params.get(1).string);
