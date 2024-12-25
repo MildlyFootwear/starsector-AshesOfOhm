@@ -123,16 +123,22 @@ FireBest DialogOptionSelected",,,
 ashesofohm_assistantAssemblyWeaponQuantity,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToQuantity == true score:10","SetShortcut ashesofohm_assistantAssembleOrderOptionWeaponCancel ""ESCAPE""
 FireAll ashesofohm_assistantWeaponQuantityCheck
-",Current quantity is $weaponQuantity. $weaponQuantityComponents components out of $market.ashesofohm_Components will be used.,"ashesofohm_assistantIncreaseWeaponCount:Increase by 1
+",,"ashesofohm_assistantIncreaseWeaponCount:Increase by 1
+ashesofohm_assistantIncreaseWeaponCount5:Increase by 5
 ashesofohm_assistantDecreaseWeaponCount:Decrease by 1
+ashesofohm_assistantDecreaseWeaponCount5:Decrease by 5
 ashesofohm_assistantAssembleOrderOptionWeaponConfirm:Confirm
 ashesofohm_assistantAssembleOrderOptionWeaponCancel:Cancel",
 ashesofohm_assistantAssemblyWeaponQuantityMinCheck,ashesofohm_assistantWeaponQuantityCheck,$weaponQuantity <= 1,"SetEnabled ashesofohm_assistantDecreaseWeaponCount false
+SetEnabled ashesofohm_assistantDecreaseWeaponCount5 false
 AssistantConstructWeaponQuantity Set 1",,,
-ashesofohm_assistantAssemblyWeaponQuantityBeyondMaxCheck,ashesofohm_assistantWeaponQuantityCheck,$weaponQuantityComponents > $market.ashesofohm_Components,"SetEnabled ashesofohm_assistantAssembleOrderOptionWeaponConfirm false
+#Disabled      ashesofohm_assistantAssemblyWeaponQuantityBeyondMaxCheck,ashesofohm_assistantWeaponQuantityCheck,$weaponQuantityComponents > $market.ashesofohm_Components,"SetEnabled ashesofohm_assistantAssembleOrderOptionWeaponConfirm false
 ",,,
+,,,,,,
 ashesofohm_assistantAssemblyWeaponQuantityMaxCheck,ashesofohm_assistantWeaponQuantityCheck,$weaponQuantityComponents >= $market.ashesofohm_Components,"SetEnabled ashesofohm_assistantIncreaseWeaponCount false
+SetEnabled ashesofohm_assistantIncreaseWeaponCount5 false
 AssistantConstructWeaponQuantity Max",,,
+ashesofohm_assistantAssemblyWeaponQuantityDisplay,ashesofohm_assistantWeaponQuantityCheck,,,Current quantity is $weaponQuantity. $weaponQuantityComponents components out of $market.ashesofohm_Components will be used.,,
 ashesofohm_assistantAssemblyWeaponQuantityIncrease,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToQuantity == true score:10
 $option ==ashesofohm_assistantIncreaseWeaponCount","AssistantConstructWeaponQuantity Add 1
@@ -141,6 +147,16 @@ FireBest DialogOptionSelected",,,
 ashesofohm_assistantAssemblyWeaponQuantityDecrease,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToQuantity == true score:10
 $option ==ashesofohm_assistantDecreaseWeaponCount","AssistantConstructWeaponQuantity Add -1
+$option = ashesofohm_assistantIgnoreOption
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantAssemblyWeaponQuantityIncrease5,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToQuantity == true score:10
+$option ==ashesofohm_assistantIncreaseWeaponCount5","AssistantConstructWeaponQuantity Add 5
+$option = ashesofohm_assistantIgnoreOption
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantAssemblyWeaponQuantityDecrease5,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToQuantity == true score:10
+$option ==ashesofohm_assistantDecreaseWeaponCount5","AssistantConstructWeaponQuantity Add -5
 $option = ashesofohm_assistantIgnoreOption
 FireBest DialogOptionSelected",,,
 ashesofohm_assistantAssemblyWeaponStart,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
