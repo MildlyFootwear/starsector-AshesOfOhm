@@ -35,7 +35,7 @@ public class HullModPristineForge extends BaseHullMod {
         {
             return ""+(int)ammoRegenBonus+"%";
         } else if (index == 1) {
-            return ""+(int)ammoRegenBonus;
+            return ""+(int)reloadInterval;
         } else if (index == 2) {
             return ""+(int)reloadPercentage+"%";
         }
