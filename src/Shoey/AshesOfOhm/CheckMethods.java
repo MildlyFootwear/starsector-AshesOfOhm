@@ -6,10 +6,12 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import static Shoey.AshesOfOhm.MainPlugin.BypassProcessor;
-import static Shoey.AshesOfOhm.MainPlugin.log;
+import static Shoey.AshesOfOhm.MainPlugin.*;
+import static Shoey.AshesOfOhm.MemoryShortcuts.addComponents;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
@@ -102,9 +104,30 @@ public class CheckMethods {
 
     }
 
+    public static void checkBlueprints()
+    {
+        List<String> foundBPs = new ArrayList<>();
+        int components = 0;
+        for(String wID : MainPlugin.omegaWeaponIDs) {
+            if (Global.getSector().getPlayerFaction().knowsWeapon(wID)) {
+                setPlayerMemory("haveDisassembled"+wID, true);
+                setPlayerMemory("haveBlueprintFor"+wID, true);
+                Global.getSector().getPlayerFaction().removeKnownWeapon(wID);
+                components += omegaWeaponComponentMap.get(wID)*10;
+                foundBPs.add(Global.getSettings().getWeaponSpec(wID).getWeaponName());
+            }
+        }
+        if (components != 0)
+        {
+            addComponents(components);
+            Global.getSector().getCampaignUI().addMessage(components + " components related to the unknown AI entities have been retrieved from disassembled technology.");
+        }
+    }
+
     public static void playerStatusChecks()
     {
         setPlayerMemory("harvestingShunt", checkShuntHarvest());
         setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
+        checkBlueprints();
     }
 }
