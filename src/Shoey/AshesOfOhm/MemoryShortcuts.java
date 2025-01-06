@@ -61,4 +61,14 @@ public class MemoryShortcuts {
         MainPlugin.pfMem.set("$ashesofohm_" + key, val);
         MainPlugin.log.debug("Set $ashesofohm_" + key + " to " + val);
     }
+
+    public static int getComponents()
+    {
+        return getPlayerMemoryInt("omegaWeaponPoints");
+    }
+
+    public static void addComponents(int i)
+    {
+        setPlayerMemory("omegaWeaponPoints", getComponents() + i);
+    }
 }
