@@ -6,8 +6,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 
 import static Shoey.AshesOfOhm.MainPlugin.BypassTimer;
-import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
-import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
+import static Shoey.AshesOfOhm.MemoryShortcuts.*;
 
 public class AddComponents implements EveryFrameScript {
 
@@ -44,7 +43,7 @@ public class AddComponents implements EveryFrameScript {
                 if (dayCounter > daysPerTick)
                 {
                     dayCounter = 0;
-                    setPlayerMemory("omegaWeaponPoints", MemoryShortcuts.getPlayerMemoryInt("omegaWeaponPoints") + 1);
+                    addComponents(1);
                     componentsLeft--;
                 }
                 if (componentsLeft == 0)

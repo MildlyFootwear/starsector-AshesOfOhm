@@ -20,10 +20,16 @@ public class MemoryShortcuts {
     }
 
     public static Object getPlayerMemory(String key) {
+        return getPlayerMemory(key, false);
+    }
+
+    public static Object getPlayerMemory(String key, boolean suppressError) {
         if (MainPlugin.pfMem.contains("$ashesofohm_" + key)) {
             return MainPlugin.pfMem.get("$ashesofohm_" + key);
         }
-        MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
+        if (!suppressError) {
+            MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
+        }
         return null;
     }
 
@@ -32,28 +38,31 @@ public class MemoryShortcuts {
     }
 
     public static boolean getPlayerMemoryBool(String key, boolean suppressError) {
-        if (MainPlugin.pfMem.contains("$ashesofohm_" + key)) {
-            return (boolean) MainPlugin.pfMem.get("$ashesofohm_" + key);
-        }
-        if (!suppressError) {
-            MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
+        if (getPlayerMemory(key, suppressError) != null) {
+            return (boolean) getPlayerMemory(key, suppressError);
         }
         return false;
     }
 
     public static int getPlayerMemoryInt(String key) {
-        if (MainPlugin.pfMem.contains("$ashesofohm_" + key)) {
-            return (int) MainPlugin.pfMem.get("$ashesofohm_" + key);
+        return getPlayerMemoryInt(key, false);
+    }
+
+    public static int getPlayerMemoryInt(String key, boolean suppressError) {
+        if (getPlayerMemory(key, suppressError) != null) {
+            return (int) getPlayerMemory(key, suppressError);
         }
-        MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
         return 0;
     }
 
     public static String getPlayerMemoryString(String key) {
-        if (MainPlugin.pfMem.contains("$ashesofohm_" + key)) {
-            return (String) MainPlugin.pfMem.get("$ashesofohm_" + key);
+        return getPlayerMemoryString(key, false);
+    }
+
+    public static String getPlayerMemoryString(String key, boolean suppressError) {
+        if (getPlayerMemory(key, suppressError) != null) {
+            return (String) getPlayerMemory(key, suppressError);
         }
-        MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
         return "";
     }
 
@@ -70,5 +79,10 @@ public class MemoryShortcuts {
     public static void addComponents(int i)
     {
         setPlayerMemory("omegaWeaponPoints", getComponents() + i);
+    }
+
+    public static void removeComponents(int i)
+    {
+        setPlayerMemory("omegaWeaponPoints", getComponents() - i);
     }
 }
