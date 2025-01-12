@@ -31,4 +31,19 @@ public class DomainTechReplica extends BaseHullMod {
         return null;
     }
 
+    @Override
+    public boolean isApplicableToShip(ShipAPI ship) {
+        if (ship.getVariant().hasHullMod("safetyoverrides")) {
+            return false;
+        }
+        return super.isApplicableToShip(ship);
+    }
+
+    @Override
+    public String getUnapplicableReason(ShipAPI ship) {
+        if (ship.getVariant().hasHullMod("safetyoverrides")) {
+            return "Ship has safety overrides.";
+        }
+        return super.getUnapplicableReason(ship);
+    }
 }
