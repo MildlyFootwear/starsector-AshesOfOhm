@@ -29,7 +29,7 @@ public class HullModTimeAccelerator extends BaseHullMod {
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0) return (Math.round((timeMultiplier - 1) * 100) + "%").replace(".0","");
+        if (index == 0) return timeMultiplier+"x";
         return null;
     }
 
