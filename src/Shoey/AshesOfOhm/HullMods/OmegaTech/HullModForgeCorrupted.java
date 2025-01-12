@@ -1,12 +1,8 @@
 package Shoey.AshesOfOhm.HullMods.OmegaTech;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.IntervalUtil;
 
-import java.awt.*;
-
-public class HullModCorruptedForge extends BaseHullMod {
+public class HullModForgeCorrupted extends BaseHullMod {
 
     private static float ammoRegenBonus = 75f;
     private static float missileRegenBonus = 75f;

@@ -6,7 +6,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 
 import java.awt.*;
 
-public class HullModPristineForge extends BaseHullMod {
+public class HullModForgePristine extends BaseHullMod {
 
 
     protected static Object STATUSKEY = new Object();
@@ -24,8 +24,8 @@ public class HullModPristineForge extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getBallisticAmmoRegenMult().modifyPercent(id, ammoRegenBonus);
 //        stats.getEnergyAmmoRegenMult().modifyPercent(id, ammoRegenBonus);
+        stats.getBallisticAmmoRegenMult().modifyPercent(id, ammoRegenBonus);
         stats.getMissileAmmoRegenMult().modifyPercent(id, missileRegenBonus);
     }
 
@@ -56,7 +56,7 @@ public class HullModPristineForge extends BaseHullMod {
         }
         boolean canReload = false;
         for (WeaponAPI w : ship.getAllWeapons()) {
-            if (w.getType() != WeaponAPI.WeaponType.MISSILE) continue;
+            if (w.getType() != WeaponAPI.WeaponType.MISSILE && w.getType() != WeaponAPI.WeaponType.BALLISTIC) continue;
             if (w.usesAmmo() && w.getAmmo() < w.getMaxAmmo() && w.getAmmoPerSecond() == 0) {
                 canReload = true;
                 break;
@@ -67,7 +67,7 @@ public class HullModPristineForge extends BaseHullMod {
             int elapsed = Math.round(data.interval.getElapsed());
             if (data.interval.intervalElapsed()) {
                 for (WeaponAPI w : ship.getAllWeapons()) {
-                    if (w.getType() != WeaponAPI.WeaponType.MISSILE) continue;
+                    if (w.getType() != WeaponAPI.WeaponType.MISSILE && w.getType() != WeaponAPI.WeaponType.BALLISTIC) continue;
                     int currentAmmo = w.getAmmo();
                     int maxAmmo = w.getMaxAmmo();
                     if (w.usesAmmo() && currentAmmo < maxAmmo && w.getAmmoPerSecond() == 0) {
