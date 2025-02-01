@@ -53,11 +53,11 @@ public class AssistantHullmodApply extends BaseCommandPlugin {
         } else if (Hullmod.equals("ashesofohm_integratedPristineNanoforge"))
         {
             MemoryShortcuts.removeComponents(5);
-            removePlayerSpecialItem("corrupted_nanoforge");
+            removePlayerSpecialItem("pristine_nanoforge");
         } else if (Hullmod.equals("ashesofohm_integratedHypershuntTap"))
         {
             MemoryShortcuts.removeComponents(5);
-            removePlayerSpecialItem("corrupted_nanoforge");
+            removePlayerSpecialItem("coronal_portal");
         }
         return false;
     }
