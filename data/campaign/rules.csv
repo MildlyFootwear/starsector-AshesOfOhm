@@ -227,9 +227,15 @@ $option == ashesofohm_assistantModifyOptionShipInformation",,"""Utilizing compon
 
 ""Some of these can make use of technology left over by the Domain to incorporate new systems into the ships hull, enabling utility from extended field repairs to ammo replenishment.""",,
 ashesofohm_assistantModifyShipSelectSubject,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantModifyOptionShipSelectShip",,,,
-,,,,,,
-,,,,,,
+$option == ashesofohm_assistantModifyOptionShipSelectShip",AssistantModificationSelectShip,,,
+ashesofohm_assistantModifyShipOptionsHullmodOptions,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantModifyOptionShipSelected",$primedToApplyHullmod = true,,"ashesofohm_timeAccelerator:Time Accelerator
+ashesofohm_integratedNanoforge:Integrated Nanoforge
+ashesofohm_integratedPristineNanoforge:Integrated Pristine Nanoforge
+ashesofohm_integratedHypershuntTap:Integrated Tap
+ashesofohm_assistantModifyOptionShip:Cancel",
+ashesofohm_assistantModifyShipOptionsHullmodApply,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToApplyHullmod == true",,,,
 ,,,,,,
 ,,,,,,
 # Cheat options,,,,,,
@@ -264,7 +270,7 @@ $option == ashesofohm_assistantCheatOptionWeaponCancel","$primedToPopulateCheatW
 $option = ashesofohm_assistantCheatOption
 FireBest DialogOptionSelected",,,
 ashesofohm_assistantDebugMenuWeaponsPopulate,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$primedToPopulateCheatWeapon == true","AssistantCheatPopulateWeapons
+$primedToPopulateCheatWeapon == true","AssistantCheatPopulateWeapons $option
 $primedToUnlockCheatWeapon = true
 $primedToPopulateCheatWeapon = false",,,
 ashesofohm_assistantDebugMenuWeaponsUnlockCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant

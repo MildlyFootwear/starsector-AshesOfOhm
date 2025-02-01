@@ -11,6 +11,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class MainPlugin extends BaseModPlugin {
     List<String> memKeysNums = new ArrayList<>();
     public static List<String> omegaWeaponIDs = new ArrayList<>();
     public static List<String> omegaShips = new ArrayList<>();
+    public static List<String> onlyOneOfHullmods = Arrays.asList("");
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
     public static HashMap<String, Integer> omegaShipComponentMap = new HashMap<>();
     public static boolean Debugging = false, GiveTesseract = false, BypassTimer = false, BypassProcessor, ListCheat;
