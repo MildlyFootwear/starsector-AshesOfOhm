@@ -2,6 +2,8 @@ package Shoey.AshesOfOhm;
 
 import Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.CargoStackAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -129,5 +131,19 @@ public class CheckMethods {
         setPlayerMemory("harvestingShunt", checkShuntHarvest());
         setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
         checkBlueprints();
+    }
+
+    public static boolean playerHasSpecialItem(String id) {
+        final CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
+        if (playerFleet == null) {
+            return false;
+        }
+        final List<CargoStackAPI> playerCargoStacks = playerFleet.getCargo().getStacksCopy();
+        for (final CargoStackAPI cargoStack : playerCargoStacks) {
+            if (cargoStack.isSpecialStack() && cargoStack.getSpecialDataIfSpecial().getId().equals(id) && cargoStack.getSize() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

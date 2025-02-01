@@ -31,7 +31,8 @@ OR
 ,,,,,,
 # Core options,,,,,,
 ,,,,,,
-ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,AssistantGreetingUpdate,,"ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons
+ashesofohm_assistantRootDirectory,PopulateOptions,$tag:ashesofohm_omegaProcessorAssistant,"AssistantGreetingUpdate
+ShowPersonVisual",,"ashesofohm_assistantDisassembleOptionWeapon:Disassemble weapons
 ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons
 ashesofohm_assistantSalvageOptionShip:Salvage ships
 ashesofohm_assistantPrepareOptionShip:Prepare ship construction
@@ -213,11 +214,9 @@ FireAll PopulateOptions",,,
 ashesofohm_assistantModifyShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantModifyOptionShip",FireAll ashesofohm_ModifyShipsOptions,"""Affirmative.""
 
-""Using the technology we have salvaged from technology related to the Omega entity, we can perform experimental modifications to ships of your choosing.""
-
-This is currently in development and will be available in a future version.",,
+""Using the technology we have salvaged from technology related to the Omega entity, we can perform experimental modifications to ships of your choosing.""",,
 ashesofohm_assistantModifyShipOptions,ashesofohm_ModifyShipsOptions,,"SetShortcut ashesofohm_assistantModifyOptionShipCancel ""ESCAPE""
-Highlight This is currently in development and will be available in a future version.",,"ashesofohm_assistantModifyOptionShipInformation:Information
+ShowPersonVisual",,"ashesofohm_assistantModifyOptionShipInformation:Information
 ashesofohm_assistantModifyOptionShipSelectShip:Perform modifications
 ashesofohm_assistantModifyOptionShipCancel:Cancel",
 ashesofohm_assistantModifyShipCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
@@ -229,19 +228,40 @@ $option == ashesofohm_assistantModifyOptionShipInformation",,"""Utilizing compon
 ashesofohm_assistantModifyShipSelectSubject,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantModifyOptionShipSelectShip",AssistantModificationSelectShip,,,
 ashesofohm_assistantModifyShipOptionsHullmodOptions,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantModifyOptionShipSelected",$primedToApplyHullmod = true,,"ashesofohm_timeAccelerator:Time Accelerator
+$option == ashesofohm_assistantModifyOptionShipSelected","$primedToConfirmHullmod = true
+SetShortcut ashesofohm_assistantModifyOptionShipReturn ""ESCAPE""",,"ashesofohm_timeAccelerator:Time Accelerator
 ashesofohm_integratedNanoforge:Integrated Nanoforge
 ashesofohm_integratedPristineNanoforge:Integrated Pristine Nanoforge
 ashesofohm_integratedHypershuntTap:Integrated Tap
-ashesofohm_assistantModifyOptionShip:Cancel",
+ashesofohm_assistantModifyOptionShipReturn:Cancel",
+ashesofohm_assistantModifyShipOptionsHullmodCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToConfirmHullmod == true
+$option == ashesofohm_assistantModifyOptionShipReturn","$primedToConfirmHullmod = false
+$option = ashesofohm_assistantModifyOptionShip
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantModifyShipOptionsHullmodConfirm,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToConfirmHullmod == true","$primedToConfirmHullmod = false
+$primedToApplyHullmod = true
+AssistantHullmodInfo $option
+SetShortcut ashesofohm_assistantModifyOptionShipCancel ""ESCAPE""",,"ashesofohm_assistantModifyOptionShipConfirm:Confirm
+ashesofohm_assistantModifyOptionShipCancel:Cancel",
 ashesofohm_assistantModifyShipOptionsHullmodApply,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$primedToApplyHullmod == true",,,,
-,,,,,,
+$primedToApplyHullmod == true
+$option == ashesofohm_assistantModifyOptionShipConfirm","$primedToApplyHullmod = false
+AssistantHullmodApply
+$option = ashesofohm_assistantModifyOptionShip
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantModifyShipOptionsHullmodApplyCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToApplyHullmod == true
+$option == ashesofohm_assistantModifyOptionShipCancel","$primedToApplyHullmod = false
+$option = ashesofohm_assistantModifyOptionShipSelected
+FireBest DialogOptionSelected",,,
 ,,,,,,
 # Cheat options,,,,,,
 ,,,,,,
 ashesofohm_assistantDebugMenu,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantCheatOption",AssistantPrintDebug,,"ashesofohm_assistantCheatOptionAddWrecks:Add to wrecks
+$option == ashesofohm_assistantCheatOption","AssistantPrintDebug
+SetShortcut ashesofohm_assistantCheatOptionCancel ""ESCAPE""",,"ashesofohm_assistantCheatOptionAddWrecks:Add to wrecks
 ashesofohm_assistantCheatOptionUnlockWeapons:Unlock weapons
 ashesofohm_assistantCheatOptionAddComponents:Add components
 ashesofohm_assistantCheatOptionCancel:Cancel",
@@ -260,7 +280,8 @@ $option = ashesofohm_assistantCheatOption
 FireBest DialogOptionSelected",,,
 ,,,,,,
 ashesofohm_assistantDebugMenuWeapons,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantCheatOptionUnlockWeapons",$primedToPopulateCheatWeapon = true, ,"ashesofohm_assistantCheatOptionWeaponSmall:Small slot weapons
+$option == ashesofohm_assistantCheatOptionUnlockWeapons","$primedToPopulateCheatWeapon = true
+SetShortcut ashesofohm_assistantCheatOptionWeaponCancel ""ESCAPE""", ,"ashesofohm_assistantCheatOptionWeaponSmall:Small slot weapons
 ashesofohm_assistantCheatOptionWeaponMedium:Medium slot weapons
 ashesofohm_assistantCheatOptionWeaponLarge:Large slot weapons
 ashesofohm_assistantCheatOptionWeaponCancel:Cancel",
@@ -282,7 +303,8 @@ ashesofohm_assistantDebugMenuWeaponsUnlock,DialogOptionSelected,"$tag:ashesofohm
 $primedToUnlockCheatWeapon == true",AssistantCheatUnlockWeapons $option,,,
 ,,,,,,
 ashesofohm_assistantDebugMenuComponents,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantCheatOptionAddComponents",$primedToCheatComponents = true,,"ashesofohm_assistantCheatOptionAddComponents1:1
+$option == ashesofohm_assistantCheatOptionAddComponents","$primedToCheatComponents = true
+SetShortcut ashesofohm_assistantCheatOptionAddComponentsCancel ""ESCAPE""",,"ashesofohm_assistantCheatOptionAddComponents1:1
 ashesofohm_assistantCheatOptionAddComponents10:10
 ashesofohm_assistantCheatOptionAddComponents100:100
 ashesofohm_assistantCheatOptionAddComponentsCancel:Cancel",
