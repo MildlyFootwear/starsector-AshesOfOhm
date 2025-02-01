@@ -34,7 +34,7 @@ public class AssistantPrintDebug extends BaseCommandPlugin {
             s += "\nhaveDisassembled"+weapon+": "+MemoryShortcuts.getPlayerMemoryBool("haveDisassembled"+weapon);
         }
 
-        s += "\nComponents: "+getComponents();
+        s += "\n\nComponents: "+getComponents();
 
         dialog.getTextPanel().addPara(s);
         return false;
