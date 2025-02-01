@@ -17,7 +17,7 @@ public class CampaignListener implements CampaignEventListener {
     public static MarketAPI currentMarket = null;
     public static boolean isAtPlayerMarket = false;
 
-    void parseHullID(String hullID)
+    public static void parseHullID(String hullID)
     {
         if (Objects.equals(hullID, "tesseract"))
         {

@@ -50,3 +50,4 @@ Debugging,Debug,Boolean,FALSE,,Debug logging.,,,Debug
 GiveTesseract,Give Salvaged Tesseract,Boolean,FALSE,,Adds a fitted Tesseract to player fleet if enabled while in-game.,,,Debug
 BypassTimer,Bypass Timer,Boolean,FALSE,,Bypasses the countdown timer for (dis)assembly assisstant interactions.,,,Debug
 BypassProcessor,Bypass Processor,Boolean,FALSE,,"If enabled, the processor requirement for the assistant to show up will be disabled.",,,Debug
+ListCheat,List Cheat Options,Boolean,FALSE,,Adds a cheat menu to the assistant dialog.,,,Debug

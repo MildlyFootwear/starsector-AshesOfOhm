@@ -36,6 +36,8 @@ ashesofohm_assistantAssembleOptionWeaponWithText:Assemble weapons
 ashesofohm_assistantSalvageOptionShip:Salvage ships
 ashesofohm_assistantPrepareOptionShip:Prepare ship construction
 ashesofohm_assistantModifyOptionShip:Modify ships",
+ashesofohm_assistantRootDirectoryAddCheatOption,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
+AssistantCheatListOption",,,ashesofohm_assistantCheatOption:Cheat menu,
 ashesofohm_assistantRootDirectoryBusyEquipmentCheck,PopulateOptions,"$tag:ashesofohm_omegaProcessorAssistant
 $market.ashesofohm_marketBusy == true","SetEnabled ashesofohm_assistantDisassembleOptionWeapon false
 SetEnabled ashesofohm_assistantAssembleOptionWeaponWithText false
@@ -205,12 +207,83 @@ FireAll PopulateOptions",,,
 ,,,,,,
 ,,,,,,
 ,,,,,,
+,,,,,,
 # Ship Modify options,,,,,,
 ,,,,,,
-,,,,,,
 ashesofohm_assistantModifyShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
-$option == ashesofohm_assistantModifyOptionShip",FireAll ashesofohm_ModifyShipsOptions,This is currently in development and will be available in a future version.,,
+$option == ashesofohm_assistantModifyOptionShip",FireAll ashesofohm_ModifyShipsOptions,"""Affirmative.""
+
+""Using the technology we have salvaged from technology related to the Omega entity, we can perform experimental modifications to ships of your choosing.""
+
+This is currently in development and will be available in a future version.",,
 ashesofohm_assistantModifyShipOptions,ashesofohm_ModifyShipsOptions,,"SetShortcut ashesofohm_assistantModifyOptionShipCancel ""ESCAPE""
-Highlight This is currently in development and will be available in a future version.",,ashesofohm_assistantModifyOptionShipCancel:Cancel,
+Highlight This is currently in development and will be available in a future version.",,"ashesofohm_assistantModifyOptionShipInformation:Information
+ashesofohm_assistantModifyOptionShipSelectShip:Perform modifications
+ashesofohm_assistantModifyOptionShipCancel:Cancel",
 ashesofohm_assistantModifyShipCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantModifyOptionShipCancel",FireAll PopulateOptions,,,
+ashesofohm_assistantModifyShipInformation,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantModifyOptionShipInformation",,"""Utilizing components we have salvaged from Omega weapons and ships, we can add experimental hull mods to ships in your fleet.""  
+
+""Some of these can make use of technology left over by the Domain to incorporate new systems into the ships hull, enabling utility from extended field repairs to ammo replenishment.""",,
+ashesofohm_assistantModifyShipSelectSubject,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantModifyOptionShipSelectShip",,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+# Cheat options,,,,,,
+,,,,,,
+ashesofohm_assistantDebugMenu,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantCheatOption",AssistantPrintDebug,,"ashesofohm_assistantCheatOptionAddWrecks:Add to wrecks
+ashesofohm_assistantCheatOptionUnlockWeapons:Unlock weapons
+ashesofohm_assistantCheatOptionAddComponents:Add components
+ashesofohm_assistantCheatOptionCancel:Cancel",
+ashesofohm_assistantDebugMenuCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantCheatOptionCancel",FireAll PopulateOptions,,,
+,,,,,,
+ashesofohm_assistantDebugMenuWrecks,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantCheatOptionAddWrecks","AssistantCheatPopulateShips
+$primedToAddWreck = true",,,
+ashesofohm_assistantDebugMenuWrecksProcess,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToAddWreck == true",AssistantCheatAddWrecks $option,,,
+ashesofohm_assistantDebugMenuWrecksCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToAddWreck == true
+$option == ashesofohm_assistantCheatOptionShipCancel","$primedToAddWreck = false
+$option = ashesofohm_assistantCheatOption
+FireBest DialogOptionSelected",,,
+,,,,,,
+ashesofohm_assistantDebugMenuWeapons,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantCheatOptionUnlockWeapons",$primedToPopulateCheatWeapon = true, ,"ashesofohm_assistantCheatOptionWeaponSmall:Small slot weapons
+ashesofohm_assistantCheatOptionWeaponMedium:Medium slot weapons
+ashesofohm_assistantCheatOptionWeaponLarge:Large slot weapons
+ashesofohm_assistantCheatOptionWeaponCancel:Cancel",
+ashesofohm_assistantDebugMenuWeaponsCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToPopulateCheatWeapon == true
+$option == ashesofohm_assistantCheatOptionWeaponCancel","$primedToPopulateCheatWeapon = false
+$option = ashesofohm_assistantCheatOption
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantDebugMenuWeaponsPopulate,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToPopulateCheatWeapon == true","AssistantCheatPopulateWeapons
+$primedToUnlockCheatWeapon = true
+$primedToPopulateCheatWeapon = false",,,
+ashesofohm_assistantDebugMenuWeaponsUnlockCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToUnlockCheatWeapon == true
+$option == ashesofohm_assistantCheatOptionUnlockWeaponsCancel","$primedToUnlockCheatWeapon = false
+$option = ashesofohm_assistantCheatOptionUnlockWeapons
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantDebugMenuWeaponsUnlock,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToUnlockCheatWeapon == true",AssistantCheatUnlockWeapons $option,,,
+,,,,,,
+ashesofohm_assistantDebugMenuComponents,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$option == ashesofohm_assistantCheatOptionAddComponents",$primedToCheatComponents = true,,"ashesofohm_assistantCheatOptionAddComponents1:1
+ashesofohm_assistantCheatOptionAddComponents10:10
+ashesofohm_assistantCheatOptionAddComponents100:100
+ashesofohm_assistantCheatOptionAddComponentsCancel:Cancel",
+ashesofohm_assistantDebugMenuComponentsCancel,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToCheatComponents == true
+$option == ashesofohm_assistantCheatOptionAddComponentsCancel","$primedToCheatComponents = false
+$option = ashesofohm_assistantCheatOption
+FireBest DialogOptionSelected",,,
+ashesofohm_assistantDebugMenuComponentsAdd,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
+$primedToCheatComponents == true",AssistantCheatAddComponents $option,,,
