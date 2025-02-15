@@ -44,7 +44,7 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
             dialog.getTextPanel().beginTooltip().addPara(tt, 0);
             dialog.getTextPanel().addTooltip();
         } else {
-            dialog.getTextPanel().addPara("\"Unfortunately, we do not know of any ships to begin working on.\"");
+            dialog.getTextPanel().addPara("\"Unfortunately, we do not know of any ships to begin working on. Once we have salvaged some in our facilities we will be able to start the process of replicating their technology.\"");
         }
         dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantPrepareOptionShipCancel");
         return false;
