@@ -43,17 +43,6 @@ public class MainPlugin extends BaseModPlugin {
             log.setLevel(Level.INFO);
         }
 
-        GiveTesseract = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "GiveTesseract"));
-        if (Global.getCurrentState() == GameState.CAMPAIGN)
-        {
-            if (GiveTesseract != getPlayerMemoryBool("hasDebugTesseract", true))
-            {
-                if (!getPlayerMemoryBool("hasDebugTesseract", true)) {
-                    Global.getSector().getPlayerFleet().getFleetData().addFleetMember("ashesofohm_tesseract_Attack");
-                }
-                setPlayerMemory("hasDebugTesseract", GiveTesseract);
-            }
-        }
         BypassTimer = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassTimer"));
         BypassProcessor = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassProcessor"));
         ListCheat = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "ListCheat"));
