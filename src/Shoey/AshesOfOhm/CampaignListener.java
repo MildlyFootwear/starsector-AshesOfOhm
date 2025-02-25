@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static Shoey.AshesOfOhm.CheckMethods.checkShuntWithResearch;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class CampaignListener implements CampaignEventListener {
@@ -105,10 +106,14 @@ public class CampaignListener implements CampaignEventListener {
 
         }
 
+        boolean checkComponents = checkShuntWithResearch();
+
         for (FleetMemberAPI fleetMemberAPI : fleetMemberGoned) {
             String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
             parseHullID(hullID);
-            addComponentsFromEntity(hullID);
+            if (checkComponents) {
+                addComponentsFromEntity(hullID);
+            }
         }
 
     }
@@ -140,9 +145,8 @@ public class CampaignListener implements CampaignEventListener {
         if (componentsToAdd > 0) {
             MemoryShortcuts.addComponents(componentsToAdd);
             componentsToAdd = 0;
+            dialog.getTextPanel().addPara("You have recovered "+componentsToAdd+" Omega components from defeated entities.", Misc.getHighlightColor());
         }
-
-        dialog.getTextPanel().addPara("You have recovered "+componentsToAdd+" Omega components from defeated entities.", Misc.getHighlightColor());
     }
 
     @Override
