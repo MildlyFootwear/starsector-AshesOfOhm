@@ -7,7 +7,10 @@ import com.fs.starfarer.api.characters.AbilityPlugin;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.EngagementResultAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.util.Misc;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
@@ -16,6 +19,7 @@ public class CampaignListener implements CampaignEventListener {
 
     public static MarketAPI currentMarket = null;
     public static boolean isAtPlayerMarket = false;
+    public static int componentsToAdd = 0;
 
     public static void parseHullID(String hullID)
     {
@@ -35,6 +39,13 @@ public class CampaignListener implements CampaignEventListener {
         {
             setPlayerMemory("destroyedShardCount", MemoryShortcuts.getPlayerMemoryInt("destroyedShardCount") + 1);
             MainPlugin.log.info("Incrementing available Shard Replicas");
+        }
+    }
+
+    public static void addComponentsFromEntity(String hullID) {
+        if (hullID.equals("remnant_station2"))
+        {
+            componentsToAdd += 1;
         }
     }
 
@@ -80,24 +91,24 @@ public class CampaignListener implements CampaignEventListener {
     @Override
     public void reportPlayerEngagement(EngagementResultAPI result) {
 
+        List<FleetMemberAPI> fleetMemberGoned = new ArrayList<>();
+
         if (result.getWinnerResult().isPlayer()) {
-            for (FleetMemberAPI fleetMemberAPI : result.getLoserResult().getDisabled()) {
-                String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
-                parseHullID(hullID);
-            }
-            for (FleetMemberAPI fleetMemberAPI : result.getLoserResult().getDestroyed()) {
-                String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
-                parseHullID(hullID);
-            }
+
+            fleetMemberGoned.addAll(result.getLoserResult().getDisabled());
+            fleetMemberGoned.addAll(result.getLoserResult().getDestroyed());
+
         } else if (result.getLoserResult().isPlayer()) {
-            for (FleetMemberAPI fleetMemberAPI : result.getWinnerResult().getDisabled()) {
-                String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
-                parseHullID(hullID);
-            }
-            for (FleetMemberAPI fleetMemberAPI : result.getWinnerResult().getDestroyed()) {
-                String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
-                parseHullID(hullID);
-            }
+
+            fleetMemberGoned.addAll(result.getWinnerResult().getDisabled());
+            fleetMemberGoned.addAll(result.getWinnerResult().getDestroyed());
+
+        }
+
+        for (FleetMemberAPI fleetMemberAPI : fleetMemberGoned) {
+            String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
+            parseHullID(hullID);
+            addComponentsFromEntity(hullID);
         }
 
     }
@@ -126,7 +137,12 @@ public class CampaignListener implements CampaignEventListener {
     public void reportShownInteractionDialog(InteractionDialogAPI dialog) {
 
         CheckMethods.playerStatusChecks();
+        if (componentsToAdd > 0) {
+            MemoryShortcuts.addComponents(componentsToAdd);
+            componentsToAdd = 0;
+        }
 
+        dialog.getTextPanel().addPara("You have recovered "+componentsToAdd+" Omega components from defeated entities.", Misc.getHighlightColor());
     }
 
     @Override
