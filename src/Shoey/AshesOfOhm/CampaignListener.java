@@ -106,7 +106,7 @@ public class CampaignListener implements CampaignEventListener {
 
         }
 
-        boolean checkComponents = checkShuntWithResearch();
+        boolean checkComponents = true;
 
         for (FleetMemberAPI fleetMemberAPI : fleetMemberGoned) {
             String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
@@ -114,6 +114,20 @@ public class CampaignListener implements CampaignEventListener {
             if (checkComponents) {
                 addComponentsFromEntity(hullID);
             }
+        }
+
+        if (componentsToAdd > 0) {
+            MainPlugin.log.debug("Player completed battle.");
+            MainPlugin.log.debug("Player will gain "+componentsToAdd);
+            MemoryShortcuts.addComponents(componentsToAdd);
+            MainPlugin.log.debug("Player gained battle components"+componentsToAdd);
+            InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
+            if (CheckMethods.checkResearch()) {
+                dialog.getTextPanel().addPara("You have recovered " + componentsToAdd + " Omega components from the wreckage.", Misc.getHighlightColor());
+            } else {
+                dialog.getTextPanel().addPara("You have found " + componentsToAdd + " odd components among the wreckage and stash them in case they will be useful.", Misc.getHighlightColor());
+            }
+            componentsToAdd = 0;
         }
 
     }
@@ -142,11 +156,7 @@ public class CampaignListener implements CampaignEventListener {
     public void reportShownInteractionDialog(InteractionDialogAPI dialog) {
 
         CheckMethods.playerStatusChecks();
-        if (componentsToAdd > 0) {
-            MemoryShortcuts.addComponents(componentsToAdd);
-            componentsToAdd = 0;
-            dialog.getTextPanel().addPara("You have recovered "+componentsToAdd+" Omega components from defeated entities.", Misc.getHighlightColor());
-        }
+
     }
 
     @Override

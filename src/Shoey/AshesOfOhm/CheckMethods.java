@@ -81,6 +81,17 @@ public class CheckMethods {
         return false;
     }
 
+    public static boolean checkResearch()
+    {
+        for (MarketAPI m : Misc.getPlayerMarkets(true))
+        {
+            if (marketOmegaResearch(m)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean checkShuntWithResearch()
     {
 
