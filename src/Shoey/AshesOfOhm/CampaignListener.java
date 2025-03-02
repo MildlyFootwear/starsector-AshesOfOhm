@@ -8,10 +8,12 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.EngagementResultAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.codehaus.janino.Java;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import static Shoey.AshesOfOhm.CheckMethods.checkShuntWithResearch;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
@@ -43,10 +45,24 @@ public class CampaignListener implements CampaignEventListener {
         }
     }
 
-    public static void addComponentsFromEntity(String hullID) {
-        if (hullID.equals("remnant_station2"))
+    public static void addComponentsFromEntity(FleetMemberAPI hull) {
+        MainPlugin.log.debug("Checking components for "+hull.getHullId());
+        if (hull.getHullId().equals("remnant_station2") || hull.getHullId().equals("vice_station"))
         {
-            componentsToAdd += 1;
+            Random r = new Random();
+            String sysName = Global.getSector().getPlayerFleet().getContainingLocation().getName();
+            int iIndex = 0;
+            long seed = 0;
+            while (iIndex < sysName.length())
+            {
+                seed += sysName.charAt(iIndex);
+                iIndex++;
+            }
+            r.setSeed(seed);
+            int compLocal = r.nextInt(20);
+            componentsToAdd += 10;
+            componentsToAdd += compLocal;
+            MainPlugin.log.debug(componentsToAdd+" components pending.");
         }
     }
 
@@ -112,7 +128,7 @@ public class CampaignListener implements CampaignEventListener {
             String hullID = fleetMemberAPI.getHullSpec().getBaseHullId();
             parseHullID(hullID);
             if (checkComponents) {
-                addComponentsFromEntity(hullID);
+                addComponentsFromEntity(fleetMemberAPI);
             }
         }
 
@@ -120,7 +136,7 @@ public class CampaignListener implements CampaignEventListener {
             MainPlugin.log.debug("Player completed battle.");
             MainPlugin.log.debug("Player will gain "+componentsToAdd);
             MemoryShortcuts.addComponents(componentsToAdd);
-            MainPlugin.log.debug("Player gained battle components"+componentsToAdd);
+            MainPlugin.log.info("Player gained battle components"+componentsToAdd);
             InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
             if (CheckMethods.checkResearch()) {
                 dialog.getTextPanel().addPara("You have recovered " + componentsToAdd + " Omega components from the wreckage.", Misc.getHighlightColor());
