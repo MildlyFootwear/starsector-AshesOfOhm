@@ -37,7 +37,10 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
         dialog.getTextPanel().addPara("\"Querying known "+params.get(0).string.toLowerCase()+" arms...\"");
         dialog.getTextPanel().addPara("A list of weapons shows up on your display.");
         dialog.getTextPanel().addPara("\"Listed arms will take approximately "+ AssistantMethods.getWeaponConstructionDuration(mode, dialog.getInteractionTarget().getMarket())+" days to produce.\"");
-
+        if (dialog.getInteractionTarget().getMarket().getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
+        {
+            dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for weapons on this colony. Assembly can proceed, but having dedicated facilities will drastically speed up the process.\"");
+        }
         for (String k : omegaWeaponComponentMap.keySet())
         {
             if (!getPlayerMemoryBool("haveDisassembled" + k, true))

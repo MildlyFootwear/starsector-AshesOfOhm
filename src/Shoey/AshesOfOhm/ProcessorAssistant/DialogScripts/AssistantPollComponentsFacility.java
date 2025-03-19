@@ -49,6 +49,10 @@ public class AssistantPollComponentsFacility extends BaseCommandPlugin {
             if (s.contains("*"))
                 tooltipMakerAPI.addPara("You will learn how to produce new items based off of those that have been marked.", Misc.getHighlightColor(), 0);
             dialog.getTextPanel().addTooltip();
+            if (m.getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
+            {
+                dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for weapons on this colony. Disassembly can proceed, but having dedicated facilities will drastically speed up the process.\"");
+            }
         }
         m.getMemory().set("$ashesofohm_omegaWeaponPointsForDialog", totalWeaponComponents);
         return false;

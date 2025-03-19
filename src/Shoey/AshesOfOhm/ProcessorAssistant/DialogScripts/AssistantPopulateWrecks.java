@@ -92,9 +92,13 @@ public class AssistantPopulateWrecks extends BaseCommandPlugin {
             if (foundWrecks > 0) {
                 dialog.getTextPanel().addPara("A list of ships that you have defeated and can salvage shows up on your display as well as projected salvage results.");
                 if (canLearn) {
-                    tooltip.addPara("\nWrecks denoted with * will take longer to salvage but grant new opportunities", 0);
+                    tooltip.addPara("\nWrecks denoted with * will take longer to salvage but grant new opportunities.", Misc.getHighlightColor(), 0);
                 }
                 dialog.getTextPanel().addTooltip();
+                if (dialog.getInteractionTarget().getMarket().getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
+                {
+                    dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for ships on this colony. Salvaging can proceed, but having dedicated facilities will drastically speed up the process.\"");
+                }
             } else {
                 dialog.getTextPanel().addPara("\"Unfortunately, there are no wrecks available to salvage.\"");
             }
