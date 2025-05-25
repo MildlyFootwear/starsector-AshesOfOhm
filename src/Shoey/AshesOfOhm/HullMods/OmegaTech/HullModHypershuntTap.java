@@ -62,9 +62,10 @@ public class HullModHypershuntTap extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        if (ship.getVariant().getSMods().contains("magazines") || ship.getVariant().getSModdedBuiltIns().contains("magazines"))
-        {
-            tooltip.addPara("\nRegeneration bonus not applicable due to the presence of S-modded Expanded Magazines.", Misc.getNegativeHighlightColor(), 0);
+        if (ship != null) {
+            if (ship.getVariant().getSMods().contains("magazines") || ship.getVariant().getSModdedBuiltIns().contains("magazines")) {
+                tooltip.addPara("\nRegeneration bonus not applicable due to the presence of S-modded Expanded Magazines.", Misc.getNegativeHighlightColor(), 0);
+            }
         }
         super.addPostDescriptionSection(tooltip, hullSize, ship, width, isForModSpec);
     }
