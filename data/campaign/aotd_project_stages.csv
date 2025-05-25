@@ -1,0 +1,4 @@
+id,name,stageDays,stageCostGP,stageCostCredits,stageCostOther,lineRenderMode,lineOriginMode,uiCordOfStageComponent,uiCordsOfPointsOnHologram
+ashesofohm_tesseractSalvageProject_stage1,Ship Systems,30,"ships:400,advanced_components:200,hand_weapons:300",250000,,STEPPED,HORIZONTAL,850650,730740
+ashesofohm_tesseractSalvageProject_stage2,Ship Structure,80,"ships:200,advanced_components:100,hand_weapons:200",250000,,STEPPED,HORIZONTAL,150650,610690
+ashesofohm_tesseractSalvageProject_stage3,Ship Superstructure,50,"ships:250,advanced_components:250",500000,,STEPPED,VERTICAL,600200,700610
