@@ -3,18 +3,20 @@ package Shoey.AshesOfOhm;
 import Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.campaign.CargoStackAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.util.Misc;
+import data.kaysaar.aotd.vok.misc.AoTDMisc;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static Shoey.AshesOfOhm.MainPlugin.*;
-import static Shoey.AshesOfOhm.MemoryShortcuts.addComponents;
-import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
+import static Shoey.AshesOfOhm.MemoryShortcuts.*;
 import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 public class CheckMethods {
@@ -133,7 +135,7 @@ public class CheckMethods {
         if (components != 0)
         {
             addComponents(components);
-            Global.getSector().getCampaignUI().addMessage(components + " components related to the unknown AI entities have been retrieved from disassembled technology.");
+            Global.getSector().getCampaignUI().addMessage(components + " components related to the Omega entities have been retrieved from disassembled technology.");
         }
     }
 
@@ -142,6 +144,40 @@ public class CheckMethods {
         setPlayerMemory("harvestingShunt", checkShuntHarvest());
         setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
         checkBlueprints();
+    }
+
+    public static void omegaShipPatchwork()
+    {
+        for (String id : omegaShips) {
+            if (getPlayerMemoryBool("canConstructSalvaged" + id))
+            {
+                for (MarketAPI m : Misc.getPlayerMarkets(true))
+                {
+                    if (m.hasIndustry("researchfacility") && (BypassProcessor || (m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))))
+                    {
+                        CargoAPI cargo = m.getSubmarket("storage").getCargo();
+                        if (id.equals("Shard"))
+                        {
+                            FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_shard_left")));
+                            fleet.getVariant().clear();
+
+                            fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_shard_right")));
+                            fleet.getVariant().clear();
+                        } else {
+                            FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_"+id.toLowerCase())));
+                            fleet.getVariant().clear();
+                        }
+                        Global.getSector().getCampaignUI().addMessage( id + " construction has been completed at "+m.getName()+".");
+                        log.debug("Omega ship project bypass used.");
+                        setPlayerMemory("canConstructSalvaged" + id, false);
+                    }
+                    if (!getPlayerMemoryBool("canConstructSalvaged" + id))
+                    {
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public static boolean playerHasSpecialItem(String id) {

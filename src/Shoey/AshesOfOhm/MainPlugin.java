@@ -31,7 +31,7 @@ public class MainPlugin extends BaseModPlugin {
     public static List<String> onlyOneOfHullmods = Arrays.asList("");
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
     public static HashMap<String, Integer> omegaShipComponentMap = new HashMap<>();
-    public static boolean Debugging = false, GiveTesseract = false, BypassTimer = false, BypassProcessor, ListCheat;
+    public static boolean Debugging = false, BypassTimer = false, BypassProcessor, ListCheat;
 
     public static void updateLunaSettings()
     {

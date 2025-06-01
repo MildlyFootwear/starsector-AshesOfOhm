@@ -34,7 +34,7 @@ public class ConstructShip implements EveryFrameScript {
                 dayCounter++;
                 if (dayCounter > daysUntilDone || BypassTimer)
                 {
-                    Global.getSector().getCampaignUI().addMessage(entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility has prepared the components required for "+kID+". We may now begin the construction project.");
+                    Global.getSector().getCampaignUI().addMessage(entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility has prepared the components required for "+kID+".");
                     setPlayerMemory("canConstructSalvaged" + kID, true);
                     entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
                     done = true;

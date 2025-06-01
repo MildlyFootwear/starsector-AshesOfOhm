@@ -18,7 +18,7 @@ public class SalvageTesseract extends AoTDSpecialProject {
     }
 
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract") || true;
     }
 
     public void grantReward() {
