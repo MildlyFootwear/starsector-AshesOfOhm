@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import static Shoey.AshesOfOhm.CheckMethods.checkShuntWithResearch;
+import static Shoey.AshesOfOhm.CheckMethods.omegaShipPatchwork;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class CampaignListener implements CampaignEventListener {
@@ -214,6 +215,7 @@ public class CampaignListener implements CampaignEventListener {
     public void reportEconomyMonthEnd() {
 
         CheckMethods.playerStatusChecks();
+        omegaShipPatchwork();
 
     }
 }

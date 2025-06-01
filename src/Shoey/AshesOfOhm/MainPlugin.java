@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static Shoey.AshesOfOhm.CheckMethods.omegaShipPatchwork;
 import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
@@ -119,6 +120,7 @@ public class MainPlugin extends BaseModPlugin {
 
         CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();
+        omegaShipPatchwork();
     }
 
     @Override

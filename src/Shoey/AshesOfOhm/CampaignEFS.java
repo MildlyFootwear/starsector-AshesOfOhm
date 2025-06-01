@@ -25,6 +25,5 @@ public class CampaignEFS implements EveryFrameScript {
             CheckMethods.marketOmegaResearch(CampaignListener.currentMarket);
             CheckMethods.marketHarvestShunt(CampaignListener.currentMarket);
         }
-        omegaShipPatchwork();
     }
 }
