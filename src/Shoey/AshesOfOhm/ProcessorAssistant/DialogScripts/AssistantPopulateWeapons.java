@@ -56,7 +56,7 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
                 dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for weapons on this colony. Assembly can proceed, but having dedicated facilities will drastically speed up the process.\"");
             }
         } else {
-            dialog.getTextPanel().addPara("\"Error: no \""+params.get(0).string.toLowerCase()+" arms are known at this time. Once we've disassembled a weapon at least once, we should be able to replicate it.\"");
+            dialog.getTextPanel().addPara("\"Error: no "+params.get(0).string.toLowerCase()+" arms are known at this time. Once we've disassembled a weapon at least once, we should be able to replicate it.\"");
         }
 
         dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantAssembleOrderOptionWeaponCancel");
