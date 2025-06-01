@@ -34,13 +34,7 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
             mode = 3;
         }
 
-        dialog.getTextPanel().addPara("\"Querying known "+params.get(0).string.toLowerCase()+" arms...\"");
-        dialog.getTextPanel().addPara("A list of weapons shows up on your display.");
-        dialog.getTextPanel().addPara("\"Listed arms will take approximately "+ AssistantMethods.getWeaponConstructionDuration(mode, dialog.getInteractionTarget().getMarket())+" days to produce.\"");
-        if (dialog.getInteractionTarget().getMarket().getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
-        {
-            dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for weapons on this colony. Assembly can proceed, but having dedicated facilities will drastically speed up the process.\"");
-        }
+        int iWeaponOptionsAdded = 0;
         for (String k : omegaWeaponComponentMap.keySet())
         {
             if (!getPlayerMemoryBool("haveDisassembled" + k, true))
@@ -48,7 +42,21 @@ public class AssistantPopulateWeapons extends BaseCommandPlugin {
 
             if (omegaWeaponComponentMap.get(k) == mode) {
                 dialog.getOptionPanel().addOption(Global.getSettings().getWeaponSpec(k).getWeaponName(), "ashesofohm_"+k);
+                iWeaponOptionsAdded++;
             }
+        }
+        dialog.getTextPanel().addPara("\"Querying known "+params.get(0).string.toLowerCase()+" arms...\"");
+
+        if (iWeaponOptionsAdded != 0)
+        {
+            dialog.getTextPanel().addPara("A list of weapons shows up on your display.");
+            dialog.getTextPanel().addPara("\"Listed arms will take approximately "+ AssistantMethods.getWeaponConstructionDuration(mode, dialog.getInteractionTarget().getMarket())+" days to produce.\"");
+            if (dialog.getInteractionTarget().getMarket().getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
+            {
+                dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for weapons on this colony. Assembly can proceed, but having dedicated facilities will drastically speed up the process.\"");
+            }
+        } else {
+            dialog.getTextPanel().addPara("\"Error: no \""+params.get(0).string.toLowerCase()+" arms are known at this time. Once we've disassembled a weapon at least once, we should be able to replicate it.\"");
         }
 
         dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantAssembleOrderOptionWeaponCancel");
