@@ -28,7 +28,7 @@ public class MemoryShortcuts {
             return MainPlugin.pfMem.get("$ashesofohm_" + key);
         }
         if (!suppressError) {
-            MainPlugin.log.error("Player faction memory does not contain key " + "$ashesofohm_" + key);
+            MainPlugin.log.debug("Player faction memory does not contain key " + "$ashesofohm_" + key);
         }
         return null;
     }
