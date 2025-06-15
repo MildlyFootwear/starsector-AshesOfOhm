@@ -1,4 +1,16 @@
 id,name,stageDays,stageCostGP,stageCostCredits,stageCostOther,lineRenderMode,lineOriginMode,uiCordOfStageComponent,uiCordsOfPointsOnHologram
-ashesofohm_tesseractSalvageProject_stage1,Ship Systems,30,"ships:400,advanced_components:200,hand_weapons:300",250000,,STEPPED,HORIZONTAL,850650,730740
-ashesofohm_tesseractSalvageProject_stage2,Ship Structure,80,"ships:200,advanced_components:100,hand_weapons:200",250000,,STEPPED,HORIZONTAL,150650,610690
-ashesofohm_tesseractSalvageProject_stage3,Ship Superstructure,50,"ships:250,advanced_components:250",500000,,STEPPED,VERTICAL,600200,700610
+ashesofohm_tesseractSalvageProject_stage1,Ship Systems,60,"ships:100,advanced_components:300",500000,alpha_core:COMMODITY:1,STEPPED,HORIZONTAL,"900,400","680,680"
+ashesofohm_tesseractSalvageProject_stage2,Ship Structure,80,"domain_heavy_machinery:100,ships:200,advanced_components:100,hand_weapons:200",250000,,STEPPED,HORIZONTAL,"150,550","600,600"
+ashesofohm_tesseractSalvageProject_stage3,Ship Superstructure,50,"domain_heavy_machinery:100,ships:200,advanced_components:250",250000,,STRAIGHT,HORIZONTAL,"830,740","660,750"
+,,,,,,,,
+ashesofohm_facetSalvageProject_stage1,Ship Systems,20,"ships:50,advanced_components:150",300000,beta_core:COMMODITY:1,STEPPED,HORIZONTAL,"900,400","690,690"
+ashesofohm_facetSalvageProject_stage2,Ship Structure,60,"domain_heavy_machinery:80,ships:100,advanced_components:50,hand_weapons:100",150000,,STEPPED,HORIZONTAL,"150,550","620,656"
+ashesofohm_facetSalvageProject_stage3,Ship Superstructure,40,"domain_heavy_machinery:80,ships:200,advanced_components:250",150000,,STRAIGHT,HORIZONTAL,"830,740","650,750"
+,,,,,,,,
+ashesofohm_shardLeftSalvageProject_stage1,Ship Systems,20,"ships:30,advanced_components:100",200000,gamma_core:COMMODITY:1,STEPPED,HORIZONTAL,"900,400","725,710"
+ashesofohm_shardLeftSalvageProject_stage2,Ship Structure,30,"domain_heavy_machinery:50,ships:80,advanced_components:50,hand_weapons:80",100000,,STEPPED,HORIZONTAL,"150,550","700,656"
+ashesofohm_shardLeftSalvageProject_stage3,Ship Superstructure,30,"domain_heavy_machinery:50,ships:80,advanced_components:100",100000,,STRAIGHT,HORIZONTAL,"830,740","680,750"
+,,,,,,,,
+ashesofohm_shardRightSalvageProject_stage1,Ship Systems,20,"ships:30,advanced_components:100",200000,gamma_core:COMMODITY:1,STEPPED,HORIZONTAL,"900,400","715,680"
+ashesofohm_shardRightSalvageProject_stage2,Ship Structure,30,"domain_heavy_machinery:50,ships:80,advanced_components:50,hand_weapons:80",100000,,STEPPED,HORIZONTAL,"150,550","660,700"
+ashesofohm_shardRightSalvageProject_stage3,Ship Superstructure,30,"domain_heavy_machinery:50,ships:80,advanced_components:100",100000,,STRAIGHT,HORIZONTAL,"830,740","720,750"

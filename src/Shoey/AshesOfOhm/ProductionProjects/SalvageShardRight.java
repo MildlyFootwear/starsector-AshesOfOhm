@@ -8,30 +8,29 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import data.kaysaar.aotd.vok.misc.AoTDMisc;
-import data.kaysaar.aotd.vok.scripts.research.AoTDMainResearchManager;
 import data.kaysaar.aotd.vok.scripts.specialprojects.models.AoTDSpecialProject;
 
-public class SalvageTesseract extends AoTDSpecialProject {
+public class SalvageShardRight extends AoTDSpecialProject {
 
     @Override
     public void createRewardSection(TooltipMakerAPI tooltip, float width) {
-        tooltip.addPara("Gain salvaged variant of the " + Global.getSettings().getHullSpec("ashesofohm_tesseract").getHullNameWithDashClass() + " vessel.", Misc.getPositiveHighlightColor(), 5.0F);
+        tooltip.addPara("Gain salvaged variant of the " + Global.getSettings().getHullSpec("ashesofohm_shard_right").getHullNameWithDashClass() + " vessel.", Misc.getPositiveHighlightColor(), 5.0F);
     }
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedTesseract") || true;
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedShard") || true;
     }
 
     @Override
     public boolean shouldShowOnUI() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedShard");
     }
 
     @Override
     public void grantReward() {
 
-        MemoryShortcuts.setPlayerMemory("canConstructSalvagedTesseract", false);
+        MemoryShortcuts.setPlayerMemory("canConstructSalvagedShard", false);
 
         MarketAPI gatheringPoint = Global.getSector().getPlayerFaction().getProduction().getGatheringPoint();
         if (gatheringPoint == null) {
@@ -39,7 +38,7 @@ public class SalvageTesseract extends AoTDSpecialProject {
         }
 
         CargoAPI cargo = gatheringPoint.getSubmarket("storage").getCargo();
-        FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_tesseract")));
+        FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_shard_right")));
         fleet.getVariant().clear();
     }
 
