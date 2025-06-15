@@ -8,15 +8,12 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.EngagementResultAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.codehaus.janino.Java;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import static Shoey.AshesOfOhm.CheckMethods.checkShuntWithResearch;
-import static Shoey.AshesOfOhm.CheckMethods.omegaShipPatchwork;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class CampaignListener implements CampaignEventListener {

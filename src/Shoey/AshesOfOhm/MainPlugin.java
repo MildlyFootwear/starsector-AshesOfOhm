@@ -1,7 +1,6 @@
 package Shoey.AshesOfOhm;
 
 import com.fs.starfarer.api.BaseModPlugin;
-import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
@@ -15,8 +14,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static Shoey.AshesOfOhm.CheckMethods.omegaShipPatchwork;
-import static Shoey.AshesOfOhm.MemoryShortcuts.getPlayerMemoryBool;
 import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 
