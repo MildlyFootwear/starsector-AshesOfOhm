@@ -215,7 +215,7 @@ public class CampaignListener implements CampaignEventListener {
     public void reportEconomyMonthEnd() {
 
         CheckMethods.playerStatusChecks();
-        omegaShipPatchwork();
+//        omegaShipPatchwork();
 
     }
 }

@@ -120,7 +120,7 @@ public class MainPlugin extends BaseModPlugin {
 
         CheckMethods.playerStatusChecks();
         updateOmegaWeaponIDs();
-        omegaShipPatchwork();
+//        omegaShipPatchwork();
     }
 
     @Override

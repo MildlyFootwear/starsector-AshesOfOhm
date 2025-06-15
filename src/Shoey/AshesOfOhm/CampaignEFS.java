@@ -4,8 +4,6 @@ import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CoreUITabId;
 
-import static Shoey.AshesOfOhm.CheckMethods.omegaShipPatchwork;
-
 public class CampaignEFS implements EveryFrameScript {
 
     @Override
