@@ -28,6 +28,10 @@ public class SalvageTesseract extends AoTDSpecialProject {
         return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
     }
 
+    public boolean canDoProject() {
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
+    }
+
     @Override
     public void grantReward() {
 

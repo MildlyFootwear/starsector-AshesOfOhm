@@ -27,6 +27,10 @@ public class SalvageFacet extends AoTDSpecialProject {
         return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet");
     }
 
+    public boolean canDoProject() {
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet");
+    }
+
     @Override
     public void grantReward() {
 

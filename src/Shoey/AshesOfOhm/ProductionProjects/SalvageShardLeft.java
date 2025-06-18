@@ -27,6 +27,10 @@ public class SalvageShardLeft extends AoTDSpecialProject {
         return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedShard");
     }
 
+    public boolean canDoProject() {
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedShard");
+    }
+
     @Override
     public void grantReward() {
 
