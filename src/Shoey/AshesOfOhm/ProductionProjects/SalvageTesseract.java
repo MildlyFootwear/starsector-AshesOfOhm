@@ -20,7 +20,7 @@ public class SalvageTesseract extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedTesseract") || true;
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedTesseract");
     }
 
     @Override

@@ -26,21 +26,9 @@ public class ConstructShip implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        int curDay = Global.getSector().getClock().getDay();
-        if (curDay != previousDay || BypassTimer)
-        {
-            if (previousDay != 0)
-            {
-                dayCounter++;
-                if (dayCounter > daysUntilDone || BypassTimer)
-                {
-                    Global.getSector().getCampaignUI().addMessage(entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility has prepared the components required for "+kID+".");
-                    setPlayerMemory("canConstructSalvaged" + kID, true);
-                    entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
-                    done = true;
-                }
-            }
-            previousDay = curDay;
-        }
+        Global.getSector().getCampaignUI().addMessage(entityToken.getMarket().getPrimaryEntity().getName()+"'s Research Facility has prepared the components required for "+kID+".");
+        setPlayerMemory("canConstructSalvaged" + kID, true);
+        entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
+        done = true;
     }
 }

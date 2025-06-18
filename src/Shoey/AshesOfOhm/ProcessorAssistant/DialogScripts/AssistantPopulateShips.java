@@ -43,10 +43,6 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
             dialog.getTextPanel().addPara(t);
             dialog.getTextPanel().beginTooltip().addPara(tt, 0);
             dialog.getTextPanel().addTooltip();
-            if (dialog.getInteractionTarget().getMarket().getMemory().getInt("$ashesofohm_productionRateOffset") == 0)
-            {
-                dialog.getTextPanel().addPara("\"At present, we do not have dedicated facilities for ships on this colony. We can proceed, but having dedicated facilities will drastically speed up the process.\"");
-            }
         } else {
             dialog.getTextPanel().addPara("\"Unfortunately, we do not know of any ships to begin working on. Once we have salvaged some in our facilities we will be able to start the process of replicating their technology.\"");
         }

@@ -19,7 +19,7 @@ public class SalvageShardRight extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedShard") || true;
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedShard");
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import static Shoey.AshesOfOhm.MainPlugin.omegaShipComponentMap;
+import static Shoey.AshesOfOhm.MemoryShortcuts.setPlayerMemory;
 
 public class AssistantOpenShipProject extends BaseCommandPlugin {
     @Override
@@ -24,17 +25,8 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
             MarketAPI m = dialog.getInteractionTarget().getMarket();
             int comp = (omegaShipComponentMap.get(option));
             dialog.getTextPanel().addPara("\"Confirmed, beginning preparation for "+option+".\"");
-            ConstructShip script = new ConstructShip();
-            script.kID = option;
-            script.daysUntilDone = comp * (7+(m.getMemory().getInt("$ashesofohm_marketRateOffset"))) / 3;
-            script.entityToken = dialog.getInteractionTarget();
-            Global.getSector().addScript(script);
+            setPlayerMemory("canConstructSalvaged" + option, true);
             MemoryShortcuts.removeComponents(comp * 2);
-            m.getMemory().set("$ashesofohm_marketBusyShip", true);
-            m.getMemory().set("$ashesofohm_marketBusyShipWith", option+" preparation.");
-            m.getMemory().expire("$ashesofohm_marketBusyShip", script.daysUntilDone);
-            m.getMemory().set("$ashesofohm_marketBusyShipStart", Global.getSector().getClock().getTimestamp());
-            m.getMemory().set("$ashesofohm_marketBusyShipDuration", script.daysUntilDone);
         } else if (option.contains("Cancel")) {
             dialog.getTextPanel().addPara("\"Confirmed, order canceled. Returning to root directory.\"");
         } else {

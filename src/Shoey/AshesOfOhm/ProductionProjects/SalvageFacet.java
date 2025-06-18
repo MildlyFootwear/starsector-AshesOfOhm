@@ -19,7 +19,7 @@ public class SalvageFacet extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedFacet") || true;
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedFacet");
     }
 
     @Override
