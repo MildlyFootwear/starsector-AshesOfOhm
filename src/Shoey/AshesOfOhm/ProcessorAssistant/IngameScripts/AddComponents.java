@@ -52,7 +52,7 @@ public class AddComponents implements EveryFrameScript {
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished disassembling the requested items.");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusy", false);
                     } else {
-                        setPlayerMemory("haveSalvaged" + shipName, true);
+                        setPlayerMemory("haveSalvaged" + shipName.replace("Sinistral ","").replace("Dextral ",""), true);
                         Global.getSector().getCampaignUI().addMessage(entityToken.getName() + " has finished salvaging a "+shipName+".");
                         entityToken.getMarket().getMemory().set("$ashesofohm_marketBusyShip", false);
                     }

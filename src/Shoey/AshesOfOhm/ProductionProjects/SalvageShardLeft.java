@@ -24,17 +24,17 @@ public class SalvageShardLeft extends AoTDSpecialProject {
 
     @Override
     public boolean shouldShowOnUI() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedShard");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedSinistral Shard");
     }
 
     public boolean canDoProject() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedShard");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedSinistral Shard");
     }
 
     @Override
     public void grantReward() {
 
-        MemoryShortcuts.setPlayerMemory("canConstructSalvagedShard", false);
+        MemoryShortcuts.setPlayerMemory("canConstructSalvagedSinistral Shard", false);
 
         MarketAPI gatheringPoint = Global.getSector().getPlayerFaction().getProduction().getGatheringPoint();
         if (gatheringPoint == null) {

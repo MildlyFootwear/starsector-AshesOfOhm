@@ -22,7 +22,6 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
         String option = params.get(0).getString(memoryMap).replace("ashesofohm_beginConstruction","");
         if (omegaShipComponentMap.containsKey(option))
         {
-            MarketAPI m = dialog.getInteractionTarget().getMarket();
             int comp = (omegaShipComponentMap.get(option));
             dialog.getTextPanel().addPara("\"Confirmed, beginning preparation for "+option+".\"");
             setPlayerMemory("canConstructSalvaged" + option, true);

@@ -26,10 +26,11 @@ public class AssistantPopulateShips extends BaseCommandPlugin {
         String t = "\"Confirmed, here is a list of the ships we can prepare to produce.\"";
         String tt = "We have "+ getPlayerMemoryInt("omegaWeaponPoints") +" components available.\n\nComponent cost:";
         for (String s : omegaShips) {
-            if (getPlayerMemoryBool("haveSalvaged" + s)) {
+            String temp = s.replace("Sinistral ","").replace("Dextral ","");
+            if (getPlayerMemoryBool("haveSalvaged" + temp)) {
                 dialog.getOptionPanel().addOption(s, "ashesofohm_beginConstruction"+s);
-                tt += "\n"+s+": "+(omegaShipComponentMap.get(s) * 2);
-                if (getPlayerMemoryInt("omegaWeaponPoints") < omegaShipComponentMap.get(s) * 2) {
+                tt += "\n"+s+": "+(omegaShipComponentMap.get(temp) * 2);
+                if (getPlayerMemoryInt("omegaWeaponPoints") < omegaShipComponentMap.get(temp) * 2) {
                     dialog.getOptionPanel().setEnabled("ashesofohm_beginConstruction"+s, false);
                 }
                 if (getPlayerMemoryBool("canConstructSalvaged" + s)) {

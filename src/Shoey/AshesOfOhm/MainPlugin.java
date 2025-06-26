@@ -74,10 +74,13 @@ public class MainPlugin extends BaseModPlugin {
         omegaShips.clear();
         omegaShips.add("Tesseract");
         omegaShips.add("Facet");
-        omegaShips.add("Shard");
+        omegaShips.add("Sinistral Shard");
+        omegaShips.add("Dextral Shard");
         omegaShipComponentMap.put("Tesseract", 12);
         omegaShipComponentMap.put("Facet", 6);
         omegaShipComponentMap.put("Shard", 3);
+        omegaShipComponentMap.put("Sinistral Shard", omegaShipComponentMap.get("Shard"));
+        omegaShipComponentMap.put("Dextral Shard", omegaShipComponentMap.get("Shard"));
 
     }
 
