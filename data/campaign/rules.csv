@@ -191,7 +191,7 @@ FireAll PopulateOptions",,,
 ashesofohm_assistantSalvageShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true
 $option == ashesofohm_assistantSalvageOptionShipCancel","$primedToSalvageShip = false
-FireAll PopulateOptions",,,
+FireAll PopulateOptions","""Confirmed, returning to root directory.""",,
 ashesofohm_assistantPrepareShip,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $option == ashesofohm_assistantPrepareOptionShip",FireAll ashesofohm_ShipOptions,,,
 ashesofohm_assistantPrepareShipOptions,ashesofohm_ShipOptions,,"AssistantPopulateShips
@@ -204,7 +204,7 @@ FireAll PopulateOptions",,,
 ashesofohm_assistantPrepareShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true
 $option == ashesofohm_assistantPrepareOptionShipCancel","$primedToPrepareShip = false
-FireAll PopulateOptions",,,
+FireAll PopulateOptions","""Confirmed, returning to root directory.""",,
 ,,,,,,
 ,,,,,,
 ,,,,,,
