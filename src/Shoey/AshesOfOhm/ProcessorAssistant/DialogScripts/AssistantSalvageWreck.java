@@ -32,7 +32,7 @@ public class AssistantSalvageWreck extends BaseCommandPlugin {
             script.offset = m.getMemory().getInt("$ashesofohm_productionRateOffset");
             setPlayerMemory("salvaged" + shipName + "Count", getPlayerMemoryInt("salvaged" + shipName + "Count") + 1);
             Global.getSector().addScript(script);
-            dialog.getTextPanel().addPara("Confirmed. Salvaging of a "+shipName+" has been initiated, expect ship facilities to be occupied for the near future.");
+            dialog.getTextPanel().addPara("\"Confirmed. Salvaging of a "+shipName+" has been initiated, expect ship facilities to be occupied for the near future.\"");
 
             long busyDur = script.componentsLeft * (7L + script.offset);
             if (!getPlayerMemoryBool("haveSalvaged" + shipName))

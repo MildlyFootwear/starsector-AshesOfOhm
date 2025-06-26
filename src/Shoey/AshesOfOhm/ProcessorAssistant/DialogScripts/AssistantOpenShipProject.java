@@ -23,7 +23,7 @@ public class AssistantOpenShipProject extends BaseCommandPlugin {
         if (omegaShipComponentMap.containsKey(option))
         {
             int comp = (omegaShipComponentMap.get(option));
-            dialog.getTextPanel().addPara("\"Confirmed, beginning preparation for "+option+".\"");
+            dialog.getTextPanel().addPara("\"Confirmed. The project for "+option+" has been opened. You will be able to direct the efforts through your standard Production Project interface.\"");
             setPlayerMemory("canConstructSalvaged" + option, true);
             MemoryShortcuts.removeComponents(comp * 2);
         } else if (option.contains("Cancel")) {

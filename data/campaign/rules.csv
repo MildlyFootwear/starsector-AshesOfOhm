@@ -187,7 +187,7 @@ SetShortcut ashesofohm_assistantSalvageOptionShipCancel ""ESCAPE""",,,
 ashesofohm_assistantSalvageShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true","$primedToSalvageShip = false
 AssistantSalvageWreck $option
-FireAll PopulateOptions","""Confirmed, salvage order canceled. Returning to root directory.""",,
+FireAll PopulateOptions",,,
 ashesofohm_assistantSalvageShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToSalvageShip == true
 $option == ashesofohm_assistantSalvageOptionShipCancel","$primedToSalvageShip = false
@@ -200,7 +200,7 @@ SetShortcut ashesofohm_assistantPrepareOptionShipCancel ""ESCAPE""",,,
 ashesofohm_assistantPrepareShipOptionSelected,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true","$primedToPrepareShip = false
 AssistantOpenShipProject $option
-FireAll PopulateOptions","""Confirmed, ship preparation order canceled. Returning to root directory.""",,
+FireAll PopulateOptions",,,
 ashesofohm_assistantPrepareShipOptionCanceled,DialogOptionSelected,"$tag:ashesofohm_omegaProcessorAssistant
 $primedToPrepareShip == true
 $option == ashesofohm_assistantPrepareOptionShipCancel","$primedToPrepareShip = false
