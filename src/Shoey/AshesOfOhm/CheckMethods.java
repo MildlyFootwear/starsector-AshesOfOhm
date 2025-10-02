@@ -133,6 +133,13 @@ public class CheckMethods {
         {
             addComponents(components);
             Global.getSector().getCampaignUI().addMessage(components + " components related to the Omega entities have been retrieved from disassembled technology.");
+            String s = "";
+            for (String n : foundBPs)
+            {
+                s += n + ", ";
+            }
+            s += "can now be assembled through the assistant.";
+            Global.getSector().getCampaignUI().addMessage(s);
         }
     }
 
