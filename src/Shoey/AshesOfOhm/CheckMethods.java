@@ -32,7 +32,7 @@ public class CheckMethods {
     public static boolean marketOmegaResearch(MarketAPI m)
     {
         boolean hasResearch = false;
-        if (m.hasIndustry("researchfacility") && (BypassProcessor || (m.getIndustry("researchfacility").getSpecialItem() != null && Objects.equals(m.getIndustry("researchfacility").getSpecialItem().getId(), "omega_processor"))))
+        if (m.hasIndustry("blacksite") && (BypassProcessor || (m.getIndustry("blacksite").getSpecialItem() != null && Objects.equals(m.getIndustry("blacksite").getSpecialItem().getId(), "omega_processor"))))
         {
             hasResearch = true;
 //            log.debug(m.getName() + " passed research with processor check.");
@@ -118,6 +118,11 @@ public class CheckMethods {
 
     public static void checkBlueprints()
     {
+        if (disableBlueprintCheck)
+        {
+            return;
+        }
+
         List<String> foundBPs = new ArrayList<>();
         int components = 0;
         for(String wID : MainPlugin.omegaWeaponIDs) {
