@@ -19,20 +19,20 @@ public class SalvageFacet extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedFacet");
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedFacet", true);
     }
 
     @Override
     public boolean shouldShowOnUI() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet", true);
     }
 
     public boolean canDoProject() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedFacet", true);
     }
 
     @Override
-    public void grantReward() {
+    public Object grantReward() {
 
         MemoryShortcuts.setPlayerMemory("canConstructSalvagedFacet", false);
 
@@ -44,6 +44,8 @@ public class SalvageFacet extends AoTDSpecialProject {
         CargoAPI cargo = gatheringPoint.getSubmarket("storage").getCargo();
         FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_facet")));
         fleet.getVariant().clear();
+        return fleet;
+
     }
 
 }

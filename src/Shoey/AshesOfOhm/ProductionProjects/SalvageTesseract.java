@@ -20,20 +20,20 @@ public class SalvageTesseract extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedTesseract");
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedTesseract", true);
     }
 
     @Override
     public boolean shouldShowOnUI() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract", true);
     }
 
     public boolean canDoProject() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedTesseract", true);
     }
 
     @Override
-    public void grantReward() {
+    public Object grantReward() {
 
         MemoryShortcuts.setPlayerMemory("canConstructSalvagedTesseract", false);
 
@@ -45,6 +45,7 @@ public class SalvageTesseract extends AoTDSpecialProject {
         CargoAPI cargo = gatheringPoint.getSubmarket("storage").getCargo();
         FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_tesseract")));
         fleet.getVariant().clear();
+        return fleet;
     }
 
 }

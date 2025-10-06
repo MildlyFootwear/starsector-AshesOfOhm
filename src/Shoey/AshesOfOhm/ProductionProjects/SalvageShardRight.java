@@ -19,21 +19,21 @@ public class SalvageShardRight extends AoTDSpecialProject {
 
     @Override
     public boolean checkIfProjectShouldUnlock() {
-        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedShard");
+        return MemoryShortcuts.getPlayerMemoryBool("haveSalvagedShard", true);
     }
 
     @Override
     public boolean shouldShowOnUI() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedDextral Shard");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedDextral Shard", true);
     }
 
     @Override
     public boolean canDoProject() {
-        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedDextral Shard");
+        return MemoryShortcuts.getPlayerMemoryBool("canConstructSalvagedDextral Shard", true);
     }
 
     @Override
-    public void grantReward() {
+    public Object grantReward() {
 
         MemoryShortcuts.setPlayerMemory("canConstructSalvagedDextral Shard", false);
 
@@ -45,6 +45,7 @@ public class SalvageShardRight extends AoTDSpecialProject {
         CargoAPI cargo = gatheringPoint.getSubmarket("storage").getCargo();
         FleetMemberAPI fleet = cargo.getMothballedShips().addFleetMember(AoTDMisc.getVaraint(Global.getSettings().getHullSpec("ashesofohm_shard_right")));
         fleet.getVariant().clear();
+        return fleet;
     }
 
 }
