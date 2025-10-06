@@ -21,8 +21,13 @@ public class AssistantCheatPopulateShips extends BaseCommandPlugin {
 
     @Override
     public boolean execute(String ruleId, InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
+        String addedIDs = "";
         for (String s : omegaShips) {
-                dialog.getOptionPanel().addOption(s, "ashesofohm_addWreck"+s);
+            String temp = s.replace("Sinistral ","").replace("Dextral ","");
+            if (addedIDs.contains("ashesofohm_addWreck"+temp))
+                continue;
+            addedIDs += "ashesofohm_addWreck"+temp;
+            dialog.getOptionPanel().addOption(temp, "ashesofohm_addWreck"+temp);
         }
         dialog.getOptionPanel().addOption("Cancel", "ashesofohm_assistantCheatOptionShipCancel");
         return false;

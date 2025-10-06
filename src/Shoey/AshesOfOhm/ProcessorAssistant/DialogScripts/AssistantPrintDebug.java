@@ -22,9 +22,10 @@ public class AssistantPrintDebug extends BaseCommandPlugin {
 
         for (String ship : MainPlugin.omegaShips)
         {
-            s += "\ndestroyed"+ship+"Count: "+ MemoryShortcuts.getPlayerMemoryInt("destroyed"+ship+"Count");
-            s += "\nsalvaged"+ship+"Count: "+ MemoryShortcuts.getPlayerMemoryInt("salvaged"+ship+"Count");
-            s += "\nhaveSalvaged"+ship+": "+ MemoryShortcuts.getPlayerMemoryBool("haveSalvaged"+ship);
+            String temp = ship.replace("Sinistral ","").replace("Dextral ","");
+            s += "\ndestroyed"+temp+"Count: "+ MemoryShortcuts.getPlayerMemoryInt("destroyed"+temp+"Count");
+            s += "\nsalvaged"+temp+"Count: "+ MemoryShortcuts.getPlayerMemoryInt("salvaged"+temp+"Count");
+            s += "\nhaveSalvaged"+temp+": "+ MemoryShortcuts.getPlayerMemoryBool("haveSalvaged"+temp);
         }
 
         s += "\n";
