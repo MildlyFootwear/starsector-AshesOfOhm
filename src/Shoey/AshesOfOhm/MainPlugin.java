@@ -29,7 +29,7 @@ public class MainPlugin extends BaseModPlugin {
     public static List<String> onlyOneOfHullmods = Arrays.asList("");
     public static HashMap<String, Integer> omegaWeaponComponentMap = new HashMap<>();
     public static HashMap<String, Integer> omegaShipComponentMap = new HashMap<>();
-    public static boolean Debugging = false, BypassTimer = false, BypassProcessor, ListCheat;
+    public static boolean Debugging = false, BypassTimer = false, BypassProcessor, ListCheat, disableBlueprintCheck = false;
 
     public static void updateLunaSettings()
     {
@@ -44,6 +44,7 @@ public class MainPlugin extends BaseModPlugin {
         BypassTimer = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassTimer"));
         BypassProcessor = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "BypassProcessor"));
         ListCheat = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "ListCheat"));
+        disableBlueprintCheck = Boolean.TRUE.equals(LunaSettings.getBoolean("ShoeyAshesOfOhm", "disableBlueprintCheck"));
     }
 
     public static void updateOmegaWeaponIDs()
