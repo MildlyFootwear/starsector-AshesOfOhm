@@ -15,6 +15,11 @@ public class SalvageFacet extends AoTDSpecialProject {
     @Override
     public void createRewardSection(TooltipMakerAPI tooltip, float width) {
         tooltip.addPara("Gain salvaged variant of the " + Global.getSettings().getHullSpec("ashesofohm_facet").getHullNameWithDashClass() + " vessel.", Misc.getPositiveHighlightColor(), 5.0F);
+
+        if (!canDoProject())
+        {
+            tooltip.addPara("Speak to the assistant to prepare this project.", Misc.getNegativeHighlightColor(), 5.0F);
+        }
     }
 
     @Override
@@ -47,5 +52,4 @@ public class SalvageFacet extends AoTDSpecialProject {
         return fleet;
 
     }
-
 }
