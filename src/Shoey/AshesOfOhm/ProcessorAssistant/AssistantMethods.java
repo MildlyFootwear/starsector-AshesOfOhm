@@ -31,7 +31,7 @@ public class AssistantMethods {
         person.setVoice(assistantID);
         m.addPerson(person);
         m.getCommDirectory().addPerson(person);
-        Global.getSector().getCampaignUI().addMessage(m.getName() + " has received an assistant to facilitate research of highly experimental technology.");
+        Global.getSector().getCampaignUI().addMessage(m.getName() + " has received an assistant to facilitate research of highly experimental technology. They can be contacted through " + (m.getName()) +"'s comms directory");
     }
 
     public static int getWeaponConstructionDuration(int componentCount, MarketAPI m)
