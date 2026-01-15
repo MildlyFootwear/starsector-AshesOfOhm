@@ -18,17 +18,6 @@ import static Shoey.AshesOfOhm.ProcessorAssistant.AssistantMethods.assistantID;
 
 public class CheckMethods {
 
-    public static boolean marketHarvestShunt(MarketAPI m)
-    {
-        if (m.hasIndustry("coronal_pylon") && m.getIndustry("coronal_pylon").getSpecialItem() != null && Objects.equals(m.getIndustry("coronal_pylon").getSpecialItem().getId(), "coronal_portal"))
-        {
-            m.getMemory().set("$ashesofohm_MarketHarvestingShunt", true);
-            return true;
-        }
-        m.getMemory().set("$ashesofohm_MarketHarvestingShunt", false);
-        return false;
-    }
-
     public static boolean marketOmegaResearch(MarketAPI m)
     {
         boolean hasResearch = false;
@@ -68,11 +57,43 @@ public class CheckMethods {
         return hasResearch;
     }
 
+    public static boolean checkMarketHarvestingShunt(MarketAPI m)
+    {
+        boolean playerHasShunt = false;
+        for (MarketAPI otherm : Misc.getPlayerMarkets(true))
+        {
+            if (otherm.hasCondition("aotd_coronal_market_cond"))
+            {
+                playerHasShunt = true;
+            }
+        }
+        m.getMemory().set("$ashesofohm_MarketHarvestingShunt", playerHasShunt);
+        log.debug(m.getName() + " has access to a shunt.");
+        return playerHasShunt;
+    }
+
+    public static void updateMarketShuntCheckCache()
+    {
+        boolean playerHasShunt = false;
+        for (MarketAPI m : Misc.getPlayerMarkets(true))
+        {
+            if (m.hasCondition("aotd_coronal_market_cond"))
+            {
+                playerHasShunt = true;
+            }
+        }
+        for (MarketAPI m : Misc.getPlayerMarkets(true))
+        {
+            m.getMemory().set("$ashesofohm_MarketHarvestingShunt", playerHasShunt);
+            log.debug(m.getName() + " has access to a shunt.");
+        }
+    }
+
     public static boolean checkShuntHarvest()
     {
         for (MarketAPI m : Misc.getPlayerMarkets(true) )
         {
-            if (marketHarvestShunt(m))
+            if (m.getMemory().getBoolean("$ashesofohm_MarketHarvestingShunt"))
             {
                 return true;
             }
@@ -82,13 +103,14 @@ public class CheckMethods {
 
     public static boolean checkResearch()
     {
+        boolean returnValue = false;
         for (MarketAPI m : Misc.getPlayerMarkets(true))
         {
             if (marketOmegaResearch(m)) {
-                return true;
+                returnValue = true;
             }
         }
-        return false;
+        return returnValue;
     }
 
     public static boolean checkShuntWithResearch()
@@ -99,11 +121,7 @@ public class CheckMethods {
         for (MarketAPI m : Misc.getPlayerMarkets(true) )
         {
             boolean hasResearch = false;
-            boolean harvestingShunt = false;
-            if (marketHarvestShunt(m))
-            {
-                harvestingShunt = true;
-            }
+            boolean harvestingShunt = m.getMemory().getBoolean("$ashesofohm_MarketHarvestingShunt");
             if (marketOmegaResearch(m)) {
                 hasResearch = true;
             }
@@ -150,6 +168,7 @@ public class CheckMethods {
 
     public static void playerStatusChecks()
     {
+        updateMarketShuntCheckCache();
         setPlayerMemory("harvestingShunt", checkShuntHarvest());
         setPlayerMemory("harvestingShuntWithResearch", checkShuntWithResearch());
         checkBlueprints();

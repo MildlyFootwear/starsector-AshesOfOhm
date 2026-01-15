@@ -21,7 +21,7 @@ public class CampaignEFS implements EveryFrameScript {
         if (CampaignListener.isAtPlayerMarket && CampaignListener.currentMarket != null && Global.getSector().getCampaignUI().getCurrentCoreTab() == CoreUITabId.CARGO)
         {
             CheckMethods.marketOmegaResearch(CampaignListener.currentMarket);
-            CheckMethods.marketHarvestShunt(CampaignListener.currentMarket);
+            CheckMethods.checkMarketHarvestingShunt(CampaignListener.currentMarket);
         }
     }
 }
