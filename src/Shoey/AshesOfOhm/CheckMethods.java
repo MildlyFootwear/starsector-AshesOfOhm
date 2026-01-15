@@ -32,7 +32,7 @@ public class CheckMethods {
     public static boolean marketOmegaResearch(MarketAPI m)
     {
         boolean hasResearch = false;
-        if (m.hasIndustry("blacksite") && (BypassProcessor || (m.getIndustry("blacksite").getSpecialItem() != null && Objects.equals(m.getIndustry("blacksite").getSpecialItem().getId(), "omega_processor"))))
+        if (m.hasIndustry("aotd_blacksite") && (BypassProcessor || (m.getIndustry("aotd_blacksite").getSpecialItem() != null && Objects.equals(m.getIndustry("aotd_blacksite").getSpecialItem().getId(), "omega_processor"))))
         {
             hasResearch = true;
 //            log.debug(m.getName() + " passed research with processor check.");
