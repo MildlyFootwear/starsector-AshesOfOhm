@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProductionProjects;
 
+import Shoey.AshesOfOhm.CheckMethods;
 import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoAPI;
@@ -10,15 +11,40 @@ import com.fs.starfarer.api.util.Misc;
 import data.kaysaar.aotd.vok.misc.AoTDMisc;
 import data.kaysaar.aotd.vok.scripts.specialprojects.models.AoTDSpecialProject;
 
+import java.util.List;
+
+import static Shoey.AshesOfOhm.MainPlugin.pfMem;
+
 public class SalvageFacet extends AoTDSpecialProject {
 
     @Override
     public void createRewardSection(TooltipMakerAPI tooltip, float width) {
         tooltip.addPara("Gain salvaged variant of the " + Global.getSettings().getHullSpec("ashesofohm_facet").getHullNameWithDashClass() + " vessel.", Misc.getPositiveHighlightColor(), 5.0F);
 
-        if (!canDoProject())
-        {
-            tooltip.addPara("Speak to the assistant to prepare this project.", Misc.getNegativeHighlightColor(), 5.0F);
+        if (!canDoProject()) {
+            StringBuilder msg = new StringBuilder();
+            List<MarketAPI> assistantMarkets = CheckMethods.findAssistantMarkets();
+
+            if (!assistantMarkets.isEmpty())
+            {
+                msg.append("To prepare for this project, speak to the assistant on ");
+            } else {
+                msg.append("We will need to locate an Omega processor and provide it to a Black Site facility to begin this project.");
+            }
+
+            if (assistantMarkets.size() == 1) {
+                msg.append(assistantMarkets.get(0).getName()).append(".");
+            } else if (assistantMarkets.size() > 1) {
+                for (MarketAPI m : assistantMarkets)
+                {
+                    if (m == assistantMarkets.get(assistantMarkets.size() - 1)) {
+                        msg.append("or ").append(m.getName()).append(".");
+                    } else {
+                        msg.append(m.getName()).append(", ");
+                    }
+                }
+            }
+            tooltip.addPara(msg.toString(), Misc.getNegativeHighlightColor(), 5.0F);
         }
     }
 

@@ -57,6 +57,23 @@ public class CheckMethods {
         return hasResearch;
     }
 
+    public static List<MarketAPI> findAssistantMarkets()
+    {
+        List<MarketAPI> foundMarkets = new ArrayList<>();
+
+        for (MarketAPI m : Misc.getPlayerMarkets(true)) {
+            for (PersonAPI p : m.getPeopleCopy())
+            {
+                if (p.hasTag(assistantID)) {
+                    foundMarkets.add(m);
+                    break;
+                }
+            }
+        }
+
+        return foundMarkets;
+    }
+
     public static boolean checkMarketHarvestingShunt(MarketAPI m)
     {
         boolean playerHasShunt = false;

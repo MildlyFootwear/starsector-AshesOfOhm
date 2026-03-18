@@ -1,5 +1,6 @@
 package Shoey.AshesOfOhm.ProcessorAssistant;
 
+import Shoey.AshesOfOhm.MemoryShortcuts;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.PersonImportance;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
@@ -8,8 +9,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Ranks;
 
-import static Shoey.AshesOfOhm.MainPlugin.log;
-import static Shoey.AshesOfOhm.MainPlugin.omegaWeaponComponentMap;
+import static Shoey.AshesOfOhm.MainPlugin.*;
 
 public class AssistantMethods {
     public static String assistantID = "ashesofohm_omegaProcessorAssistant";
@@ -30,6 +30,7 @@ public class AssistantMethods {
 
         person.setVoice(assistantID);
         m.addPerson(person);
+        MemoryShortcuts.setPlayerMemory("marketForLastCreatedAssistant", m);
         m.getCommDirectory().addPerson(person);
         Global.getSector().getCampaignUI().showMessageDialog(m.getName() + " has received an assistant to facilitate research of highly experimental technology. They can be contacted through " + (m.getName()) +"'s comms directory");
     }
